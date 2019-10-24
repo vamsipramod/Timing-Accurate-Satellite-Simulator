@@ -1,19 +1,79 @@
-#include <math.h>
+#include <stdint.h>
 
-struct decoded_inst{
-    uint rd;
-    uint rs1;
+typedef struct{
+    int32_t target_address;
+} Call;
+
+typedef struct{
+   int32_t opcode3; 
+   uint32_t rd;
+   uint32_t rs1;
+
+   union 
+   {
+       struct 
+       {
+           int i;
+           union 
+           {
+                uint32_t rs2;
+                int32_t simm13;
+           } rs2;
+           
+       } intg;
+
+       struct 
+       {
+           uint32_t rs2;
+           uint32_t opf;
+       } fp;
+
+   } operand2;
+
+} Arithmetic;
+
+typedef struct{
     
-    union{
-        uint rs2;
-        int simm13;
-    } r2;
-};
+    uint32_t opcode2;
 
-int get_instruction_format(char bit1,char bit2);
+    union 
+    {
+        struct
+        {
+            uint32_t rd;
+            int32_t imm22;
+        } sethi;
 
-uint get_register_number(char reg[],int off);
+        struct 
+        {
+            int32_t a;
+            int32_t cond;
+            int32_t disp22;  
+        } branch; 
+     
+    } target;
+    
+} Branch;
 
-void decode(char inst[],decoded_inst* d);
 
-int get_simm13(char* reg);
+typedef struct {
+    uint32_t opcode1;
+    union 
+    {
+        Arithmetic a;
+        Branch b;
+        Call c; 
+    } inst_type;
+    
+
+}  decoded_instr;
+
+
+void decode(uint32_t inst,decoded_instr* d);
+// int get_instruction_format(char bit1,char bit2);
+
+// uint get_register_number(char reg[],int off);
+
+// void decode(char inst[],decoded_instr* d);
+
+// int get_simm13(char* reg);
