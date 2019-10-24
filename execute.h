@@ -1,20 +1,16 @@
 #include "decode.h"
-#include <iostream>
+#include <stdio.h>
 
-struct reg
-{
-    union 
-    {
-        int integer;
-        char character;
-        float decimal;
-    } data;
-    
-};
+typedef int32_t reg_word;
 
+static reg_word registers[32];
 
-static reg registers[32];
+void execute(decoded_instr* inst_details);
 
-void execute(decoded_inst* inst_details);
 void print_register_state();
+
 void initialize_registers();
+
+int32_t get_simm13(int32_t num);
+
+void set_register(uint32_t index,int32_t val);

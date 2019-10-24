@@ -70,10 +70,3 @@ typedef struct {
 
 
 void decode(uint32_t inst,decoded_instr* d);
-// int get_instruction_format(char bit1,char bit2);
-
-// uint get_register_number(char reg[],int off);
-
-// void decode(char inst[],decoded_instr* d);
-
-// int get_simm13(char* reg);

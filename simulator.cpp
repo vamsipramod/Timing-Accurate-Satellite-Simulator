@@ -1,9 +1,6 @@
 // #include "elf_reader.h"
-#include "decode.h"
-// #include "execute.h"
+#include "execute.h"
 #include <stdlib.h>
-#include <iostream>
-
 
 int main(int argc ,char ** argv)
 {   
@@ -13,22 +10,21 @@ int main(int argc ,char ** argv)
     // a.print_instructions();
     // a.write_instructions();
 
-    //char inst[] = "10000010000000001000000000000011";
-
+    
     uint32_t inst = 0x82008003;
     //Decode
     decoded_instr* inst_decoded = (decoded_instr*) malloc (sizeof(decoded_instr));
-    
+
     decode(inst,inst_decoded);
+    set_register(1,10);
+    set_register(2,33);
+    set_register(3,66);
 
-    // printf("%8.8x",inst_decoded->opcode1);
-    //IE
-    // initialize_registers();
-    // print_register_state();
-    // printf("\n\n");
-    // execute(inst_details);
-    // print_register_state();
 
+    //Execute
+    print_register_state();
+    execute(inst_decoded);
+    print_register_state();
 
     return 0;
 }

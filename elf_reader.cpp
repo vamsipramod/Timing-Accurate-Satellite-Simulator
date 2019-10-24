@@ -35,14 +35,14 @@ void elf::read_elf_instruction()
         while ( n < shdr.sh_size && ( data = elf_getdata(scn ,data)) != NULL )
         {
             uint64_t i=0,buff_size=0;
-            unsigned char *p = (unsigned char *) data->d_buf;
+            int32_t *p = (int32_t *) data->d_buf;
 
 
             buff_size = data->d_size;
             // fprintf(output_file, "start address : %p\t \t End address : %p\n",p,p+buff_size);
 
             int counter = 0;
-            char* curr_instruction = (char *)malloc(8*sizeof(char));
+            int32_t* curr_instruction = (int32_t *)malloc(sizeof(int32_t));
             char* current = curr_instruction;
             for (i = 0; i < buff_size; ++i)
             {    
@@ -52,7 +52,7 @@ void elf::read_elf_instruction()
                     break;
                 }
                 counter++;
-                sprintf(current,"%02x", p[i]);
+                sprintf(current,"%x", p[i]);
                 current += 2;
 
                 if(counter == 4)
