@@ -1,14 +1,15 @@
-// #include "elf_reader.h"
+#include "elf_reader.h"
 #include "execute.h"
-#include <stdlib.h>
+
 
 int main(int argc ,char ** argv)
 {   
-    //IF
+    // //IF
+    // char out[] = "instructions.txt";
     // elf a(argv[1]);
     // a.read_elf_instruction();    
-    // a.print_instructions();
-    // a.write_instructions();
+    // // a.print_instructions();
+    // a.write_instructions(out);
 
     
     uint32_t inst = 0x82008003;

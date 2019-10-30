@@ -4,7 +4,6 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <bsd/vis.h>
 # include <gelf.h>
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
@@ -31,7 +30,7 @@ class elf
     private:
     Elf *e;
     size_t shstrndx;
-    vector <char *> instructions;
+    vector <uint32_t> instructions;
     int current_instruction_index=0;
     
 
@@ -40,12 +39,12 @@ class elf
 
     void read_elf_instruction();
 
-    char* get_instruciton();
+    uint32_t get_instruciton();
 
     void print_section_header(Elf_Scn *scn);
     
     void print_instructions();
    
-    void write_instructions();
+    void write_instructions(char output_file[]);
 
 };

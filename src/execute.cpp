@@ -64,15 +64,10 @@ void initialize_registers()
 int32_t get_simm13(int32_t num)
 {
     if( (1) & (num >> 12))
-    {
         return ((((1<<19)-1)<<12) | num);
-    }
 
     else
-    {
         return num;
-    }
-    
 }
 
 void set_register(uint32_t index,int32_t val)

@@ -31,19 +31,17 @@ void elf::read_elf_instruction()
 
         Elf_Data *data = NULL;
         size_t n = 0;
+		int shift =24;
+		uint32_t instr = 0;
 
         while ( n < shdr.sh_size && ( data = elf_getdata(scn ,data)) != NULL )
         {
-            uint64_t i=0,buff_size=0;
-            int32_t *p = (int32_t *) data->d_buf;
+            uint32_t i=0,buff_size=0;
+            unsigned char *p = (unsigned char *) data->d_buf;
 
 
             buff_size = data->d_size;
-            // fprintf(output_file, "start address : %p\t \t End address : %p\n",p,p+buff_size);
 
-            int counter = 0;
-            int32_t* curr_instruction = (int32_t *)malloc(sizeof(int32_t));
-            char* current = curr_instruction;
             for (i = 0; i < buff_size; ++i)
             {    
                 if(p == NULL)
@@ -51,17 +49,19 @@ void elf::read_elf_instruction()
                     printf( "Err: NULL address\n");
                     break;
                 }
-                counter++;
-                sprintf(current,"%x", p[i]);
-                current += 2;
 
-                if(counter == 4)
-                {   
-                    counter = 0;
-                    instructions.push_back(curr_instruction);
-                    
-                    curr_instruction = (char *)malloc(8*sizeof(char));
-                    current = curr_instruction;
+			    uint32_t curr_byte = p[i];
+                
+                curr_byte <<= shift;
+                shift -= 8;
+
+                instr = instr | curr_byte;
+
+                if(shift < 0)
+                {
+                    shift = 24;
+                    instructions.push_back(instr);
+                    instr = 0;
                 }
             }
         }
@@ -95,7 +95,7 @@ void elf::print_section_header(Elf_Scn *scn)
     printf("====================\n");
 }
 
-char* elf::get_instruciton()
+uint32_t elf::get_instruciton()
 {
     if(instructions.size() > 0 && current_instruction_index < instructions.size())
     {
@@ -104,12 +104,12 @@ char* elf::get_instruciton()
 
     else if(instructions.size() == 0)
     {
-        return (char *)"Error: No instructions, Read the instructions and try again";
+        return 0;
     }
 
     else
     {
-        return (char *)"Reached the end of instructions";
+        return 0;
     }
     
 }
@@ -118,15 +118,14 @@ void elf::print_instructions()
 {
     for(auto i=instructions.begin();i!=instructions.end();i++)
     {
-        char* inst = *i;
-        printf("%s\n",inst);
+        printf("%8.8x\n",*i);
     }
 }
 
-void elf::write_instructions()
+void elf::write_instructions(char output_file[])
 {
     FILE *fd;
-    char output_file[] = "instructions.txt";
+    
     fd = fopen(output_file,"w");
 
     if(fd == NULL)
@@ -134,9 +133,7 @@ void elf::write_instructions()
     
     for(auto i=instructions.begin();i!=instructions.end();i++)
     {
-        char *curr_instruction = *i;
-        fprintf(fd,"%s\n",curr_instruction);
+        fprintf(fd,"%8.8x\n",*i);
     }
     fclose(fd);
 }
-
