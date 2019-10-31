@@ -1,5 +1,5 @@
-simulator.o: simulator.cpp /usr/include/stdc-predef.h simulator.h core.h \
- elf_reader.h /usr/include/err.h /usr/include/features.h \
+core.o: core.cpp /usr/include/stdc-predef.h core.h elf_reader.h \
+ /usr/include/err.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/bits/long-double.h \
@@ -103,8 +103,6 @@ simulator.o: simulator.cpp /usr/include/stdc-predef.h simulator.h core.h \
  /usr/include/c++/8/bits/vector.tcc execute.h decode.h reg.h
 
 /usr/include/stdc-predef.h:
-
-simulator.h:
 
 core.h:
 

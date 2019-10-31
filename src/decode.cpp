@@ -1,6 +1,6 @@
 #include "decode.h"
 
-void decode(uint32_t instr,decoded_instr* d)
+void Decode::decode(uint32_t instr,Decode::decoded_instr* d)
 {   
 
     uint32_t instr_copy = instr;

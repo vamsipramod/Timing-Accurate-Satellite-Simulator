@@ -1,16 +1,12 @@
 #include "decode.h"
-#include <stdio.h>
+#include "reg.h"
 
-typedef int32_t reg_word;
+class Execute{
 
-static reg_word registers[32];
+    private:
+        static int32_t get_simm13(int32_t num);
 
-void execute(decoded_instr* inst_details);
+    public:
+        static void execute(Decode::decoded_instr* inst_details);
 
-void print_register_state();
-
-void initialize_registers();
-
-int32_t get_simm13(int32_t num);
-
-void set_register(uint32_t index,int32_t val);
+};

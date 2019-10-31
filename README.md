@@ -10,7 +10,8 @@
 
 Libraries that need to be installed:
 
-* libelf library
+* libelf library.                                                
+
     For installation, Refer to : https://github.com/WolfgangSt/libelf
 
 

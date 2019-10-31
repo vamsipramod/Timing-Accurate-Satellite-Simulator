@@ -100,8 +100,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_simulator_OBJECTS = simulator.$(OBJEXT) elf_reader.$(OBJEXT) \
-	decode.$(OBJEXT) execute.$(OBJEXT)
+am_simulator_OBJECTS = simulator.$(OBJEXT) core.$(OBJEXT) \
+	elf_reader.$(OBJEXT) decode.$(OBJEXT) execute.$(OBJEXT) \
+	reg.$(OBJEXT)
 simulator_OBJECTS = $(am_simulator_OBJECTS)
 simulator_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -119,8 +120,9 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/decode.Po ./$(DEPDIR)/elf_reader.Po \
-	./$(DEPDIR)/execute.Po ./$(DEPDIR)/simulator.Po
+am__depfiles_remade = ./$(DEPDIR)/core.Po ./$(DEPDIR)/decode.Po \
+	./$(DEPDIR)/elf_reader.Po ./$(DEPDIR)/execute.Po \
+	./$(DEPDIR)/reg.Po ./$(DEPDIR)/simulator.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -265,7 +267,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-simulator_SOURCES = simulator.cpp elf_reader.cpp elf_reader.h decode.cpp decode.h execute.cpp execute.h
+simulator_SOURCES = simulator.cpp simulator.h core.cpp core.h elf_reader.cpp elf_reader.h decode.cpp decode.h execute.cpp execute.h reg.cpp reg.h
 all: all-am
 
 .SUFFIXES:
@@ -352,9 +354,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/core.Po # am--include-marker
 include ./$(DEPDIR)/decode.Po # am--include-marker
 include ./$(DEPDIR)/elf_reader.Po # am--include-marker
 include ./$(DEPDIR)/execute.Po # am--include-marker
+include ./$(DEPDIR)/reg.Po # am--include-marker
 include ./$(DEPDIR)/simulator.Po # am--include-marker
 
 $(am__depfiles_remade):
@@ -504,9 +508,11 @@ clean: clean-am
 clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/decode.Po
+		-rm -f ./$(DEPDIR)/core.Po
+	-rm -f ./$(DEPDIR)/decode.Po
 	-rm -f ./$(DEPDIR)/elf_reader.Po
 	-rm -f ./$(DEPDIR)/execute.Po
+	-rm -f ./$(DEPDIR)/reg.Po
 	-rm -f ./$(DEPDIR)/simulator.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -553,9 +559,11 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/decode.Po
+		-rm -f ./$(DEPDIR)/core.Po
+	-rm -f ./$(DEPDIR)/decode.Po
 	-rm -f ./$(DEPDIR)/elf_reader.Po
 	-rm -f ./$(DEPDIR)/execute.Po
+	-rm -f ./$(DEPDIR)/reg.Po
 	-rm -f ./$(DEPDIR)/simulator.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic

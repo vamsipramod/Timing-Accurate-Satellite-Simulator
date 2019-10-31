@@ -3,11 +3,8 @@
 # include <stdio.h>
 # include <stdint.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <gelf.h>
 #define __STDC_FORMAT_MACROS
-#include <inttypes.h>
-#include <string.h>
 #include <vector>
 
 using namespace std;
@@ -21,8 +18,6 @@ using namespace std;
             //END
 
 #define         NL() do { (void) printf("\n"); }while(0)
-
-
 
 
 class elf

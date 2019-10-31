@@ -271,6 +271,7 @@ config.status:777: creating Makefile
 config.status:777: creating src/Makefile
 config.status:949: executing depfiles commands
 config.status:1026: cd src       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+make: Nothing to be done for 'am--depfiles'.
 config.status:1031: $? = 0
 
 ## ---------------- ##
