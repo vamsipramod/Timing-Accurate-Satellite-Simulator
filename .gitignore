@@ -3,3 +3,5 @@ autom4te.cache/**
 missing
 install-sh
 depcomp
+config.status
+**/Makefile
