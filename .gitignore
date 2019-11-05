@@ -1,4 +1,6 @@
+satsim
 .*
+*.o
 !.gitignore
 aclocal.m4
 configure

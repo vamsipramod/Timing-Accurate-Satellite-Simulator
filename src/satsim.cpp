@@ -1,4 +1,4 @@
-#include "simulator.h"
+#include "satsim.h"
 
 
 Simulator::Simulator(char* input)
@@ -22,7 +22,7 @@ int main(int argc ,char ** argv)
 {
     if (argc !=2) {
         fprintf(stderr, "Unrecognized filename.\n");
-        fprintf(stderr, "USAGE: %s </path/to/SPARCv8/executable>\n", argv[0]);
+        fprintf(stderr, "USAGE:  %s  </path/to/SPARCv8/executable>\n", argv[0]);
         exit(1);
     }
 
