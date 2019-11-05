@@ -1,5 +1,10 @@
 #include <stdint.h>
 
+//TODO: 
+// Rename each struct here to Format1, Format2, Format3
+// Decode to have a union called inst which is union{Format1, Format2, Format3}
+// Input to Decode object (instruction-bytes), output -> set the control regs
+
 class Decode {
     
     public :
@@ -32,7 +37,7 @@ class Decode {
             } fp;
 
         } operand2;
-    } Arithmetic;
+    } Arithmetic; //FMT1 or FMT2 or FMT3
 
     typedef struct{
         uint32_t opcode2;

@@ -1,3 +1,5 @@
+.*
+!.gitignore
 autom4te.cache/**
 **/*.log
 missing
@@ -6,3 +8,4 @@ depcomp
 config.status
 **/Makefile
 **/Makefile.in
+tags

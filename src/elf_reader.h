@@ -26,7 +26,7 @@ class elf
     Elf *e;
     size_t shstrndx;
     vector <uint32_t> instructions;
-    int current_instruction_index=0;
+    unsigned current_instruction_index=0;
     
 
     public:
