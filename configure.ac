@@ -13,7 +13,7 @@ AC_PROG_CXX
 
 AC_SUBST([CC])
 
-AC_CHECK_LIB([elf],[gelf_getshdr],[],[AC_MSG_ERROR([unable to find the gelf_getshdr() function])])
+AC_CHECK_LIB([elf],[gelf_getshdr],[],[AC_MSG_ERROR([Package 'libelf-dev' is missing on this computer. Please install and try again!])])
 AC_CHECK_HEADERS([libelf.h gelf.h])
 
 

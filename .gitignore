@@ -1,3 +1,5 @@
-./autom4te.cache
-./autom4te.cache/**
-./**/*.log
+autom4te.cache/**
+**/*.log
+missing
+install-sh
+depcomp

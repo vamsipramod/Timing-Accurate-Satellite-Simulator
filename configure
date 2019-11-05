@@ -3539,7 +3539,7 @@ _ACEOF
   LIBS="-lelf $LIBS"
 
 else
-  as_fn_error $? "unable to find the gelf_getshdr() function" "$LINENO" 5
+  as_fn_error $? "Package 'libelf-dev' is missing on this computer. Please install and try again!" "$LINENO" 5
 fi
 
 ac_ext=cpp
