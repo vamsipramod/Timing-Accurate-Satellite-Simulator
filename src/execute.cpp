@@ -23,12 +23,67 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,rs1+rs2);
        }
 
+       if(instr->inst_type.a.opcode3 == 0x00000010)
+       {                                                    //ADDcc ***
+            Registers::set_register(rd,rs1+rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000008)
+       {                                                    //ADDX ***
+            Registers::set_register(rd,rs1+rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000018)
+       {                                                    //ADDXcc ***
+            Registers::set_register(rd,rs1+rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000020)
+       {                                                    //TADDcc ***
+            Registers::set_register(rd,rs1+rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000022)
+       {                                                    //TADDccTV ***
+            Registers::set_register(rd,rs1+rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000004)
+       {                                                    //SUB
+            Registers::set_register(rd,rs1-rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000014)
+       {                                                    //SUBcc ***
+            Registers::set_register(rd,rs1-rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x0000000C)
+       {                                                    //SUBX ***
+            Registers::set_register(rd,rs1-rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x0000001C)
+       {                                                    //SUBXcc ***
+            Registers::set_register(rd,rs1-rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000021)
+       {                                                   //TSUBXcc ***
+            Registers::set_register(rd,rs1-rs2);
+       }
+
+       if(instr->inst_type.a.opcode3 == 0x00000023)
+       {                                                    //TSUBXccTV ***
+            Registers::set_register(rd,rs1-rs2);
+       }
+
        else if(instr->inst_type.a.opcode3 == 0x00000001)   //AND
        {
             Registers::set_register(rd,(rs1 & rs2));
        }
 
-       else if(instr->inst_type.a.opcode3 == 0x00000011)   //ANDcc
+       else if(instr->inst_type.a.opcode3 == 0x00000011)   //ANDcc ***
        {
             Registers::set_register(rd,(rs1 & rs2));
        }
@@ -38,7 +93,7 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,(rs1 & ~rs2));
        }
 
-       else if(instr->inst_type.a.opcode3 == 0x00000015)   //ANDNcc
+       else if(instr->inst_type.a.opcode3 == 0x00000015)   //ANDNcc ***
        {
             Registers::set_register(rd,(rs1 & ~rs2));
        }
@@ -48,7 +103,7 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,(rs1 | rs2));
        }
 
-       else if(instr->inst_type.a.opcode3 == 0x00000012)   //ORcc
+       else if(instr->inst_type.a.opcode3 == 0x00000012)   //ORcc ***
        {
             Registers::set_register(rd,(rs1 | rs2));
        }
@@ -58,7 +113,7 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,(rs1 | ~rs2));
        }
 
-       else if(instr->inst_type.a.opcode3 == 0x00000016)   //ORNcc
+       else if(instr->inst_type.a.opcode3 == 0x00000016)   //ORNcc ***
        {
             Registers::set_register(rd,(rs1 | ~rs2));
        }
@@ -68,7 +123,7 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,(rs1 ^ rs2));
        }
 
-       else if(instr->inst_type.a.opcode3 == 0x00000013)   //XORcc
+       else if(instr->inst_type.a.opcode3 == 0x00000013)   //XORcc ***
        {
             Registers::set_register(rd,(rs1 ^ rs2));
        }
@@ -78,11 +133,94 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,~(rs1 ^ rs2));
        }
 
-       else if(instr->inst_type.a.opcode3 == 0x00000017)   //XNORcc
+       else if(instr->inst_type.a.opcode3 == 0x00000017)   //XNORcc ***
        {
             Registers::set_register(rd,~(rs1 ^ rs2));
        }
-    
+
+       else if(instr->inst_type.a.opcode3 == 0x00000024)   //MULScc ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000000A)   //UMUL ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000000B)   //SMUL ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000001A)   //UMULcc ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000001B)   //SMULcc ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000000E)   //UDIV ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000000F)   //SDIV ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000001E)   //UDIVcc ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000001F)   //SDIVcc ***
+       {
+            Registers::set_register(rd, rs1*rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000003C)   //SAVE ***
+       {
+            Registers::set_register(rd,~(rs1 ^ rs2));
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x0000003D)   //RESTORE ***
+       {
+            Registers::set_register(rd,~(rs1 ^ rs2));
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x00000025)   //SLL
+       {    
+            rs2 = rs2 << 27;
+            rs2 = rs2 >> 27;
+            Registers::set_register(rd, rs1<<rs2);
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x00000026)   //SRL
+       {
+           rs2 = rs2 << 27;
+           rs2 = rs2 >> 27;
+           Registers::set_register(rd, rs1>>rs2);
+           
+       }
+
+       else if(instr->inst_type.a.opcode3 == 0x00000027)   //SRA
+       {
+           rs2 = rs2 << 27;
+           rs2 = rs2 >> 27;
+           if(0x80000000 & rs1)
+           {
+              rs2 = (rs1>>rs2) | (0xFFFFFFFF ^ 0xFFFFFFFF>>rs2);
+              Registers::set_register(rd,rs2);  
+           }
+           else
+               Registers::set_register(rd, rs1>>rs2);
+       }
+       
     }
 
     if(instr->opcode1 == 0)
