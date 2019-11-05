@@ -1,6 +1,6 @@
 # Initialize AC: ACINIT( package_name, version, bug_report_address)
-AC_INIT([SatelliteSimulator], [1.0])
-AM_INIT_AUTOMAKE([foreign -Wall -Werror])
+AC_INIT([SatSim], [1.0], [111601010@smail.iitpkd.ac.in, sandeepchandran@iitpkd.ac.in])
+AM_INIT_AUTOMAKE
 
 
 # AM stands for Automake commands, AC stands for Autoconf commands
@@ -17,7 +17,6 @@ AC_CHECK_LIB([elf],[gelf_getshdr],[],[AC_MSG_ERROR([Package 'libelf-dev' is miss
 AC_CHECK_HEADERS([libelf.h gelf.h])
 
 
-AC_CONFIG_FILES([Makefile src/Makefile])
 # Finally produce "configure" script
-AC_OUTPUT
+AC_OUTPUT(Makefile src/Makefile)
 
