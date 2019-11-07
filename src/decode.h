@@ -4,16 +4,33 @@
 // Rename each struct here to Format1, Format2, Format3
 // Decode to have a union called inst which is union{Format1, Format2, Format3}
 // Input to Decode object (instruction-bytes), output -> set the control regs
+typedef struct{
+        int32_t disp30;
+    } format1;
 
-class Decode {
-    
-    public :
-    typedef struct{
-        int32_t target_address;
-    } Call;
+typedef struct{
+        uint32_t op2;
 
-    typedef struct{
-        int32_t opcode3; 
+        union 
+        {
+            struct
+            {
+                uint32_t rd;
+                int32_t imm22;
+            } sethi;
+
+            struct 
+            {
+                int32_t a;
+                int32_t cond;
+                int32_t disp22;  
+            } branch; 
+        
+        } target;
+    } format2;
+
+typedef struct{
+        int32_t op3; 
         uint32_t rd;
         uint32_t rs1;
 
@@ -37,40 +54,23 @@ class Decode {
             } fp;
 
         } operand2;
-    } Arithmetic; //FMT1 or FMT2 or FMT3
+    } format3; //FMT1 or FMT2 or FMT3
 
-    typedef struct{
-        uint32_t opcode2;
-
+typedef struct {
+        uint32_t op;
         union 
         {
-            struct
-            {
-                uint32_t rd;
-                int32_t imm22;
-            } sethi;
-
-            struct 
-            {
-                int32_t a;
-                int32_t cond;
-                int32_t disp22;  
-            } branch; 
-        
-        } target;
-    } Branch;
-
-    typedef struct {
-        uint32_t opcode1;
-        union 
-        {
-            Arithmetic a;
-            Branch b;
-            Call c; 
+            format1 a;
+            format2 b;
+            format3 c; 
         } inst_type;
-    } decoded_instr;
+    } inst;
 
-    static void decode(uint32_t inst,decoded_instr* d);
+
+class Decode {
+    
+    public :
+        void decode(uint32_t inst);
 };
 
 
