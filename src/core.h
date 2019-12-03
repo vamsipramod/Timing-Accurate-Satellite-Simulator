@@ -1,10 +1,9 @@
 #include "elf_reader.h"
 #include "execute.h"
-
+#include "fetch.h"
 
 class Core{
-    private:
-    char* input_file;
+
     // TODO: micro-architectural elements
     // Fetch f;
     // Decode d;
@@ -16,8 +15,11 @@ class Core{
     // match with that in VHDL for cycle-accuracy)
 
     public:
-    Core(char* input);
-
+    Core();
+    vector <uint32_t> icache; 
+    Registers regs;
+    Decode d;
+    Fetch f;
     void pipeline();
 
 };

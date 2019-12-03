@@ -7,6 +7,6 @@ class Execute{
         static int32_t get_simm13(int32_t num);
 
     public:
-        static void execute(Decode::decoded_instr* inst_details);
+        static void execute(inst* inst_details);
 
 };

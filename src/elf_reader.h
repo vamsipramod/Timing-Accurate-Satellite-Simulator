@@ -25,11 +25,11 @@ class elf
     private:
     Elf *e;
     size_t shstrndx;
-    vector <uint32_t> instructions;
     unsigned current_instruction_index=0;
     
 
     public:
+    vector <uint32_t> instructions;
     elf(char *input_file);
 
     void read_elf_instruction();

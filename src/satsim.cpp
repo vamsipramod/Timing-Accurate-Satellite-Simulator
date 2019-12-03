@@ -1,12 +1,8 @@
 #include "satsim.h"
 
 
-Simulator::Simulator(char* input)
+Simulator::Simulator()
 {
-    input_file = input;
-
-    // Create micro-architectural elements when you create simulator
-    // Core core(input_file);
     // TODO: 
     // Memory ram;
     // Disk hdd;
@@ -14,8 +10,14 @@ Simulator::Simulator(char* input)
 
 void Simulator::run()
 {
-    Core core(input_file);
     core.pipeline();
+}
+
+void Simulator::load(char *input)
+{
+    elf bin(input);
+    bin.read_elf_instruction();
+    memory = bin.instructions;
 }
 
 int main(int argc ,char ** argv)
@@ -30,9 +32,10 @@ int main(int argc ,char ** argv)
     //
 
     // Found SPARCv8 executable. Simulate now
-    Simulator sim(argv[1]);
-    // sim.load(argv[1], addr) -> load the executable to a location in memory
+    Simulator sim;
+    sim.load(argv[1]);      // sim.load(argv[1], addr) -> load the executable to a location in memory
     sim.run();
 
     return 0;
 }
+// 

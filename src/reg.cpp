@@ -1,9 +1,9 @@
 #include "reg.h"
 
 
-int32_t Registers::registers[32] = {0,0,0,0,0,0};
+// int32_t Registers::registers[32] = {0,0,0,0,0,0};
 
-void Registers::print_register_state()
+void Registers::print_regstate()
 {   
     printf("================================\n");
     for (int i = 0; i < 32; i++)
@@ -15,6 +15,7 @@ void Registers::print_register_state()
 
 void Registers::initialize_registers()
 {
+    Registers::pc = 0;
     for(int i=0;i<32;i++)
     {
         Registers::registers[i] = 0;

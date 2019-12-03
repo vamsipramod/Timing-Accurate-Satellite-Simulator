@@ -1,9 +1,10 @@
 #include "core.h"
 
-
 class Simulator{
     private:
-    char* input_file;
+    Core core;
+    vector <uint32_t> memory; 
+
     // TODO: Add other micro-architectural elements
     // Core core;
     // Cache L1;
@@ -11,7 +12,7 @@ class Simulator{
     // APB p_bus;
 
     public:
-    Simulator(char* input);
-
+    Simulator();
     void run();
+    void load(char* input);
 };

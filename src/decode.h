@@ -1,9 +1,11 @@
 #include <stdint.h>
-
+#include "reg.h"
 //TODO: 
 // Rename each struct here to Format1, Format2, Format3
 // Decode to have a union called inst which is union{Format1, Format2, Format3}
 // Input to Decode object (instruction-bytes), output -> set the control regs
+
+
 typedef struct{
         int32_t disp30;
     } format1;
@@ -69,8 +71,11 @@ typedef struct {
 
 class Decode {
     
+    private:
+        inst decode_inst(uint32_t instr);
+        void set_control_regs(inst instr,plregs& r);
     public :
-        void decode(uint32_t inst);
+        void decode(plregs& r);
 };
 
 

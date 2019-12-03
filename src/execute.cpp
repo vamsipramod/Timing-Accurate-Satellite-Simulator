@@ -1,9 +1,9 @@
 #include "execute.h"
 
-void Execute::execute(Decode::decoded_instr* instr)
+void Execute::execute(inst* instr)
 {
 
-    if(instr->opcode1 == 2)
+    if(instr->op == 2)
     {
        int32_t rs1 =  Registers::get_register(instr->inst_type.a.rs1);
        uint32_t rd =  instr->inst_type.a.rd;
@@ -23,7 +23,7 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,rs1+rs2);
        }
 
-       else if(instr->inst_type.a.opcode3 == 0x00000001)   //AND
+       else if(instr->inst_type.a.op3 == 0x00000001)   //AND
        {
             Registers::set_register(rd,(rs1 & rs2));
        }
@@ -83,7 +83,7 @@ void Execute::execute(Decode::decoded_instr* instr)
             Registers::set_register(rd,~(rs1 ^ rs2));
        }
     
-    }
+    }     
 
     if(instr->opcode1 == 0)
     {
