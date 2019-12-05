@@ -16,8 +16,16 @@ typedef struct
         uint32_t rs2;
         uint32_t rd;
         uint32_t pc;
-    } pr_de;
+        int32_t simm13;
+    } pr_dra;
 
+    struct 
+    {
+        uint32_t operand1;
+        uint32_t operand2;
+        uint32_t dest;
+    } pr_rae;
+    
     struct 
     {
         uint32_t rd;
