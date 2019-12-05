@@ -15,6 +15,9 @@ void Core::pipeline()
     //Decode
     d.decode(regs.pregs);
 
+    //Register Access
+    ra.reg_access(regs.pregs,regs);
+
     // inst* inst_decoded = (inst*) malloc (sizeof(inst));
 
     //Execute

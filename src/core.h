@@ -1,7 +1,7 @@
 #include "elf_reader.h"
 #include "execute.h"
 #include "fetch.h"
-
+#include "reg_access.h"
 class Core{
 
     // TODO: micro-architectural elements
@@ -20,6 +20,8 @@ class Core{
     Registers regs;
     Decode d;
     Fetch f;
+    Reg_access ra;
+
     void pipeline();
 
 };
