@@ -23,6 +23,7 @@ typedef struct
     {
         uint32_t operand1;
         uint32_t operand2;
+        uint32_t rd;
         uint32_t pc;
     } pr_rae;
     
@@ -30,7 +31,7 @@ typedef struct
     {
         uint32_t rd;
         uint32_t aout;
-
+        uint32_t pc;
     } pr_em;
 
     struct 
