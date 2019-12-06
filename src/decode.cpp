@@ -74,7 +74,7 @@ inst Decode::decode_inst(uint32_t instr)
     return d;       
 }
 
-void set_control_regs(inst instr,plregs& r)
+void Decode::set_control_regs(inst instr,plregs& r)
 {
     switch (instr.op)
     {

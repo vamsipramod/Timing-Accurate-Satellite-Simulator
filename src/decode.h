@@ -1,3 +1,6 @@
+#ifndef DECODE
+#define DECODE
+
 #include <stdint.h>
 #include "reg.h"
 //TODO: 
@@ -81,4 +84,4 @@ class Decode {
         
 };
 
-
+#endif

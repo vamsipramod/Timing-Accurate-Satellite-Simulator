@@ -1,3 +1,6 @@
+#ifndef ELF_READER
+#define ELF_READER
+
 # include <err.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -43,3 +46,5 @@ class elf
     void write_instructions(char output_file[]);
 
 };
+
+#endif

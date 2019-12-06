@@ -1,7 +1,12 @@
+#ifndef CORE
+#define CORE
+
 #include "elf_reader.h"
 #include "execute.h"
 #include "fetch.h"
 #include "reg_access.h"
+#include "decode.h"
+
 
 class Core{
 
@@ -26,3 +31,5 @@ class Core{
     void pipeline();
 
 };
+
+#endif

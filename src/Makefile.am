@@ -4,4 +4,4 @@ AM_LDFLAGS = -lelf
 bindir = ..
 
 bin_PROGRAMS = satsim
-satsim_SOURCES = satsim.cpp satsim.h core.cpp core.h elf_reader.cpp elf_reader.h decode.cpp decode.h execute.cpp execute.h reg.cpp reg.h
+satsim_SOURCES = satsim.cpp satsim.h core.cpp core.h fetch.cpp fetch.h reg_access.cpp reg_access.h elf_reader.cpp elf_reader.h decode.cpp decode.h execute.cpp execute.h reg.cpp reg.h

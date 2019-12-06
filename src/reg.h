@@ -1,3 +1,6 @@
+#ifndef REG
+#define REG
+
 #include <stdint.h>
 #include <stdio.h>
 
@@ -68,7 +71,6 @@ class Registers
         plregs pregs;
 };
 
-
-
+#endif
 
 
