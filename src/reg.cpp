@@ -31,10 +31,3 @@ Registers::reg_word Registers::get_register(uint32_t index)
 {
     return Registers::registers[index];
 }
-
-//Instruction
-
-void Instr::disassemble()
-{
-    printf("Disassembly is Under Development!!!..............Coming Soon\n");
-}
