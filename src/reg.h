@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+//REGISTERS
 typedef struct
 {
     struct 
@@ -20,6 +21,7 @@ typedef struct
         uint32_t rd;
         uint32_t pc;
         int32_t simm13;
+        Instr instr;
     } pr_dra;
 
     struct 
@@ -28,6 +30,7 @@ typedef struct
         uint32_t operand2;
         uint32_t rd;
         uint32_t pc;
+        Instr instr;
     } pr_rae;
     
     struct 
@@ -35,6 +38,7 @@ typedef struct
         uint32_t rd;
         uint32_t ares;
         uint32_t pc;
+        Instr instr;
     } pr_em;
 
     struct 
@@ -42,12 +46,14 @@ typedef struct
         uint32_t rd;
         uint32_t pc;
         uint32_t data;
+        Instr instr;
     }pr_mx;
     
     struct 
     {
         uint32_t memout;
         uint32_t rd;
+        Instr instr;
     } pr_xwb;
 
     struct
@@ -76,6 +82,77 @@ class Registers
         reg_word get_register(uint32_t index);
         reg_word registers[32];
         plregs pregs;
+};
+
+//INSTRUCTION
+typedef struct{
+        int32_t disp30;
+    } format1;
+
+typedef struct{
+        uint32_t op2;
+
+        union 
+        {
+            struct
+            {
+                uint32_t rd;
+                int32_t imm22;
+            } sethi;
+
+            struct 
+            {
+                int32_t a;
+                int32_t cond;
+                int32_t disp22;  
+            } branch; 
+        
+        } target;
+    } format2;
+
+typedef struct{
+        int32_t op3; 
+        uint32_t rd;
+        uint32_t rs1;
+
+        union 
+        {
+            struct 
+            {
+                int i;
+                union 
+                {
+                        uint32_t rs2;
+                        int32_t simm13;
+                } rs2;
+                
+            } intg;
+
+            struct 
+            {
+                uint32_t rs2;
+                uint32_t opf;
+            } fp;
+
+        } operand2;
+    } format3; //FMT1 or FMT2 or FMT3
+
+typedef struct {
+        uint32_t op;
+        union 
+        {
+            format1 a;
+            format2 b;
+            format3 c; 
+        } inst;
+    } inst_type;
+
+class Instr
+{
+    private:
+        inst_type instr;
+    public:
+        void disassemble();
 };
 
 #endif

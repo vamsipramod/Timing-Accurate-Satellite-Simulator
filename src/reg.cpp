@@ -1,8 +1,7 @@
 #include "reg.h"
 
 
-// int32_t Registers::registers[32] = {0,0,0,0,0,0};
-
+// Registers
 void Registers::print_regstate()
 {   
     printf("================================\n");
@@ -31,4 +30,11 @@ void Registers::set_register(uint32_t index,int32_t val)
 Registers::reg_word Registers::get_register(uint32_t index)
 {
     return Registers::registers[index];
+}
+
+//Instruction
+
+void Instr::disassemble()
+{
+    printf("Disassembly is Under Development!!!..............Coming Soon\n");
 }
