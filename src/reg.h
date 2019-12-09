@@ -33,15 +33,22 @@ typedef struct
     struct 
     {
         uint32_t rd;
-        uint32_t aout;
+        uint32_t ares;
         uint32_t pc;
     } pr_em;
 
     struct 
+    {   
+        uint32_t rd;
+        uint32_t pc;
+        uint32_t data;
+    }pr_mx;
+    
+    struct 
     {
         uint32_t memout;
         uint32_t rd;
-    } pr_mwb;
+    } pr_xwb;
 
     struct
     {

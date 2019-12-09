@@ -2,10 +2,12 @@
 #define CORE
 
 #include "elf_reader.h"
-#include "execute.h"
 #include "fetch.h"
-#include "reg_access.h"
 #include "decode.h"
+#include "reg_access.h"
+#include "execute.h"
+#include "mem_access.h"
+
 
 
 class Core{
@@ -22,11 +24,15 @@ class Core{
 
     public:
     Core();
-    vector <uint32_t> icache; 
+    vector <uint32_t> icache;
+    vector <uint32_t> dcache; 
     Registers regs;
     Decode d;
     Fetch f;
     Reg_access ra;
+    Execute e;
+    Mem_access m;
+    
 
     void pipeline();
 

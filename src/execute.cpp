@@ -9,12 +9,12 @@ void Execute::execute(plregs& pr)
      
      switch (pr.cntrl_sig.ALUop)
      {
-     case 0:
-          pr.pr_em.aout = a + b;
-          break;
-     
-     default:
-          break;
+          case 0:
+               pr.pr_em.ares = a + b;   //ADD
+               break;
+          
+          default:
+               break;
      }
      
 

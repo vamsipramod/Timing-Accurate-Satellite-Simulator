@@ -80,7 +80,6 @@ void Decode::set_control_regs(inst instr,plregs& r)
     {
         case 2:
             r.pr_dra.rs1 = instr.inst_type.c.rs1;
-            // r.pr_dra.rs2 = instr.inst_type.c.operand2.fp.rs2;
             r.pr_dra.rd  = instr.inst_type.c.rd;
             r.pr_dra.pc  = r.pr_fd.pc;
 
