@@ -37,7 +37,7 @@ typedef struct
     struct 
     {
         uint32_t rd;
-        uint32_t ares;
+        uint32_t ares;  //ALU result
         uint32_t pc;
         Instr instr;
     } pr_em;

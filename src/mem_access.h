@@ -7,6 +7,6 @@
 class Mem_access
 {
     public:
-    void mem_access(plregs& r, vector<uint32_t> dcache);
+    void mem_access(plregs& r, vector <uint32_t> dcache);
 };
-#endif 
+#endif
