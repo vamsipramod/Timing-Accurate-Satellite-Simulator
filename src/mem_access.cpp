@@ -1,6 +1,6 @@
 #include "mem_access.h"
 
-void Mem_access::mem_access(plregs& r, vector <uint32_t> dcache)
+void Mem_access::mem_access(plregs& r, std::vector <uint32_t> dcache)
 {
     r.pr_mx.pc = r.pr_em.pc;
     r.pr_mx.rd = r.pr_em.rd;
