@@ -9,7 +9,7 @@ Core::Core()
 
 void Core::pipeline()
 {
-    //IF
+    //Fetch
     f.fetch(regs.pregs,regs.pc, icache);
     
     //Decode
@@ -18,11 +18,15 @@ void Core::pipeline()
     //Register Access
     ra.reg_access(regs.pregs,regs);
 
-    // inst* inst_decoded = (inst*) malloc (sizeof(inst));
-
     //Execute
+    e.execute(regs.pregs);
 
-    // Registers::print_regstate();
-    // Execute::execute(inst_decoded);
-    // Registers::print_regstate();
+    //Memory Access
+    m.mem_access(regs.pregs,dcache);
+
+    //Exception
+    x.exception(regs.pregs);
+
+    //Write Back
+    wb.wrt_back(regs.pregs,regs);
 }

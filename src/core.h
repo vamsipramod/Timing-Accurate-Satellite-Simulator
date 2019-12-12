@@ -7,7 +7,8 @@
 #include "reg_access.h"
 #include "execute.h"
 #include "mem_access.h"
-
+#include "exception.h"
+#include "write_back.h"
 
 
 class Core{
@@ -27,12 +28,13 @@ class Core{
     vector <uint32_t> icache;
     vector <uint32_t> dcache; 
     Registers regs;
-    Decode d;
     Fetch f;
+    Decode d;
     Reg_access ra;
     Execute e;
     Mem_access m;
-    
+    Exception x;
+    Wrt_back wb;
 
     void pipeline();
 

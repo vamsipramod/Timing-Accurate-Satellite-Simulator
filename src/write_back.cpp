@@ -8,5 +8,4 @@ void Wrt_back::wrt_back(plregs& pr, Registers& regs)
         int32_t data = pr.pr_xwb.data;
         regs.set_register(reg, data);
     }
-
 }
