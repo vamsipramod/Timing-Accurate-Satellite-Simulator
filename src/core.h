@@ -40,4 +40,5 @@ class Core{
 
 };
 
+void print_pregs(plregs pr,char s);
 #endif

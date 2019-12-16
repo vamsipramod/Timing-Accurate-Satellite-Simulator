@@ -2,8 +2,8 @@
 
 void Execute::execute(plregs& pr)
 {
-     int32_t a = pr.pr_rae.operand1;
-     int32_t b = pr.pr_rae.operand2;
+     uint32_t a = pr.pr_rae.operand1;
+     uint32_t b = pr.pr_rae.operand2;
      pr.pr_em.pc = pr.pr_rae.pc;
      pr.pr_em.rd = pr.pr_rae.rd;
      pr.pr_em.instr = pr.pr_rae.instr;
