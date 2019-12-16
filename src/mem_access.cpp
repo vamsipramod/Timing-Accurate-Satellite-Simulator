@@ -10,4 +10,10 @@ void Mem_access::mem_access(plregs& r, std::vector <uint32_t> dcache)
     {
         r.pr_mx.data = dcache.at(r.pr_em.ares);
     }
+    
+    else if(r.cntrl_sig.RegWrite == 1)
+    {
+        r.pr_mx.data = r.pr_em.ares;
+    }
+    
 }

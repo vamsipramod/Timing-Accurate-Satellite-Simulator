@@ -46,7 +46,7 @@ Instr Decode::decode_inst(uint32_t instr)
         case 3:
             d.instr.inst_type.c.op3 = (((1 << 6) - 1) & (instr_copy >> (19)));
             d.instr.inst_type.c.rd = (((1 << 5) - 1) & (instr_copy >> (25)));
-            d.instr.inst_type.c.rs1 = (((1 << 5) - 1) & (instr_copy >> (25)));
+            d.instr.inst_type.c.rs1 = (((1 << 5) - 1) & (instr_copy >> (14)));
 
             if(d.instr.inst_type.c.op3 >= 0x00000034 && d.instr.inst_type.c.op3 <= 0x00000037)
             {

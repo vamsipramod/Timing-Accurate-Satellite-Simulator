@@ -81,7 +81,7 @@ void print_pregs(plregs pr,char s)
         case 'M':
             printf("===================================\n");
             printf("MEMORY ACCESS COMPLETED\n");
-            printf("Data out/in : %d\n",pr.pr_mx.data);
+            printf("NO Memory Access Involved \n Passing ALU output \n Data out/in : %d\n",pr.pr_mx.data);
             break;
         
         case 'X':
