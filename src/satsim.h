@@ -16,6 +16,8 @@ class Simulator{
     // Support loading and storing of entire simulator state.
     //      - Run only a subset of instructions
     //      - Statistics
+    // Support configuration from a config file
+    //      - VHDL style
     // Add other micro-architectural elements
     //      - AHB bus;
     //      - APB p_bus;
