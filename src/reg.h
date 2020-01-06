@@ -70,7 +70,7 @@ typedef struct
         int32_t ALUop;
     } cntrl_sig;
     
-} plregs;
+} plregs; 
 
 class Registers
 {
@@ -79,11 +79,20 @@ class Registers
         typedef int32_t reg_word;
         void print_regstate();
         void initialize_registers();
-        void set_register(uint32_t index,int32_t val);
-        reg_word get_register(uint32_t index);
-        reg_word registers[32];
+        void set_register(uint32_t index,int32_t val); // TODO: register(uint32_t index,int32_t val)
+        reg_word get_register(uint32_t index);         // TODO: register(uint32_t index)
+        reg_word registers[32];  // TODO: Change 32 to a config knob, rename 'registers' to 'register_file' or 'rf' or 'reg_file'
         plregs pregs;
-};
+};  // TODO: Do not mix the control registers and data registers into the same class.
+
+// Register -> Abstract class -> register(index), and register(index, value) 
+// PipeRegister -> Derives from Register  (No configurations)
+//    - Stage registers could be subclasses. 
+//    - code will be pr.f, pr.d, pr.a, pr.e, pr.m, pr.w, pr.x.
+//    - Think of using enums to map names to indexes
+// RegisterFile -> Derives from Register  (Can be configured by the user)
+//    - Register windows? CWP and WIM
+//
 
 #endif
 
