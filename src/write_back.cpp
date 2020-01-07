@@ -6,6 +6,6 @@ void Wrt_back::wrt_back(plregs& pr, Registers& regs)
     {
         uint32_t reg = pr.pr_xwb.rd;
         int32_t data = pr.pr_xwb.data;
-        regs.set_register(reg, data);
+        regs.reg(reg, data);
     }
 }

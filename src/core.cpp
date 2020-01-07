@@ -2,14 +2,14 @@
 
 Core::Core()
 {
-    regs.initialize_registers();
+    regs.init_reg_file();
     icache.push_back(0x82008003);
     regs.pc = 0;
-    regs.set_register(1,10);
-    regs.set_register(2,20);
-    regs.set_register(3,30);
-    regs.set_register(4,40);
-    regs.set_register(5,50);
+    regs.reg(1,10);
+    regs.reg(2,20);
+    regs.reg(3,30);
+    regs.reg(4,40);
+    regs.reg(5,50);
 }
 
 void Core::pipeline()
