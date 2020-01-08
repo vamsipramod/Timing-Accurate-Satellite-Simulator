@@ -12,7 +12,7 @@ Core::Core()
     regs.reg(5,50);
 }
 
-void Core::pipeline()
+void Core:: pipeline()
 {
     printf("Pipeline Started \n");
     printf("Executing Instruction at PC: %x [ADD R1,R2,R3]\n",regs.pc);

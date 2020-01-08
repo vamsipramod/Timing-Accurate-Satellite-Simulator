@@ -71,16 +71,97 @@ typedef struct
 
 } plregs;
 
+class PipeF
+{
+    uint32_t pc;
+};
+
+class PipeD
+{
+    uint32_t instr;
+    uint32_t pc;
+};
+
+class PipeRA
+{
+    uint32_t rs1;
+    uint32_t rs2;
+    uint32_t rd;
+    uint32_t pc;
+    int32_t simm13;
+    Instr instr;
+};  
+
+class PipeE
+{
+    uint32_t operand1;
+    uint32_t operand2;
+    uint32_t rd;
+    uint32_t pc;
+    Instr instr;
+};
+
+class PipeMA
+{
+    uint32_t rd;
+    uint32_t ares; //ALU result
+    uint32_t pc;
+    Instr instr;
+};
+
+class PipeX
+{
+    uint32_t rd;
+    uint32_t pc;
+    int32_t data;
+    Instr instr;
+};
+
+class PipeWB
+{
+    int32_t data;
+    uint32_t rd;
+    Instr instr;
+};
+
+class CntrlSig
+{
+    bool RegDst;
+    bool ALUSrc;
+    bool MemtoReg;
+    bool RegWrite;
+    bool MemRead;
+    bool MemWrite;
+    bool Branch;
+    bool Jump;
+    bool ALUop;
+};
+
+class PipeRegister
+{
+    PipeF f;
+    PipeD d;
+    PipeRA a;
+    PipeE e;
+    PipeMA m;
+    PipeX x;
+    PipeWB w;
+};
+
 class Registers
 {
-public:
-    uint32_t pc;
+
+private:
     typedef int32_t reg_word;
+    reg_word reg_file[32]; 
+
+public:
+    uint32_t pc; 
     void state();
     void init_reg_file();
     void reg(uint32_t index, int32_t val); // TODO: register(uint32_t index,int32_t val)
     reg_word reg(uint32_t index);          // TODO: register(uint32_t index)
-    reg_word reg_file[32];                         // TODO: Change 32 to a config knob, rename 'registers' to 'register_file' or 'rf' or 'reg_file'
+                                           // TODO: Change 32 to a config knob, rename 'registers' to 'register_file' or 'rf' or 'reg_file'
     plregs pregs;
 }; // TODO: Do not mix the control registers and data registers into the same class.
 

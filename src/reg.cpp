@@ -12,7 +12,7 @@ void Registers::state()
     printf("================================\n");
 }
 
-void Registers::initialize_registers()
+void Registers::init_reg_file()
 {
     Registers::pc = 0;
     for(int i=0;i<32;i++)

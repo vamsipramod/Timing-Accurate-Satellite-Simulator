@@ -23,6 +23,9 @@ class Core{
     // Internal structures -> pointing to which register to read/write (to
     // match with that in VHDL for cycle-accuracy)
 
+    private:
+    PipeRegister pr;
+    
     public:
     Core();
     vector <uint32_t> icache;
