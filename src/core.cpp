@@ -18,31 +18,31 @@ void Core:: pipeline()
     printf("Executing Instruction at PC: %x [ADD R1,R2,R3]\n",regs.pc);
 
     //Fetch
-    f.fetch(regs.pregs,regs.pc, icache);
+    f.fetch(pr, icache);
     print_pregs(regs.pregs,'F');
     
     //Decode
-    d.decode(regs.pregs);
+    d.decode(pr);
     print_pregs(regs.pregs,'D');
 
     //Register Access
-    ra.reg_access(regs.pregs,regs);
+    ra.reg_access(pr,regs);
     print_pregs(regs.pregs,'R');
 
     //Execute
-    e.execute(regs.pregs);
+    e.execute(pr);
     print_pregs(regs.pregs,'E');
 
     //Memory Access
-    m.mem_access(regs.pregs,dcache);
+    m.mem_access(pr,dcache);
     print_pregs(regs.pregs,'M');
 
     //Exception
-    x.exception(regs.pregs);
+    x.exception(pr);
     print_pregs(regs.pregs,'X');
 
     //Write Back
-    wb.wrt_back(regs.pregs,regs);
+    wb.wrt_back(pr,regs);
     print_pregs(regs.pregs,'W');
 }
 

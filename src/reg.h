@@ -73,84 +73,93 @@ typedef struct
 
 class PipeF
 {
-    uint32_t pc;
+    public:
+        int32_t pc;
 };
 
 class PipeD
-{
-    uint32_t instr;
-    uint32_t pc;
+{   
+    public:
+        uint32_t instr;
+        uint32_t pc;
 };
 
 class PipeRA
 {
-    uint32_t rs1;
-    uint32_t rs2;
-    uint32_t rd;
-    uint32_t pc;
-    int32_t simm13;
-    Instr instr;
+    public:
+        uint32_t rs1;
+        uint32_t rs2;
+        uint32_t rd;
+        uint32_t pc;
+        int32_t simm13;
+        Instr instr;
 };  
 
 class PipeE
 {
-    uint32_t operand1;
-    uint32_t operand2;
-    uint32_t rd;
-    uint32_t pc;
-    Instr instr;
+    public:
+        uint32_t operand1;
+        uint32_t operand2;
+        uint32_t rd;
+        uint32_t pc;
+        Instr instr;
 };
 
 class PipeMA
 {
-    uint32_t rd;
-    uint32_t ares; //ALU result
-    uint32_t pc;
-    Instr instr;
+    public:
+        uint32_t rd;
+        uint32_t ares; //ALU result
+        uint32_t pc;
+        Instr instr;
 };
 
 class PipeX
 {
-    uint32_t rd;
-    uint32_t pc;
-    int32_t data;
-    Instr instr;
+    public:
+        uint32_t rd;
+        uint32_t pc;
+        int32_t data;
+        Instr instr;
 };
 
 class PipeWB
 {
-    int32_t data;
-    uint32_t rd;
-    Instr instr;
+    public:
+        int32_t data;
+        uint32_t rd;
+        Instr instr;
 };
 
 class CntrlSig
 {
-    bool RegDst;
-    bool ALUSrc;
-    bool MemtoReg;
-    bool RegWrite;
-    bool MemRead;
-    bool MemWrite;
-    bool Branch;
-    bool Jump;
-    bool ALUop;
+    public:
+        bool RegDst;
+        bool ALUSrc;
+        bool MemtoReg;
+        bool RegWrite;
+        bool MemRead;
+        bool MemWrite;
+        bool Branch;
+        bool Jump;
+        uint32_t ALUop;
 };
 
 class PipeRegister
 {
-    PipeF f;
-    PipeD d;
-    PipeRA a;
-    PipeE e;
-    PipeMA m;
-    PipeX x;
-    PipeWB w;
+    public:
+        PipeF f;
+        PipeD d;
+        PipeRA a;
+        PipeE e;
+        PipeMA m;
+        PipeX x;
+        PipeWB w;
+        CntrlSig sig;
 };
 
 class Registers
 {
-
 private:
     typedef int32_t reg_word;
     reg_word reg_file[32]; 

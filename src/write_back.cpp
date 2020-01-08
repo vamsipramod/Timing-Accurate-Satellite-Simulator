@@ -1,11 +1,11 @@
 #include "write_back.h"
 
-void Wrt_back::wrt_back(plregs& pr, Registers& regs)
+void Wrt_back::wrt_back(PipeRegister& pr, Registers& regs)
 {
-    if(pr.cntrl_sig.RegWrite)
+    if(pr.sig.RegWrite)
     {
-        uint32_t reg = pr.pr_xwb.rd;
-        int32_t data = pr.pr_xwb.data;
+        uint32_t reg = pr.w.rd;
+        int32_t data = pr.w.data;
         regs.reg(reg, data);
     }
 }

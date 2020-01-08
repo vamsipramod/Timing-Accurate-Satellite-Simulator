@@ -7,6 +7,6 @@ class Wrt_back
 {
 
     public:
-        void wrt_back(plregs& pr,Registers& regs);
+        void wrt_back(PipeRegister& pr,Registers& regs);
 };
 #endif

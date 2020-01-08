@@ -8,6 +8,6 @@
 class Mem_access
 {
     public:
-    void mem_access(plregs& r, std::vector <uint32_t> dcache);
+    void mem_access(PipeRegister& pr, std::vector <uint32_t> dcache);
 };
 #endif

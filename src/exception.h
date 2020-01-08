@@ -6,7 +6,7 @@
 class Exception
 {
     public:
-    void exception(plregs& pr);
+    void exception(PipeRegister& pr);
 };
 
 #endif

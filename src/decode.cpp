@@ -1,6 +1,6 @@
 #include "decode.h"
 
-int32_t simm13(int32_t n)
+int32_t Decode::simm13(int32_t n)
 {
     if((1) & (n >> 12))
         return ((((1<<19)-1)<<12) | n);
@@ -74,34 +74,34 @@ Instr Decode::decode_inst(uint32_t instr)
     return d;       
 }
 
-void Decode::set_control_regs(Instr x,plregs& r)
+void Decode::set_control_regs(Instr x,PipeRegister& pr)
 {
     switch (x.instr.op)
     {
         case 2:
-            r.pr_dra.rs1 = x.instr.inst_type.c.rs1;
-            r.pr_dra.rd  = x.instr.inst_type.c.rd;
-            r.pr_dra.pc  = r.pr_fd.pc;
-            r.pr_dra.instr = x;
+            pr.a.rs1 = x.instr.inst_type.c.rs1;
+            pr.a.rd = x.instr.inst_type.c.rd;
+            pr.a.pc = pr.d.pc;
+            pr.a.instr = x;
 
             if(x.instr.inst_type.c.operand2.intg.i == 0)
-                r.pr_dra.rs2 = x.instr.inst_type.c.operand2.intg.rs2.rs2;
+                pr.a.rs2  = x.instr.inst_type.c.operand2.intg.rs2.rs2;
 
             else
-                r.pr_dra.simm13 = simm13(x.instr.inst_type.c.operand2.intg.rs2.simm13);
+                pr.a.simm13 = simm13(x.instr.inst_type.c.operand2.intg.rs2.simm13);
 
             switch (x.instr.inst_type.c.op3)
             {
                 case 0x00000000:                //ADD
-                    r.cntrl_sig.ALUop = 0x00000000;
-                    r.cntrl_sig.ALUSrc = 1;
-                    r.cntrl_sig.Branch = 0;
-                    r.cntrl_sig.Jump = 0;
-                    r.cntrl_sig.MemRead = 0;
-                    r.cntrl_sig.MemtoReg =0;
-                    r.cntrl_sig.MemWrite = 0;
-                    r.cntrl_sig.RegDst = 1;
-                    r.cntrl_sig.RegWrite = 1;
+                    pr.sig.ALUop = 0x00000000;
+                    pr.sig.ALUSrc = 1;
+                    pr.sig.Branch = 0;
+                    pr.sig.Jump = 0;
+                    pr.sig.MemRead = 0;
+                    pr.sig.MemtoReg =0;
+                    pr.sig.MemWrite = 0;
+                    pr.sig.RegDst = 1;
+                    pr.sig.RegWrite = 1;
                     break;
                 
                 default:
@@ -114,8 +114,8 @@ void Decode::set_control_regs(Instr x,plregs& r)
     }    
 }
 
-void Decode::decode(plregs& r)
+void Decode::decode(PipeRegister& pr)
 {
-    Instr d = decode_inst(r.pr_fd.instr);
-    set_control_regs(d,r);
+    Instr d = decode_inst(pr.d.instr);
+    set_control_regs(d,pr);
 }
