@@ -5,7 +5,7 @@
 
 class Execute{
     public:
-        static void execute(PipeRegister& pr);
+        void execute(PipeRegister& pr);
 };
 
 #endif

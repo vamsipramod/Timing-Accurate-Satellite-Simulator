@@ -19,69 +19,69 @@ void Core:: pipeline()
 
     //Fetch
     f.fetch(pr, icache);
-    print_pregs(regs.pregs,'F');
+    print_pregs(pr,'F');
     
     //Decode
     d.decode(pr);
-    print_pregs(regs.pregs,'D');
+    print_pregs(pr,'D');
 
     //Register Access
     ra.reg_access(pr,regs);
-    print_pregs(regs.pregs,'R');
+    print_pregs(pr,'R');
 
     //Execute
     e.execute(pr);
-    print_pregs(regs.pregs,'E');
+    print_pregs(pr,'E');
 
     //Memory Access
     m.mem_access(pr,dcache);
-    print_pregs(regs.pregs,'M');
+    print_pregs(pr,'M');
 
     //Exception
     x.exception(pr);
-    print_pregs(regs.pregs,'X');
+    print_pregs(pr,'X');
 
     //Write Back
     wb.wrt_back(pr,regs);
-    print_pregs(regs.pregs,'W');
+    print_pregs(pr,'W');
 }
 
-void print_pregs(plregs pr,char s)
+void print_pregs(PipeRegister pr,char s)
 {
     switch (s)
     {
         case 'F':
             printf("===================================\n");
             printf("FETCH STAGE COMPLETED\n");
-            printf("Instruction : %x\n",pr.pr_fd.instr);
-            printf("PC : %d\n",pr.pr_fd.pc);
+            printf("Instruction : %x\n",pr.d.instr);
+            printf("PC : %d\n",pr.d.pc);
             break;
 
         case 'D':
             printf("===================================\n");
             printf("DECODE STAGE COMPLETED\n");
-            printf(" Source Register A  : %d\n",pr.pr_dra.rs1);
-            printf(" Source Register B  : %d\n",pr.pr_dra.rs2);
-            printf(" Destination Register : %d\n",pr.pr_dra.rd);
+            printf(" Source Register A  : %d\n",pr.a.rs1);
+            printf(" Source Register B  : %d\n",pr.a.rs2);
+            printf(" Destination Register : %d\n",pr.a.rd);
             break;
         
         case 'R':
             printf("===================================\n");
             printf("REGISTER ACCESS COMPLETED\n");
-            printf(" Operand 1 : %d\n",pr.pr_rae.operand1);
-            printf(" Operand 2 : %d\n",pr.pr_rae.operand2);
+            printf(" Operand 1 : %d\n",pr.e.operand1);
+            printf(" Operand 2 : %d\n",pr.e.operand2);
             break;
         
         case 'E':
             printf("===================================\n");
             printf("EXECUTE STAGE COMPLETED\n");
-            printf("ALU output : %d\n",pr.pr_em.ares);
+            printf("ALU output : %d\n",pr.m.ares);
             break;
         
         case 'M':
             printf("===================================\n");
             printf("MEMORY ACCESS COMPLETED\n");
-            printf("NO Memory Access Involved \n Passing ALU output \n Data out/in : %d\n",pr.pr_mx.data);
+            printf("NO Memory Access Involved \n Passing ALU output \n Data out/in : %d\n",pr.x.data);
             break;
         
         case 'X':
@@ -92,7 +92,7 @@ void print_pregs(plregs pr,char s)
         case 'W':
             printf("===================================\n");
             printf("WRITE BACK STAGE COMPLETED\n");
-            printf("Written %d to Register %d\n",pr.pr_xwb.data,pr.pr_xwb.rd);
+            printf("Written %d to Register %d\n",pr.w.data,pr.w.rd);
             break;
 
         default:

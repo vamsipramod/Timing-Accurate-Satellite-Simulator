@@ -25,11 +25,6 @@ class Core{
 
     private:
     PipeRegister pr;
-    
-    public:
-    Core();
-    vector <uint32_t> icache;
-    vector <uint32_t> dcache; 
     Registers regs;
     Fetch f;
     Decode d;
@@ -39,9 +34,13 @@ class Core{
     Exception x;
     Wrt_back wb;
 
+    public:
+    Core();
+    vector <uint32_t> icache;
+    vector <uint32_t> dcache; 
     void pipeline();
 
 };
 
-void print_pregs(plregs pr,char s);
+void print_pregs(PipeRegister pr,char s);
 #endif
