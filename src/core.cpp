@@ -3,7 +3,8 @@
 Core::Core()
 {
     regs.init_reg_file();
-    icache.push_back(0x82008003);
+    // icache.push_back(0x82008003); //ADD
+    icache.push_back(0x09200000);
     regs.pc = 0;
     regs.reg(1,10);
     regs.reg(2,20);
@@ -16,7 +17,7 @@ void Core:: pipeline()
 {
     printf("Pipeline Started \n");
     printf("Executing Instruction at PC: %x [ADD R1,R2,R3]\n",regs.pc);
-
+    pr.f.pc = regs.pc;
     //Fetch
     f.fetch(pr, icache);
     print_pregs(pr,'F');
