@@ -92,6 +92,7 @@ class PipeRA
         uint32_t rd;
         uint32_t pc;
         int32_t simm13;
+        uint32_t imm22;
         Instr instr;
 };  
 

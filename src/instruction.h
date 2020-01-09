@@ -64,7 +64,7 @@ typedef struct {
             format1 a;
             format2 b;
             format3 c; 
-        } inst_type;
+        } format;
     } inst;
 
 class Instr
