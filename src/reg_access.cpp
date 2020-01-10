@@ -17,4 +17,9 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
         pr.e.operand1 = pr.a.imm22;
         pr.e.rd = pr.a.rd;
     }
+
+    else if(pr.sig.ALUop == 0x00000002)
+    {
+        pr.e.disp22 = pr.a.disp22;
+    }
 }

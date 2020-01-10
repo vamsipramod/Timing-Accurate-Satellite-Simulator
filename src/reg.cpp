@@ -31,3 +31,8 @@ Registers::reg_word Registers::reg(uint32_t index)
 {
     return Registers::reg_file[index];
 }
+
+void PipeRegister::flush()
+{
+    
+}

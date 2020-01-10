@@ -4,7 +4,8 @@ Core::Core()
 {
     regs.init_reg_file();
     // icache.push_back(0x82008003); //ADD
-    icache.push_back(0x09200000);
+    // icache.push_back(0x09200000);  //SETHI
+    icache.push_back(0x10800001);  //Branch Always
     regs.pc = 0;
     regs.reg(1,10);
     regs.reg(2,20);
@@ -31,7 +32,7 @@ void Core:: pipeline()
     print_pregs(pr,'R');
 
     //Execute
-    e.execute(pr);
+    e.execute(pr,regs.pc);
     print_pregs(pr,'E');
 
     //Memory Access

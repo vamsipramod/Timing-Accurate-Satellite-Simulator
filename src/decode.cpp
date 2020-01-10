@@ -97,6 +97,21 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
                     pr.sig.RegWrite = 1;
                     break;
                 
+                case 0x00000002:                //Branch Always
+                    pr.a.cond = x.instr.format.b.target.branch.cond;
+                    pr.a.a = x.instr.format.b.target.branch.a;
+                    pr.a.disp22 = x.instr.format.b.target.branch.disp22;
+                
+                    pr.sig.ALUop = 0x00000002;
+                    pr.sig.ALUSrc = 0;
+                    pr.sig.Branch = 1;
+                    pr.sig.Jump = 0;
+                    pr.sig.MemRead = 0;
+                    pr.sig.MemtoReg =0;
+                    pr.sig.MemWrite = 0;
+                    pr.sig.RegDst = 0;
+                    pr.sig.RegWrite = 0;
+                    break;
                 default:
                     break;
             }

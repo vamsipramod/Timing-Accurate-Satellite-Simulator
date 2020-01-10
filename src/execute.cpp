@@ -1,6 +1,6 @@
 #include "execute.h"
 
-void Execute::execute(PipeRegister& pr)
+void Execute::execute(PipeRegister& pr,uint32_t& pc)
 {
      pr.m.pc = pr.e.pc;
      pr.m.rd = pr.e.rd;
@@ -14,15 +14,21 @@ void Execute::execute(PipeRegister& pr)
                pr.m.ares = a + b;   //ADD
                break;
           }
-          case 0x00000004:
+          case 0x00000004:         //SETHI
           {    uint32_t c = pr.e.operand1;
                pr.m.ares = c << 10;
                break;
+          }
+          
+          case 0x00000002:         //Branch Always
+          {
+               uint32_t new_pc = pr.e.pc + 4*pr.e.disp22;
+               pr.flush();
+               pc = new_pc;
           }     
           default:
                break;
-     }
-     
+     }  
 
 }
 

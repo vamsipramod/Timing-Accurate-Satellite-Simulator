@@ -93,6 +93,9 @@ class PipeRA
         uint32_t pc;
         int32_t simm13;
         uint32_t imm22;
+        uint32_t disp22;
+        bool a;
+        uint32_t cond;
         Instr instr;
 };  
 
@@ -102,6 +105,7 @@ class PipeE
         uint32_t operand1;
         uint32_t operand2;
         uint32_t rd;
+        uint32_t disp22;
         uint32_t pc;
         Instr instr;
 };
@@ -157,6 +161,7 @@ class PipeRegister
         PipeX x;
         PipeWB w;
         CntrlSig sig;
+        void flush();
 };
 
 class Registers
