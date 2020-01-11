@@ -32,6 +32,8 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc)
                     break;
           }  
           pr.m.instr.cycles++;
+          pr.m.valid = true;
+          pr.e.valid = false;
      }
 }
 

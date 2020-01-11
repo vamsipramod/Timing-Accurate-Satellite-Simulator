@@ -11,5 +11,6 @@ void Wrt_back::wrt_back(PipeRegister& pr, Registers& regs)
             regs.reg(reg, data);
         }
         pr.w.instr.cycles++;
+        pr.w.valid = false;
     }
 }

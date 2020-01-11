@@ -25,5 +25,7 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
             pr.e.disp22 = pr.a.disp22;
         }
         pr.e.instr.cycles++;
+        pr.e.valid = true;
+        pr.a.valid = false;
     }
 }

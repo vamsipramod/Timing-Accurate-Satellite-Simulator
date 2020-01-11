@@ -158,5 +158,7 @@ void Decode::decode(PipeRegister& pr)
         d.cycles = pr.d.cycle;
         set_control_regs(d,pr);
         pr.a.instr.cycles++;
+        pr.a.valid = true;
+        pr.d.valid = false;
     } 
 }

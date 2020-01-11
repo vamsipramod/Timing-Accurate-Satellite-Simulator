@@ -47,6 +47,7 @@ void Core:: pipeline()
         print_pregs(pr,'D');
 
         pr.f.pc = regs.pc;
+        pr.f.valid = true;
         //Fetch
         f.fetch(pr, icache);
         print_pregs(pr,'F');
@@ -62,7 +63,7 @@ void print_pregs(PipeRegister pr,char s)
     {
         case 'F':
             printf("===================================\n");
-            printf("FETCH STAGE COMPLETED\n");
+            printf("FETCH STAGe\n");
             printf("Instruction : %x\n",pr.d.instr);
             printf("PC : %d\n",pr.d.pc);
             break;

@@ -18,5 +18,7 @@ void Mem_access::mem_access(PipeRegister& pr, std::vector <uint32_t> dcache)
             pr.x.data = pr.m.ares;
         }
         pr.x.instr.cycles++;
+        pr.x.valid = true;
+        pr.m.valid = false;
     }
 }
