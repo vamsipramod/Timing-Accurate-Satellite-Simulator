@@ -29,6 +29,6 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc)
           default:
                break;
      }  
-
+     pr.m.instr.cycles++;
 }
 

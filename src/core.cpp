@@ -95,6 +95,7 @@ void print_pregs(PipeRegister pr,char s)
             printf("===================================\n");
             printf("WRITE BACK STAGE COMPLETED\n");
             printf("Written %d to Register %d\n",pr.w.data,pr.w.rd);
+            printf("No.of Cycles Taken : %d\n",pr.w.instr.cycles);
             break;
 
         default:

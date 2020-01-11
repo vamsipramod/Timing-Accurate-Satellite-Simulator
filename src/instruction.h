@@ -70,6 +70,7 @@ typedef struct {
 class Instr
 {
     public:
+        uint32_t cycles;
         inst instr;
         void disassemble();
 };

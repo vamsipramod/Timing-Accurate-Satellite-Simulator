@@ -153,5 +153,7 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
 void Decode::decode(PipeRegister& pr)
 {
     Instr d = decode_inst(pr.d.instr);
+    d.cycles = pr.d.cycle;
     set_control_regs(d,pr);
+    pr.a.instr.cycles++;
 }

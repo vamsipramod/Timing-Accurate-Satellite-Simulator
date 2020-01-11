@@ -6,71 +6,6 @@
 #include "instruction.h"
 
 //REGISTERS
-typedef struct
-{
-    struct
-    {
-        uint32_t instr;
-        uint32_t pc;
-    } pr_fd;
-
-    struct
-    {
-        uint32_t rs1;
-        uint32_t rs2;
-        uint32_t rd;
-        uint32_t pc;
-        int32_t simm13;
-        Instr instr;
-    } pr_dra;
-
-    struct
-    {
-        uint32_t operand1;
-        uint32_t operand2;
-        uint32_t rd;
-        uint32_t pc;
-        Instr instr;
-    } pr_rae;
-
-    struct
-    {
-        uint32_t rd;
-        uint32_t ares; //ALU result
-        uint32_t pc;
-        Instr instr;
-    } pr_em;
-
-    struct
-    {
-        uint32_t rd;
-        uint32_t pc;
-        int32_t data;
-        Instr instr;
-    } pr_mx;
-
-    struct
-    {
-        int32_t data;
-        uint32_t rd;
-        Instr instr;
-    } pr_xwb;
-
-    struct
-    {
-        int32_t RegDst;
-        int32_t ALUSrc;
-        int32_t MemtoReg;
-        int32_t RegWrite;
-        int32_t MemRead;
-        int32_t MemWrite;
-        int32_t Branch;
-        int32_t Jump;
-        int32_t ALUop;
-    } cntrl_sig;
-
-} plregs;
-
 class PipeF
 {
     public:
@@ -82,6 +17,7 @@ class PipeD
     public:
         uint32_t instr;
         uint32_t pc;
+        uint32_t cycle;
 };
 
 class PipeRA
@@ -177,7 +113,6 @@ public:
     void reg(uint32_t index, int32_t val); // TODO: register(uint32_t index,int32_t val)
     reg_word reg(uint32_t index);          // TODO: register(uint32_t index)
                                            // TODO: Change 32 to a config knob, rename 'registers' to 'register_file' or 'rf' or 'reg_file'
-    plregs pregs;
 }; // TODO: Do not mix the control registers and data registers into the same class.
 
 // Register -> Abstract class -> register(index), and register(index, value)

@@ -8,4 +8,5 @@ void Wrt_back::wrt_back(PipeRegister& pr, Registers& regs)
         int32_t data = pr.w.data;
         regs.reg(reg, data);
     }
+    pr.w.instr.cycles++;
 }
