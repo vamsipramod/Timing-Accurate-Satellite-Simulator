@@ -2,25 +2,28 @@
 
 void Reg_access::reg_access(PipeRegister& pr,Registers regs)
 {   
-    pr.e.pc = pr.a.pc;
-    pr.e.instr = pr.a.instr;
-
-    if(pr.sig.ALUSrc)
+    if(pr.a.valid)
     {
-        pr.e.operand1 = regs.reg(pr.a.rs1);
-        pr.e.operand2 = regs.reg(pr.a.rs2);
-        pr.e.rd = pr.a.rd;
-    }
+        pr.e.pc = pr.a.pc;
+        pr.e.instr = pr.a.instr;
 
-    else if(pr.sig.ALUop == 0x00000004) //SETHI
-    {
-        pr.e.operand1 = pr.a.imm22;
-        pr.e.rd = pr.a.rd;
-    }
+        if(pr.sig.ALUSrc)
+        {
+            pr.e.operand1 = regs.reg(pr.a.rs1);
+            pr.e.operand2 = regs.reg(pr.a.rs2);
+            pr.e.rd = pr.a.rd;
+        }
 
-    else if(pr.sig.ALUop == 0x00000002)
-    {
-        pr.e.disp22 = pr.a.disp22;
+        else if(pr.sig.ALUop == 0x00000004) //SETHI
+        {
+            pr.e.operand1 = pr.a.imm22;
+            pr.e.rd = pr.a.rd;
+        }
+
+        else if(pr.sig.ALUop == 0x00000002)
+        {
+            pr.e.disp22 = pr.a.disp22;
+        }
+        pr.e.instr.cycles++;
     }
-     pr.e.instr.cycles++;
 }

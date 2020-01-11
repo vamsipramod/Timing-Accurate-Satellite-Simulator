@@ -2,11 +2,14 @@
 
 void Wrt_back::wrt_back(PipeRegister& pr, Registers& regs)
 {
-    if(pr.sig.RegWrite)
+    if(pr.w.valid)
     {
-        uint32_t reg = pr.w.rd;
-        int32_t data = pr.w.data;
-        regs.reg(reg, data);
+        if(pr.sig.RegWrite)
+        {
+            uint32_t reg = pr.w.rd;
+            int32_t data = pr.w.data;
+            regs.reg(reg, data);
+        }
+        pr.w.instr.cycles++;
     }
-    pr.w.instr.cycles++;
 }

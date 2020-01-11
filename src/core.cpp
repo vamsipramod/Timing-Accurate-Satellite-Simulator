@@ -3,9 +3,9 @@
 Core::Core()
 {
     regs.init_reg_file();
-    // icache.push_back(0x82008003); //ADD
-    // icache.push_back(0x09200000);  //SETHI
-    icache.push_back(0x10800001);  //Branch Always
+    icache.push_back(0x82008003); //ADD
+    icache.push_back(0x09200000);  //SETHI
+    // icache.push_back(0x10800001);  //Branch Always
     regs.pc = 0;
     regs.reg(1,10);
     regs.reg(2,20);
@@ -18,34 +18,42 @@ void Core:: pipeline()
 {
     printf("Pipeline Started \n");
     printf("Executing Instruction at PC: %x [ADD R1,R2,R3]\n",regs.pc);
-    pr.f.pc = regs.pc;
-    //Fetch
-    f.fetch(pr, icache);
-    print_pregs(pr,'F');
+
+    while(regs.pc < 3)
+    {        
+        //Write Back
+        wb.wrt_back(pr,regs);
+        print_pregs(pr,'W');
+
+        //Exception
+        x.exception(pr);
+        print_pregs(pr,'X');
+
+        //Memory Access
+        m.mem_access(pr,dcache);
+        print_pregs(pr,'M');
+
+
+        //Execute
+        e.execute(pr,regs.pc);
+        print_pregs(pr,'E');
+
+        //Register Access
+        ra.reg_access(pr,regs);
+        print_pregs(pr,'R');
+
+        //Decode
+        d.decode(pr);
+        print_pregs(pr,'D');
+
+        pr.f.pc = regs.pc;
+        //Fetch
+        f.fetch(pr, icache);
+        print_pregs(pr,'F');
+
+        regs.pc++;
+    }
     
-    //Decode
-    d.decode(pr);
-    print_pregs(pr,'D');
-
-    //Register Access
-    ra.reg_access(pr,regs);
-    print_pregs(pr,'R');
-
-    //Execute
-    e.execute(pr,regs.pc);
-    print_pregs(pr,'E');
-
-    //Memory Access
-    m.mem_access(pr,dcache);
-    print_pregs(pr,'M');
-
-    //Exception
-    x.exception(pr);
-    print_pregs(pr,'X');
-
-    //Write Back
-    wb.wrt_back(pr,regs);
-    print_pregs(pr,'W');
 }
 
 void print_pregs(PipeRegister pr,char s)

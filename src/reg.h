@@ -10,6 +10,7 @@ class PipeF
 {
     public:
         int32_t pc;
+        bool valid;
 };
 
 class PipeD
@@ -18,6 +19,8 @@ class PipeD
         uint32_t instr;
         uint32_t pc;
         uint32_t cycle;
+        bool valid;
+
 };
 
 class PipeRA
@@ -33,6 +36,7 @@ class PipeRA
         bool a;
         uint32_t cond;
         Instr instr;
+        bool valid;
 };  
 
 class PipeE
@@ -44,6 +48,7 @@ class PipeE
         uint32_t disp22;
         uint32_t pc;
         Instr instr;
+        bool valid;
 };
 
 class PipeMA
@@ -53,6 +58,7 @@ class PipeMA
         uint32_t ares; //ALU result
         uint32_t pc;
         Instr instr;
+        bool valid;
 };
 
 class PipeX
@@ -62,6 +68,7 @@ class PipeX
         uint32_t pc;
         int32_t data;
         Instr instr;
+        bool valid;
 };
 
 class PipeWB
@@ -70,6 +77,7 @@ class PipeWB
         int32_t data;
         uint32_t rd;
         Instr instr;
+        bool valid;
 };
 
 class CntrlSig
@@ -84,6 +92,7 @@ class CntrlSig
         bool Branch;
         bool Jump;
         uint32_t ALUop;
+        bool valid;
 };
 
 class PipeRegister
