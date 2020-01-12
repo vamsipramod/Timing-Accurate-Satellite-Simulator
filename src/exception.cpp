@@ -8,6 +8,7 @@ void Exception::exception(PipeRegister& pr)
         pr.w.data = pr.x.data;
         pr.w.rd = pr.x.rd;
         pr.w.instr.cycles++;
+        pr.w.sig = pr.x.sig;
         pr.w.valid = 1;
 
         log(pr);

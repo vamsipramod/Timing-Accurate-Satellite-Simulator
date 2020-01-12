@@ -7,8 +7,9 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc)
           pr.m.pc = pr.e.pc;
           pr.m.rd = pr.e.rd;
           pr.m.instr = pr.e.instr;
-          printf("ALUop : %x\n",pr.sig.ALUop);
-          switch (pr.sig.ALUop)
+          pr.m.sig = pr.e.sig;
+          printf("ALUop : %x\n",pr.e.sig.ALUop);
+          switch (pr.e.sig.ALUop)
           {
                case 0x00000000:
                {    uint32_t a = pr.e.operand1;
@@ -51,7 +52,7 @@ void Execute::log(PipeRegister& pr,uint32_t pc)
 
      if(pr.e.valid)
      {    
-          switch (pr.sig.ALUop)
+          switch (pr.e.sig.ALUop)
           {
           case 0x00000000:
                printf("Executing  ADD Instruction\n");

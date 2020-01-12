@@ -78,6 +78,7 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
 {
     pr.a.instr = x;
     pr.a.pc = pr.d.pc;
+    CntrlSig sig;
     switch (x.instr.op)
     {
         case 0:
@@ -86,15 +87,18 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
                 case 0x00000004:                //SETHI
                     pr.a.rd = x.instr.format.b.target.sethi.rd;
                     pr.a.imm22 = x.instr.format.b.target.sethi.imm22;
-                    pr.sig.ALUop = 0x00000004;
-                    pr.sig.ALUSrc = false;
-                    pr.sig.Branch = false;
-                    pr.sig.Jump = false;
-                    pr.sig.MemRead = false;
-                    pr.sig.MemtoReg =false;
-                    pr.sig.MemWrite = false;
-                    pr.sig.RegDst = true;
-                    pr.sig.RegWrite = true;
+
+                    sig.ALUop = 0x00000004;
+                    sig.ALUSrc = false;
+                    sig.Branch = false;
+                    sig.Jump = false;
+                    sig.MemRead = false;
+                    sig.MemtoReg =false;
+                    sig.MemWrite = false;
+                    sig.RegDst = true;
+                    sig.RegWrite = true;
+
+                    pr.a.sig = sig;
                     break;
                 
                 case 0x00000002:                //Branch Always
@@ -102,15 +106,17 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
                     pr.a.a = x.instr.format.b.target.branch.a;
                     pr.a.disp22 = x.instr.format.b.target.branch.disp22;
                 
-                    pr.sig.ALUop = 0x00000002;
-                    pr.sig.ALUSrc = false;
-                    pr.sig.Branch = true;
-                    pr.sig.Jump = false;
-                    pr.sig.MemRead = false;
-                    pr.sig.MemtoReg =false;
-                    pr.sig.MemWrite = false;
-                    pr.sig.RegDst = false;
-                    pr.sig.RegWrite = false;
+                    sig.ALUop = 0x00000002;
+                    sig.ALUSrc = false;
+                    sig.Branch = true;
+                    sig.Jump = false;
+                    sig.MemRead = false;
+                    sig.MemtoReg =false;
+                    sig.MemWrite = false;
+                    sig.RegDst = false;
+                    sig.RegWrite = false;
+
+                    pr.a.sig = sig;
                     break;
                 default:
                     break;
@@ -129,15 +135,17 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
             switch (x.instr.format.c.op3)
             {
                 case 0x00000000:                //ADD
-                    pr.sig.ALUop = 0x00000000;
-                    pr.sig.ALUSrc = true;
-                    pr.sig.Branch = false;
-                    pr.sig.Jump = false;
-                    pr.sig.MemRead = false;
-                    pr.sig.MemtoReg =false;
-                    pr.sig.MemWrite = false;
-                    pr.sig.RegDst = true;
-                    pr.sig.RegWrite = true;
+                    sig.ALUop = 0x00000000;
+                    sig.ALUSrc = true;
+                    sig.Branch = false;
+                    sig.Jump = false;
+                    sig.MemRead = false;
+                    sig.MemtoReg =false;
+                    sig.MemWrite = false;
+                    sig.RegDst = true;
+                    sig.RegWrite = true;
+
+                    pr.a.sig = sig;
                     break;
                 
                 default:
@@ -177,7 +185,7 @@ void Decode::log(PipeRegister& pr)
      {       
           printf(" INSTRUCTION DECODED \n");
           printf(" CONTROL SIGNALS ARE SET \n\n");
-          printf("ALUop :%x\n\n",pr.sig.ALUop);
+          printf("ALUop :%x\n\n",pr.a.sig.ALUop);
 
      }
 

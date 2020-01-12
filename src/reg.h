@@ -6,6 +6,21 @@
 #include "instruction.h"
 
 //REGISTERS
+class CntrlSig
+{
+    public:
+        uint32_t RegDst;
+        uint32_t ALUSrc;
+        uint32_t MemtoReg;
+        uint32_t RegWrite;
+        uint32_t MemRead;
+        uint32_t MemWrite;
+        uint32_t Branch;
+        uint32_t Jump;
+        uint32_t ALUop;
+        uint32_t valid;
+};
+
 class PipeF
 {
     public:
@@ -37,6 +52,7 @@ class PipeRA
         uint32_t cond;
         Instr instr;
         uint32_t valid;
+        CntrlSig sig;
 };  
 
 class PipeE
@@ -49,6 +65,7 @@ class PipeE
         uint32_t pc;
         Instr instr;
         uint32_t valid;
+        CntrlSig sig;
 };
 
 class PipeMA
@@ -59,6 +76,7 @@ class PipeMA
         uint32_t pc;
         Instr instr;
         uint32_t valid;
+        CntrlSig sig;
 };
 
 class PipeX
@@ -69,6 +87,7 @@ class PipeX
         int32_t data;
         Instr instr;
         uint32_t valid;
+        CntrlSig sig;
 };
 
 class PipeWB
@@ -78,21 +97,7 @@ class PipeWB
         uint32_t rd;
         Instr instr;
         uint32_t valid;
-};
-
-class CntrlSig
-{
-    public:
-        uint32_t RegDst;
-        uint32_t ALUSrc;
-        uint32_t MemtoReg;
-        uint32_t RegWrite;
-        uint32_t MemRead;
-        uint32_t MemWrite;
-        uint32_t Branch;
-        uint32_t Jump;
-        uint32_t ALUop;
-        uint32_t valid;
+        CntrlSig sig;
 };
 
 class PipeRegister
@@ -106,7 +111,6 @@ class PipeRegister
         PipeMA m;
         PipeX x;
         PipeWB w;
-        CntrlSig sig;
         void flush();
 };
 

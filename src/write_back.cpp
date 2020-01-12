@@ -4,7 +4,7 @@ void Wrt_back::wrt_back(PipeRegister& pr, Registers& regs)
 {
     if(pr.w.valid)
     {
-        if(pr.sig.RegWrite)
+        if(pr.w.sig.RegWrite)
         {
             uint32_t reg = pr.w.rd;
             int32_t data = pr.w.data;
