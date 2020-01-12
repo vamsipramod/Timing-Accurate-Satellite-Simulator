@@ -18,41 +18,48 @@ void Core:: pipeline()
 {
     printf("Pipeline Started \n");
     printf("Executing Instruction at PC: %x [ADD R1,R2,R3]\n",regs.pc);
-
-    while(regs.pc < 3)
-    {        
+    bool run = true;
+    uint32_t cyc = 1;
+    while(run)
+    { 
+        printf("=========================CYCLE %d============================\n",cyc++);  
         //Write Back
         wb.wrt_back(pr,regs);
-        print_pregs(pr,'W');
+        // print_pregs(pr,'W');
 
         //Exception
         x.exception(pr);
-        print_pregs(pr,'X');
+        // print_pregs(pr,'X');
 
         //Memory Access
         m.mem_access(pr,dcache);
-        print_pregs(pr,'M');
-
+        // print_pregs(pr,'M');
 
         //Execute
         e.execute(pr,regs.pc);
-        print_pregs(pr,'E');
+        // print_pregs(pr,'E');
 
         //Register Access
         ra.reg_access(pr,regs);
-        print_pregs(pr,'R');
+        // print_pregs(pr,'R');
 
         //Decode
         d.decode(pr);
-        print_pregs(pr,'D');
+        // print_pregs(pr,'D');
+
+        
+        if(regs.pc >= icache.size())
+            pr.f.valid = 0;
+        else
+            pr.f.valid = 1;
 
         pr.f.pc = regs.pc;
-        pr.f.valid = true;
         //Fetch
         f.fetch(pr, icache);
-        print_pregs(pr,'F');
+        // print_pregs(pr,'F');
 
         regs.pc++;
+        run = pr.f.valid | pr.d.valid | pr.a.valid | pr.e.valid | pr.m.valid | pr.x.valid | pr.w.valid;
     }
     
 }
@@ -63,7 +70,7 @@ void print_pregs(PipeRegister pr,char s)
     {
         case 'F':
             printf("===================================\n");
-            printf("FETCH STAGe\n");
+            printf("FETCH STAGE\n");
             printf("Instruction : %x\n",pr.d.instr);
             printf("PC : %d\n",pr.d.pc);
             break;

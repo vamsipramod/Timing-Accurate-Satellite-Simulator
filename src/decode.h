@@ -15,7 +15,7 @@ class Decode {
         Instr decode_inst(uint32_t instr);
         void set_control_regs(Instr instr,PipeRegister& r);
         int32_t simm13(int32_t n);
-        
+        void log(PipeRegister& pr);
     public :
         void decode(PipeRegister& pr);
         

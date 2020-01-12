@@ -25,7 +25,39 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
             pr.e.disp22 = pr.a.disp22;
         }
         pr.e.instr.cycles++;
-        pr.e.valid = true;
-        pr.a.valid = false;
+        pr.e.valid = 1;
+
+        log(pr);
+        pr.a.valid = 0;
     }
+
+    else
+        log(pr);
+}
+
+void Reg_access::log(PipeRegister& pr)
+{
+     printf("------------------------\n");
+     printf("  REGISTER ACCESS STAGE        \n");
+     printf("------------------------\n");
+
+     if(pr.a.valid)
+     {
+        if(pr.sig.ALUSrc)
+        {
+            printf("ALU Operand1 : %d\n",pr.e.operand1);
+            printf("ALU Operand2 : %d\n\n",pr.e.operand2);
+        }
+        
+        else if(pr.sig.ALUop == 0x00000004)
+        {
+            printf("ALU Operand :%x\n\n",pr.e.operand1);
+        }
+    
+     }
+
+     else
+     {
+          printf(" \nNO JOB, IDLE\n\n");
+     }
 }

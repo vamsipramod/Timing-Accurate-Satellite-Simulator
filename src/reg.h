@@ -10,7 +10,7 @@ class PipeF
 {
     public:
         int32_t pc;
-        bool valid;
+        uint32_t valid;
 };
 
 class PipeD
@@ -19,7 +19,7 @@ class PipeD
         uint32_t instr;
         uint32_t pc;
         uint32_t cycle;
-        bool valid;
+        uint32_t valid;
 
 };
 
@@ -33,10 +33,10 @@ class PipeRA
         int32_t simm13;
         uint32_t imm22;
         uint32_t disp22;
-        bool a;
+        uint32_t a;
         uint32_t cond;
         Instr instr;
-        bool valid;
+        uint32_t valid;
 };  
 
 class PipeE
@@ -48,7 +48,7 @@ class PipeE
         uint32_t disp22;
         uint32_t pc;
         Instr instr;
-        bool valid;
+        uint32_t valid;
 };
 
 class PipeMA
@@ -58,7 +58,7 @@ class PipeMA
         uint32_t ares; //ALU result
         uint32_t pc;
         Instr instr;
-        bool valid;
+        uint32_t valid;
 };
 
 class PipeX
@@ -68,7 +68,7 @@ class PipeX
         uint32_t pc;
         int32_t data;
         Instr instr;
-        bool valid;
+        uint32_t valid;
 };
 
 class PipeWB
@@ -77,27 +77,28 @@ class PipeWB
         int32_t data;
         uint32_t rd;
         Instr instr;
-        bool valid;
+        uint32_t valid;
 };
 
 class CntrlSig
 {
     public:
-        bool RegDst;
-        bool ALUSrc;
-        bool MemtoReg;
-        bool RegWrite;
-        bool MemRead;
-        bool MemWrite;
-        bool Branch;
-        bool Jump;
+        uint32_t RegDst;
+        uint32_t ALUSrc;
+        uint32_t MemtoReg;
+        uint32_t RegWrite;
+        uint32_t MemRead;
+        uint32_t MemWrite;
+        uint32_t Branch;
+        uint32_t Jump;
         uint32_t ALUop;
-        bool valid;
+        uint32_t valid;
 };
 
 class PipeRegister
 {
     public:
+        PipeRegister();
         PipeF f;
         PipeD d;
         PipeRA a;

@@ -6,7 +6,9 @@
 
 
 class Mem_access
-{
+{   
+    private:
+    void log(PipeRegister& pr);
     public:
     void mem_access(PipeRegister& pr, std::vector <uint32_t> dcache);
 };

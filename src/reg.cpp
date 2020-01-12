@@ -36,3 +36,14 @@ void PipeRegister::flush()
 {
     
 }
+
+PipeRegister::PipeRegister()
+{
+    f.valid = 0;
+    d.valid = 0;
+    a.valid = 0;
+    e.valid = 0;
+    m.valid = 0;
+    x.valid = 0;
+    w.valid = 0;
+}

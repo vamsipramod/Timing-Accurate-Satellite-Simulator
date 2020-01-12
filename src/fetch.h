@@ -6,7 +6,9 @@
 #include "reg.h"
 
 class Fetch
-{
+{   
+    private:
+    void log(PipeRegister& pr);
     public:
     void fetch(PipeRegister& pr,std::vector <uint32_t> icache);
 };

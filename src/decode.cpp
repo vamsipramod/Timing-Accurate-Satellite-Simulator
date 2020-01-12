@@ -87,14 +87,14 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
                     pr.a.rd = x.instr.format.b.target.sethi.rd;
                     pr.a.imm22 = x.instr.format.b.target.sethi.imm22;
                     pr.sig.ALUop = 0x00000004;
-                    pr.sig.ALUSrc = 0;
-                    pr.sig.Branch = 0;
-                    pr.sig.Jump = 0;
-                    pr.sig.MemRead = 0;
-                    pr.sig.MemtoReg =0;
-                    pr.sig.MemWrite = 0;
-                    pr.sig.RegDst = 1;
-                    pr.sig.RegWrite = 1;
+                    pr.sig.ALUSrc = false;
+                    pr.sig.Branch = false;
+                    pr.sig.Jump = false;
+                    pr.sig.MemRead = false;
+                    pr.sig.MemtoReg =false;
+                    pr.sig.MemWrite = false;
+                    pr.sig.RegDst = true;
+                    pr.sig.RegWrite = true;
                     break;
                 
                 case 0x00000002:                //Branch Always
@@ -103,14 +103,14 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
                     pr.a.disp22 = x.instr.format.b.target.branch.disp22;
                 
                     pr.sig.ALUop = 0x00000002;
-                    pr.sig.ALUSrc = 0;
-                    pr.sig.Branch = 1;
-                    pr.sig.Jump = 0;
-                    pr.sig.MemRead = 0;
-                    pr.sig.MemtoReg =0;
-                    pr.sig.MemWrite = 0;
-                    pr.sig.RegDst = 0;
-                    pr.sig.RegWrite = 0;
+                    pr.sig.ALUSrc = false;
+                    pr.sig.Branch = true;
+                    pr.sig.Jump = false;
+                    pr.sig.MemRead = false;
+                    pr.sig.MemtoReg =false;
+                    pr.sig.MemWrite = false;
+                    pr.sig.RegDst = false;
+                    pr.sig.RegWrite = false;
                     break;
                 default:
                     break;
@@ -130,14 +130,14 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
             {
                 case 0x00000000:                //ADD
                     pr.sig.ALUop = 0x00000000;
-                    pr.sig.ALUSrc = 1;
-                    pr.sig.Branch = 0;
-                    pr.sig.Jump = 0;
-                    pr.sig.MemRead = 0;
-                    pr.sig.MemtoReg =0;
-                    pr.sig.MemWrite = 0;
-                    pr.sig.RegDst = 1;
-                    pr.sig.RegWrite = 1;
+                    pr.sig.ALUSrc = true;
+                    pr.sig.Branch = false;
+                    pr.sig.Jump = false;
+                    pr.sig.MemRead = false;
+                    pr.sig.MemtoReg =false;
+                    pr.sig.MemWrite = false;
+                    pr.sig.RegDst = true;
+                    pr.sig.RegWrite = true;
                     break;
                 
                 default:
@@ -155,10 +155,34 @@ void Decode::decode(PipeRegister& pr)
     if(pr.d.valid)
     {
         Instr d = decode_inst(pr.d.instr);
-        d.cycles = pr.d.cycle;
         set_control_regs(d,pr);
-        pr.a.instr.cycles++;
-        pr.a.valid = true;
-        pr.d.valid = false;
-    } 
+        pr.a.instr.cycles = pr.d.cycle +1;
+        pr.a.valid = 1;
+
+        log(pr);
+        pr.d.valid = 0;
+    }
+
+    else
+        log(pr); 
+}
+
+void Decode::log(PipeRegister& pr)
+{
+     printf("------------------------\n");
+     printf("    DECODE STAGE        \n");
+     printf("------------------------\n");
+
+     if(pr.d.valid)
+     {       
+          printf(" INSTRUCTION DECODED \n");
+          printf(" CONTROL SIGNALS ARE SET \n\n");
+          printf("ALUop :%x\n\n",pr.sig.ALUop);
+
+     }
+
+     else
+     {
+          printf(" \nNO JOB, IDLE\n\n");
+     }
 }
