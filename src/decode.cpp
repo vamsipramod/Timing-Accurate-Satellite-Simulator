@@ -208,20 +208,16 @@ void Decode::decode(PipeRegister& pr)
 
 void Decode::log(PipeRegister& pr)
 {
-     printf("------------------------\n");
-     printf("    DECODE STAGE        \n");
-     printf("------------------------\n");
+     LOG(linfo) << "------------------------\n";
+     LOG(linfo) << "    DECODE STAGE        \n";
+     LOG(linfo) << "------------------------\n";
 
      if(pr.d.valid)
      {       
-          printf(" INSTRUCTION DECODED \n");
-          printf(" CONTROL SIGNALS ARE SET \n\n");
-          printf("ALUop :%x\n\n",pr.a.sig.ALUop);
-
+        LOG(ldebug) << " INSTRUCTION DECODED \n";
+        LOG(ldebug) << " CONTROL SIGNALS ARE SET \n\n";
      }
 
      else
-     {
-          printf(" \nNO JOB, IDLE\n\n");
-     }
+         LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }

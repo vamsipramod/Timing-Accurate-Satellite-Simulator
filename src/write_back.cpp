@@ -22,19 +22,17 @@ void Wrt_back::wrt_back(PipeRegister& pr, Registers& regs)
 
 void Wrt_back::log(PipeRegister& pr)
 {
-        printf("------------------------\n");
-        printf("    WRITE BACK STAGE        \n");
-        printf("------------------------\n");
+        LOG(linfo) << "------------------------\n";
+        LOG(linfo) << "    WRITE BACK STAGE        \n";
+        LOG(linfo) << "------------------------\n";
 
         if(pr.w.valid)
         {
-            printf("\nData written : %x \n",pr.w.data);
-            printf("Written to Register %d\n\n",pr.w.rd);
-            printf("Total no.of cycles Taken for the instruction : %d\n",pr.w.instr.cycles);
+            LOG(ldebug) << "\nData written : " << pr.w.data << " ("<<std::hex<<pr.w.data<<")\n";
+            LOG(ldebug) << "Written to Register " << pr.w.rd << "\n\n";
+            LOG(ldebug) << "Total no.of cycles Taken for the instruction : " << pr.w.instr.cycles << "\n\n";
         }
 
         else
-        {
-            printf(" \nNO JOB, IDLE\n\n");
-        }
+            LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }

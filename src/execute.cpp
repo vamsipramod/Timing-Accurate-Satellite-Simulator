@@ -8,14 +8,13 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc)
           pr.m.rd = pr.e.rd;
           pr.m.instr = pr.e.instr;
           pr.m.sig = pr.e.sig;
-          printf("ALUop : %x\n",pr.e.sig.ALUop);
+          
           switch (pr.e.sig.ALUop)
           {
                case 0x00000000:
                {    uint32_t a = pr.e.operand1;
                     uint32_t b = pr.e.operand2;
                     pr.m.ares = a + b;   //ADD
-                    printf("ADD\n");
                     break;
                }
                case 0x00000004:         //SETHI
@@ -46,35 +45,34 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc)
 
 void Execute::log(PipeRegister& pr,uint32_t pc)
 {
-     printf("------------------------\n");
-     printf("    EXECUTE STAGE        \n");
-     printf("------------------------\n");
+     LOG(linfo) << "------------------------\n";
+     LOG(linfo) << "    EXECUTE STAGE        \n";
+     LOG(linfo) << "------------------------\n";
 
      if(pr.e.valid)
      {    
           switch (pr.e.sig.ALUop)
           {
-          case 0x00000000:
-               printf("Executing  ADD Instruction\n");
-               printf("ALU Output : %d\n\n",pr.m.ares);
-               break;
-          
-          case 0x00000004:
-               printf("Executing  SETHI Instruction\n");
-               printf("ALU Output : %x\n\n",pr.m.ares);
-               break;
+               case 0x00000000:
+                    LOG(ldebug) << "Executing  ADD Instruction\n";
+                    LOG(ldebug) << "ALU Output : " << pr.m.ares << "\n\n";
+                    break;
+               
+               case 0x00000004:
+                    LOG(ldebug) << "Executing  SETHI Instruction\n";
+                    LOG(ldebug) << "ALU Output : " << std::hex << pr.m.ares << "\n\n";
+                    break;
 
-          case 0x00000002:   
-               printf("Executing Branch Always Instruction:");
-               printf("New PC : %x\n\n", pc);
-          default:
-               break;
+               case 0x00000002:
+                    LOG(ldebug) << "Executing Branch Always Instruction\n";
+                    LOG(ldebug) << "New PC : " << std::hex << pc << "\n\n";   
+
+               default:
+                    break;
           }
      }
 
      else
-     {
-          printf(" \nNO JOB, IDLE\n\n");
-     }
+          LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }
 

@@ -1,4 +1,5 @@
 #include "core.h"
+#include "log.h"
 
 class Simulator{
     private:

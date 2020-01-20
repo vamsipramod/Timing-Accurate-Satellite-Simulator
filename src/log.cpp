@@ -114,18 +114,5 @@ inline std::string NowTime()
 
 #endif //WIN32
 
-inline void initLogger(const char * file, TLogLevel level)
-{
-    FILELog::ReportingLevel() = level;
-    FILE* log_fd = fopen( file, "w" );
-    Output2FILE::Stream() = log_fd;
-}
-
-inline void endLogger()
-{
-	if (Output2FILE::Stream())
-		fclose(Output2FILE::Stream());
-}
-
 
 

@@ -20,9 +20,12 @@ void Core:: pipeline()
     bool run = true;
     uint32_t cyc = 1;
     
+    LOG(ldebug) << "Pipeline Started\n";
+
     while(run)
     { 
-        printf("=========================CYCLE %d============================\n",cyc++);  
+        LOG(ldebug) << "=========================CYCLE"<<cyc++<<"============================\n"; 
+        
         //Write Back
         wb.wrt_back(pr,regs);
 
@@ -50,65 +53,9 @@ void Core:: pipeline()
         pr.f.pc = regs.pc;
         //Fetch
         f.fetch(pr, icache);
-        // print_pregs(pr,'F');
 
         regs.pc++;
         run = pr.f.valid | pr.d.valid | pr.a.valid | pr.e.valid | pr.m.valid | pr.x.valid | pr.w.valid;
     }
     
-}
-
-void print_pregs(PipeRegister pr,char s)
-{
-    switch (s)
-    {
-        case 'F':
-            printf("===================================\n");
-            printf("FETCH STAGE\n");
-            printf("Instruction : %x\n",pr.d.instr);
-            printf("PC : %d\n",pr.d.pc);
-            break;
-
-        case 'D':
-            printf("===================================\n");
-            printf("DECODE STAGE COMPLETED\n");
-            printf(" Source Register A  : %d\n",pr.a.rs1);
-            printf(" Source Register B  : %d\n",pr.a.rs2);
-            printf(" Destination Register : %d\n",pr.a.rd);
-            break;
-        
-        case 'R':
-            printf("===================================\n");
-            printf("REGISTER ACCESS COMPLETED\n");
-            printf(" Operand 1 : %d\n",pr.e.operand1);
-            printf(" Operand 2 : %d\n",pr.e.operand2);
-            break;
-        
-        case 'E':
-            printf("===================================\n");
-            printf("EXECUTE STAGE COMPLETED\n");
-            printf("ALU output : %d\n",pr.m.ares);
-            break;
-        
-        case 'M':
-            printf("===================================\n");
-            printf("MEMORY ACCESS COMPLETED\n");
-            printf("NO Memory Access Involved \n Passing ALU output \n Data out/in : %d\n",pr.x.data);
-            break;
-        
-        case 'X':
-            printf("===================================\n");
-            printf("EXCEPTION STAGE COMPLETED\n");
-            break;
-        
-        case 'W':
-            printf("===================================\n");
-            printf("WRITE BACK STAGE COMPLETED\n");
-            printf("Written %d to Register %d\n",pr.w.data,pr.w.rd);
-            printf("No.of Cycles Taken : %d\n",pr.w.instr.cycles);
-            break;
-
-        default:
-            break;
-    }
 }

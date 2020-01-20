@@ -2,6 +2,7 @@
 #define WRT_BACK
 
 #include "reg.h"
+#include "log.h"
 
 class Wrt_back
 {   

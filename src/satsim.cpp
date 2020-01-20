@@ -6,6 +6,7 @@ Simulator::Simulator()
     // TODO: 
     // Memory ram;
     // Disk hdd;
+    initLogger( "mylogfile.log", ldebug);
 }
 
 void Simulator::run()

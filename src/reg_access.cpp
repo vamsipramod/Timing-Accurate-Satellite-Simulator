@@ -37,27 +37,25 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
 
 void Reg_access::log(PipeRegister& pr)
 {
-     printf("------------------------\n");
-     printf("  REGISTER ACCESS STAGE        \n");
-     printf("------------------------\n");
+     LOG(linfo) << "------------------------\n";
+     LOG(linfo) << "  REGISTER ACCESS STAGE        \n";
+     LOG(linfo) << "------------------------\n";
 
      if(pr.a.valid)
      {
         if(pr.a.sig.ALUSrc)
         {
-            printf("ALU Operand1 : %d\n",pr.e.operand1);
-            printf("ALU Operand2 : %d\n\n",pr.e.operand2);
+            LOG(ldebug) << "ALU Operand1 : " << std::hex << pr.e.operand1 << "\n";
+            LOG(ldebug) << "ALU Operand2 : " << std::hex << pr.e.operand2 << "\n\n";
         }
         
         else if(pr.a.sig.ALUop == 0x00000004)
-        {
-            printf("ALU Operand :%x\n\n",pr.e.operand1);
+        {   
+            LOG(ldebug) << "ALU Operand : " << std::hex << pr.e.operand1 << "\n\n";
         }
     
      }
 
      else
-     {
-          printf(" \nNO JOB, IDLE\n\n");
-     }
+        LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }

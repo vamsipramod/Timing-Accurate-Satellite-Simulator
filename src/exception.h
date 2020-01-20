@@ -2,6 +2,7 @@
 #define EXCEPTION
 
 #include "reg.h"
+#include "log.h"
 
 class Exception
 {   

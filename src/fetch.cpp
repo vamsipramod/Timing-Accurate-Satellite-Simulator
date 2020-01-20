@@ -20,18 +20,17 @@ void Fetch::fetch(PipeRegister& pr, std::vector <uint32_t> icache)
 
 void Fetch::log(PipeRegister& pr)
 {
-     printf("------------------------\n");
-     printf("    FETCH STAGE        \n");
-     printf("------------------------\n");
+     LOG(linfo) << "------------------------\n";
+     LOG(linfo) << "    FETCH STAGE        \n";
+     LOG(linfo) << "------------------------\n";
 
      if(pr.f.valid)
      {
-          printf("Fetching Instruction at address : %x\n", pr.f.pc);
-          printf("Instruction at %x :    %x\n\n",pr.f.pc,pr.d.instr);
+          LOG(ldebug) << "Fetching Instruction at address : " << std::hex << pr.f.pc << "\n";
+          LOG(ldebug) << "Instruction at " << std::hex << pr.f.pc << ":\t"<< std::hex << pr.d.instr <<"\n\n";
      }
 
      else
-     {
-          printf(" \nNO JOB, IDLE\n\n");
-     }
+          LOG(ldebug) << " \nNO JOB, IDLE\n\n";
+     
 }

@@ -3,7 +3,7 @@
 
 #include "reg.h"
 #include <vector>
-
+#include "log.h"
 
 class Mem_access
 {   

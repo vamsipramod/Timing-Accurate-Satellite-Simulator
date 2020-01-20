@@ -23,18 +23,15 @@ void Exception::exception(PipeRegister& pr)
 
 void Exception::log(PipeRegister& pr)
 {
-    printf("------------------------\n");
-    printf("    EXCEPTION STAGE        \n");
-    printf("------------------------\n");
-
+    LOG(linfo) << "------------------------\n";
+    LOG(linfo) << "    EXCEPTION STAGE        \n";
+    LOG(linfo) << "------------------------\n";
+    
     if(pr.x.valid)
     {
-        printf(" NO EXCEPTIONS \n\n");
+        LOG(ldebug) << " NO EXCEPTIONS \n\n";
     }
 
     else
-    {
-        printf(" \nNO JOB, IDLE\n\n");
-    }
-    
+        LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }

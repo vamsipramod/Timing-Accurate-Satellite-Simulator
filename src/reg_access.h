@@ -2,6 +2,7 @@
 #define REG_ACCESS
 
 #include "reg.h"
+#include "log.h"
 
 class Reg_access
 {   
