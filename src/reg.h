@@ -9,16 +9,16 @@
 class CntrlSig
 {
     public:
-        uint32_t RegDst;
-        uint32_t ALUSrc;
-        uint32_t MemtoReg;
-        uint32_t RegWrite;
-        uint32_t MemRead;
-        uint32_t MemWrite;
-        uint32_t Branch;
-        uint32_t Jump;
+        bool RegDst;
+        bool ALUSrc;
+        bool MemtoReg;
+        bool RegWrite;
+        bool MemRead;
+        bool MemWrite;
+        bool Branch;
+        bool Jump;
         uint32_t ALUop;
-        uint32_t valid;
+        bool valid;
 };
 
 class PipeF

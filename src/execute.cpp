@@ -64,7 +64,7 @@ void Execute::log(PipeRegister& pr,uint32_t pc)
                printf("ALU Output : %x\n\n",pr.m.ares);
                break;
 
-          case  0x00000002:   
+          case 0x00000002:   
                printf("Executing Branch Always Instruction:");
                printf("New PC : %x\n\n", pc);
           default:

@@ -152,6 +152,37 @@ void Decode::set_control_regs(Instr x,PipeRegister& pr)
                     break;
             }
             break;
+        
+        case 3:
+            pr.a.rs1 = x.instr.format.c.rs1;
+            pr.a.rd = x.instr.format.c.rd;
+
+            if(x.instr.format.c.operand2.intg.i == 0)
+                pr.a.rs2  = x.instr.format.c.operand2.intg.rs2.rs2;
+
+            else
+                pr.a.simm13 = simm13(x.instr.format.c.operand2.intg.rs2.simm13);
+
+            switch (x.instr.format.c.op3)
+            {
+                case 0x00000000:                //LD [Load Word]
+                    sig.ALUop = 0x00000000;
+                    sig.ALUSrc = true;
+                    sig.Branch = false;
+                    sig.Jump = false;
+                    sig.MemRead = true;
+                    sig.MemtoReg =true;
+                    sig.MemWrite = false;
+                    sig.RegDst = true;
+                    sig.RegWrite = true;
+
+                    pr.a.sig = sig;
+                    break;
+                
+                default:
+                    break;
+            }
+            break;
     
         default:
             break;
