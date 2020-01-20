@@ -5,7 +5,8 @@ Core::Core()
     regs.init_reg_file();
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x09200000);  //SETHI
-    // icache.push_back(0x10800001);  //Branch Always
+    icache.push_back(0x10800001);  //Branch Always
+    
     regs.pc = 0;
     regs.reg(1,10);
     regs.reg(2,20);
@@ -16,36 +17,29 @@ Core::Core()
 
 void Core:: pipeline()
 {
-    printf("Pipeline Started \n");
-    printf("Executing Instruction at PC: %x [ADD R1,R2,R3]\n",regs.pc);
     bool run = true;
     uint32_t cyc = 1;
+    
     while(run)
     { 
         printf("=========================CYCLE %d============================\n",cyc++);  
         //Write Back
         wb.wrt_back(pr,regs);
-        // print_pregs(pr,'W');
 
         //Exception
         x.exception(pr);
-        // print_pregs(pr,'X');
 
         //Memory Access
         m.mem_access(pr,dcache);
-        // print_pregs(pr,'M');
 
         //Execute
         e.execute(pr,regs.pc);
-        // print_pregs(pr,'E');
-
+       
         //Register Access
         ra.reg_access(pr,regs);
-        // print_pregs(pr,'R');
-
+       
         //Decode
         d.decode(pr);
-        // print_pregs(pr,'D');
 
         
         if(regs.pc >= icache.size())
