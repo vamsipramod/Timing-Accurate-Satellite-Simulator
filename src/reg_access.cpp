@@ -6,24 +6,43 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
     {
         pr.e.pc = pr.a.pc;
         pr.e.instr = pr.a.instr;
-
-        if(pr.a.sig.ALUSrc)
+        
+        switch (pr.a.sig.ALUop)
         {
-            pr.e.operand1 = regs.reg(pr.a.rs1);
-            pr.e.operand2 = regs.reg(pr.a.rs2);
-            pr.e.rd = pr.a.rd;
-        }
+            case 0x00000000:    //ADD & LOAD
+                if(pr.a.instr.instr.format.c.operand2.intg.i)
+                {
+                    pr.e.operand1 = regs.reg(pr.a.rs1);
+                    pr.e.operand2 = regs.reg(pr.a.rs2);
+                    pr.e.rd = pr.a.rd;
+                }
 
-        else if(pr.a.sig.ALUop == 0x00000004) //SETHI
-        {
-            pr.e.operand1 = pr.a.imm22;
-            pr.e.rd = pr.a.rd;
-        }
+                else
+                {
+                    pr.e.operand1 = regs.reg(pr.a.rs1);
+                    pr.e.operand2 = pr.a.simm13;
+                    pr.e.rd = pr.a.rd;
+                }
+                
+                break;
 
-        else if(pr.a.sig.ALUop == 0x00000002)
-        {
-            pr.e.disp22 = pr.a.disp22;
+            case 0x00000004:    //SETHI
+                {
+                    pr.e.operand1 = pr.a.imm22;
+                    pr.e.rd = pr.a.rd;
+                }
+                break;
+            
+            case 0x00000002:     //Branch Always
+                {
+                    pr.e.disp22 = pr.a.disp22;
+                }
+                break;
+            
+            default:
+                break;
         }
+        
         pr.e.instr.cycles++;
         pr.e.valid = 1;
         pr.e.sig = pr.a.sig;

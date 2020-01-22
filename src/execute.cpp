@@ -11,10 +11,10 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc)
           
           switch (pr.e.sig.ALUop)
           {
-               case 0x00000000:
+               case 0x00000000:    //ADD & LOAD
                {    uint32_t a = pr.e.operand1;
                     uint32_t b = pr.e.operand2;
-                    pr.m.ares = a + b;   //ADD
+                    pr.m.ares = a + b;   
                     break;
                }
                case 0x00000004:         //SETHI
