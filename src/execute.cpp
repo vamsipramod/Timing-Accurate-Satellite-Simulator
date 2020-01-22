@@ -1,6 +1,6 @@
 #include "execute.h"
 
-void Execute::execute(PipeRegister& pr,uint32_t& pc)
+void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
 {
      if(pr.e.valid)
      {
@@ -28,6 +28,8 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc)
                     uint32_t new_pc = pr.e.pc + 4*pr.e.disp22;
                     pr.flush();
                     pc = new_pc;
+                    flush = true;
+                    break;
                }     
                default:
                     break;

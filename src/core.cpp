@@ -5,7 +5,12 @@ Core::Core()
     regs.init_reg_file();
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x09200000);  //SETHI
+    icache.push_back(0x82008003); //ADD
+    icache.push_back(0x82008003); //ADD
     icache.push_back(0x10800001);  //Branch Always
+    icache.push_back(0x82008003); //ADD
+    icache.push_back(0x82008003); //ADD
+    icache.push_back(0x82008003); //ADD
     
     regs.pc = 0;
     regs.reg(1,10);
@@ -18,6 +23,7 @@ Core::Core()
 void Core:: pipeline()
 {
     bool run = true;
+    bool flush = false;
     uint32_t cyc = 1;
     
     LOG(ldebug) << "Pipeline Started\n";
@@ -36,8 +42,11 @@ void Core:: pipeline()
         m.mem_access(pr,dcache);
 
         //Execute
-        e.execute(pr,regs.pc);
-       
+        e.execute(pr,regs.pc,flush);
+
+        if(flush)
+            { flush = false; continue; }
+
         //Register Access
         ra.reg_access(pr,regs);
        

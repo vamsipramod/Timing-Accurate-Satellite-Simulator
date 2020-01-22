@@ -19,6 +19,8 @@ class CntrlSig
         bool Jump;
         uint32_t ALUop;
         bool valid;
+
+        void clear();
 };
 
 class PipeF
@@ -26,6 +28,8 @@ class PipeF
     public:
         int32_t pc;
         uint32_t valid;
+
+        void clear();
 };
 
 class PipeD
@@ -35,6 +39,8 @@ class PipeD
         uint32_t pc;
         uint32_t cycle;
         uint32_t valid;
+
+        void clear();
 
 };
 
@@ -53,6 +59,8 @@ class PipeRA
         Instr instr;
         uint32_t valid;
         CntrlSig sig;
+
+        void clear();
 };  
 
 class PipeE
@@ -66,6 +74,8 @@ class PipeE
         Instr instr;
         uint32_t valid;
         CntrlSig sig;
+
+        void clear();
 };
 
 class PipeMA
@@ -77,6 +87,8 @@ class PipeMA
         Instr instr;
         uint32_t valid;
         CntrlSig sig;
+
+        void clear();
 };
 
 class PipeX
@@ -88,6 +100,8 @@ class PipeX
         Instr instr;
         uint32_t valid;
         CntrlSig sig;
+
+        void clear();
 };
 
 class PipeWB
@@ -98,6 +112,8 @@ class PipeWB
         Instr instr;
         uint32_t valid;
         CntrlSig sig;
+
+        void clear();
 };
 
 class PipeRegister
@@ -111,6 +127,8 @@ class PipeRegister
         PipeMA m;
         PipeX x;
         PipeWB w;
+        
+        void clear();
         void flush();
 };
 
