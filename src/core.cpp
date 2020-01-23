@@ -5,9 +5,9 @@ Core::Core()
     regs.init_reg_file();
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x09200000);  //SETHI
-    icache.push_back(0x82008003); //ADD
-    icache.push_back(0x82008003); //ADD
     icache.push_back(0x10800001);  //Branch Always
+    icache.push_back(0x82008003); //ADD
+    icache.push_back(0x82008003); //ADD
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x82008003); //ADD
