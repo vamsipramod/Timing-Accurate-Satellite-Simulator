@@ -43,13 +43,13 @@ PipeRegister::PipeRegister()
     w.valid = 0;
 }
 
-void PipeF :: clear()
+void PipeF::clear()
 {
     pc  = 0;
     valid = 0;
 }
 
-void PipeRA :: clear()
+void PipeRA::clear()
 {
     rs1 = 0;
     rs2 = 0;

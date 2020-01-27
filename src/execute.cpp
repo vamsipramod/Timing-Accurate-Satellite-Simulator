@@ -2,6 +2,9 @@
 
 void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
 {
+     LOG(linfo) << "------------------------\n";
+     LOG(linfo) << "    EXECUTE STAGE        \n";
+     LOG(linfo) << "------------------------\n";
      if(pr.e.valid)
      {
           pr.m.pc = pr.e.pc;
@@ -29,6 +32,7 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
                     pr.flush();
                     pc = new_pc;
                     flush = true;
+                    pr.e.valid = 1;
                     break;
                }     
                default:
@@ -37,20 +41,16 @@ void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
           pr.m.instr.cycles++;
           pr.m.valid = 1;
 
-          log(pr,pc);
+          log(pr,pc,flush);
           pr.e.valid = 0;
      }
 
      else
-          log(pr,pc);
+          log(pr,pc,flush);
 }
 
-void Execute::log(PipeRegister& pr,uint32_t pc)
+void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
 {
-     LOG(linfo) << "------------------------\n";
-     LOG(linfo) << "    EXECUTE STAGE        \n";
-     LOG(linfo) << "------------------------\n";
-
      if(pr.e.valid)
      {    
           switch (pr.e.sig.ALUop)
@@ -72,6 +72,9 @@ void Execute::log(PipeRegister& pr,uint32_t pc)
                default:
                     break;
           }
+
+          if(flush)
+          {     LOG(ldebug) << "Branch Taken, PipeLine Flushed Out\n";     }
      }
 
      else

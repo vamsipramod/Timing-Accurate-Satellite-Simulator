@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "instruction.h"
+#include "log.h"
 
 //REGISTERS
 class CntrlSig
