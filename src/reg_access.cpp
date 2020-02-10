@@ -55,26 +55,29 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
 }
 
 void Reg_access::log(PipeRegister& pr)
-{
-     LOG(linfo) << "------------------------\n";
-     LOG(linfo) << "  REGISTER ACCESS STAGE        \n";
-     LOG(linfo) << "------------------------\n";
+{   
+    spdlog::info("   MEMORY ACCESS STAGE         \n");
+    //  LOG(linfo) << "------------------------\n";
+    //  LOG(linfo) << "  REGISTER ACCESS STAGE        \n";
+    //  LOG(linfo) << "------------------------\n";
 
      if(pr.a.valid)
      {
         if(pr.a.sig.ALUSrc)
         {
-            LOG(ldebug) << "ALU Operand1 : " << std::hex << pr.e.operand1 << "\n";
-            LOG(ldebug) << "ALU Operand2 : " << std::hex << pr.e.operand2 << "\n\n";
+            spdlog::debug("ALU Operand1 : %x\n",pr.e.operand1);
+            spdlog::debug("ALU Operand2 : %x\n\n",pr.e.operand2);
+            //LOG(ldebug) << "ALU Operand1 : " << std::hex << pr.e.operand1 << "\n";
+            //LOG(ldebug) << "ALU Operand2 : " << std::hex << pr.e.operand2 << "\n\n";
         }
         
         else if(pr.a.sig.ALUop == 0x00000004)
         {   
-            LOG(ldebug) << "ALU Operand : " << std::hex << pr.e.operand1 << "\n\n";
+            spdlog::debug("ALU Operand : %x\n\n",pr.e.operand1);
+            // LOG(ldebug) << "ALU Operand : " << std::hex << pr.e.operand1 << "\n\n";
         }
-    
      }
 
      else
-        LOG(ldebug) << " \nNO JOB, IDLE\n\n";
+        spdlog::debug(" NO JOB, IDLE\n\n");
 }

@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include "reg.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 //TODO: 
 // Input to Decode object (instruction-bytes), output -> set the control regs

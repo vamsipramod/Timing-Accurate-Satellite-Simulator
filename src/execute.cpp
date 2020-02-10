@@ -2,9 +2,11 @@
 
 void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
 {
-     LOG(linfo) << "------------------------\n";
-     LOG(linfo) << "    EXECUTE STAGE        \n";
-     LOG(linfo) << "------------------------\n";
+     spdlog::info("    EXECUTE STAGE        \n");
+
+     // LOG(linfo) << "------------------------\n";
+     // LOG(linfo) << "    EXECUTE STAGE        \n";
+     // LOG(linfo) << "------------------------\n";
      if(pr.e.valid)
      {
           pr.m.pc = pr.e.pc;
@@ -56,28 +58,35 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
           switch (pr.e.sig.ALUop)
           {
                case 0x00000000:
-                    LOG(ldebug) << "Executing  ADD Instruction\n";
-                    LOG(ldebug) << "ALU Output : " << pr.m.ares << "\n\n";
+                    spdlog::debug("Executing  ADD Instruction\n");
+                    spdlog::debug("ALU Output : %d\n\n",pr.m.ares);
+                    //LOG(ldebug) << "Executing  ADD Instruction\n";
+                    //LOG(ldebug) << "ALU Output : " << pr.m.ares << "\n\n";
                     break;
                
                case 0x00000004:
-                    LOG(ldebug) << "Executing  SETHI Instruction\n";
-                    LOG(ldebug) << "ALU Output : " << std::hex << pr.m.ares << "\n\n";
+                    spdlog::debug("Executing  SETHI Instruction\n");
+                    spdlog::debug("ALU Output : %x\n\n",pr.m.ares);
+                    // LOG(ldebug) << "Executing  SETHI Instruction\n";
+                    // LOG(ldebug) << "ALU Output : " << std::hex << pr.m.ares << "\n\n";
                     break;
 
                case 0x00000002:
-                    LOG(ldebug) << "Executing Branch Always Instruction\n";
-                    LOG(ldebug) << "New PC : " << std::hex << pc << "\n\n";   
+                    spdlog::debug("Executing Branch Always Instruction\n");
+                    spdlog::debug("New PC : %x\n\n",pc);
+                    // LOG(ldebug) << "Executing Branch Always Instruction\n";
+                    // LOG(ldebug) << "New PC : " << std::hex << pc << "\n\n";   
 
                default:
                     break;
           }
 
           if(flush)
-          {     LOG(ldebug) << "Branch Taken, PipeLine Flushed Out\n";     }
+          {    spdlog::debug("Branch Taken, PipeLine Flushed Out\n"); }
+               // LOG(ldebug) << "Branch Taken, PipeLine Flushed Out\n";  
      }
 
      else
-          LOG(ldebug) << " \nNO JOB, IDLE\n\n";
+          spdlog::debug(" NO JOB, IDLE\n\n");
 }
 

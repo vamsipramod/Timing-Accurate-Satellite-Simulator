@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 //INSTRUCTION
 typedef struct{

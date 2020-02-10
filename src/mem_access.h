@@ -1,6 +1,8 @@
 #ifndef MEM_ACCESS
 #define MEM_ACCESS
 
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 #include "reg.h"
 #include <vector>
 

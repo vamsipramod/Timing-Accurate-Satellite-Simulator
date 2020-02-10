@@ -6,7 +6,10 @@ Simulator::Simulator()
     // TODO: 
     // Memory ram;
     // Disk hdd;
-    initLogger( "mylogfile.log", ldebug);
+    spdlog::set_level(spdlog::level::debug);
+    spdlog::set_pattern("[%l] %v");
+    auto file_logger = spdlog::basic_logger_mt("basic_logger", "logfile.log");
+    spdlog::set_default_logger(file_logger);
 }
 
 void Simulator::run()

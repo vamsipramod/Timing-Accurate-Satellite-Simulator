@@ -2,6 +2,8 @@
 #define REG_ACCESS
 
 #include "reg.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 class Reg_access
 {   

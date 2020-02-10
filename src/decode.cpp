@@ -207,17 +207,20 @@ void Decode::decode(PipeRegister& pr)
 }
 
 void Decode::log(PipeRegister& pr)
-{
-     LOG(linfo) << "------------------------\n";
-     LOG(linfo) << "    DECODE STAGE        \n";
-     LOG(linfo) << "------------------------\n";
+{   
+    spdlog::info("    DECODE STAGE        \n");
+
+    //  LOG(linfo) << "------------------------\n";
+    //  LOG(linfo) << "    DECODE STAGE        \n";
+    //  LOG(linfo) << "------------------------\n";
 
      if(pr.d.valid)
      {       
-        LOG(ldebug) << " INSTRUCTION DECODED \n";
-        LOG(ldebug) << " CONTROL SIGNALS ARE SET \n\n";
+        spdlog::debug("INSTRUCTION DECODED \n");
+        spdlog::debug(" CONTROL SIGNALS ARE SET \n\n");
      }
 
      else
-         LOG(ldebug) << " \nNO JOB, IDLE\n\n";
+        spdlog::debug(" NO JOB, IDLE\n\n");
+        //  LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }

@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <vector>
 #include "reg.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 class Fetch
 {   

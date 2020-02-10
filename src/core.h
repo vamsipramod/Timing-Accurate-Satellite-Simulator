@@ -9,6 +9,8 @@
 #include "mem_access.h"
 #include "exception.h"
 #include "write_back.h"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
 
 class Core{
 

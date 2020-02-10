@@ -26,11 +26,13 @@ void Core:: pipeline()
     bool flush = false;
     uint32_t cyc = 1;
     
-    LOG(ldebug) << "Pipeline Started\n";
+    // LOG(ldebug) << "Pipeline Started\n";
+    spdlog::info("Pipeline Started\n");
 
     while(run)
     { 
-        LOG(ldebug) << "=========================CYCLE"<<cyc++<<"============================\n"; 
+        // LOG(ldebug) << "=========================CYCLE"<<cyc++<<"============================\n";
+        spdlog::debug("=========================CYCLE %d ============================\n",cyc++);     
         
         //Write Back
         wb.wrt_back(pr,regs);
