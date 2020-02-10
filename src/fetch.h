@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <vector>
 #include "reg.h"
-#include "log.h"
 
 class Fetch
 {   

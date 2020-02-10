@@ -2,7 +2,6 @@
 #define EXECUTE
 
 #include "reg.h"
-#include "log.h"
 
 class Execute{
 

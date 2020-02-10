@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include "reg.h"
-#include "log.h"
+
 //TODO: 
 // Input to Decode object (instruction-bytes), output -> set the control regs
 

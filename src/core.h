@@ -9,7 +9,6 @@
 #include "mem_access.h"
 #include "exception.h"
 #include "write_back.h"
-#include "log.h"
 
 class Core{
 
