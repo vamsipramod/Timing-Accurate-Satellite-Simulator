@@ -2,15 +2,17 @@
 #define EXCEPTION
 
 #include "reg.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
+#include "NanoLogCpp17.h"
 
 class Exception
 {   
     private:
     void log(PipeRegister& pr);
+    std::string id;
+    
     public:
     void exception(PipeRegister& pr);
+    void id(std::string id);
 };
 
 #endif

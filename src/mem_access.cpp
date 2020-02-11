@@ -31,7 +31,8 @@ void Mem_access::mem_access(PipeRegister& pr, std::vector <uint32_t> dcache)
 
 void Mem_access::log(PipeRegister& pr)
 {   
-    spdlog::info("   MEMORY ACCESS STAGE         \n");
+    NANO_LOG(NOTICE,"   MEMORY ACCESS STAGE         \n");
+    //spdlog::info("   MEMORY ACCESS STAGE         \n");
     // LOG(linfo) << "------------------------\n";
     // LOG(linfo) << "   MEMORY ACCESS STAGE        \n";
     // LOG(linfo) << "------------------------\n";
@@ -40,19 +41,28 @@ void Mem_access::log(PipeRegister& pr)
     {
         if(pr.m.sig.MemRead)
         {   
-            spdlog::debug("Accessing Memory address %x\n",pr.m.ares);
-            spdlog::debug("Data at address location %d\n\n",pr.x.data);
+            NANO_LOG(DEBUG,"Accessing Memory address %x\n",pr.m.ares);
+            NANO_LOG(DEBUG,"Data at address location %d\n\n",pr.x.data);
+            //spdlog::debug("Accessing Memory address %x\n",pr.m.ares);
+            //spdlog::debug("Data at address location %d\n\n",pr.x.data);
             // LOG(ldebug) << "Accessing Memory address " << std::hex << pr.m.ares << "\n";
             //LOG(ldebug) << "Data at address location " << pr.x.data << "\n\n";
         }
 
         else
         {
-            spdlog::debug("NO Memory Access is Involved\n\n");
+            NANO_LOG(DEBUG,"NO Memory Access is Involved\n\n");
+            //spdlog::debug("NO Memory Access is Involved\n\n");
             // LOG(ldebug) << "NO Memory Access is Involved\n\n";
         }
     }
     
     else
-        spdlog::debug(" NO JOB, IDLE\n\n");
+        NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+        // spdlog::debug(" NO JOB, IDLE\n\n");
+}
+
+void Mem_access::id(std::string s)
+{
+    this->id = s;
 }

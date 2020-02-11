@@ -56,7 +56,8 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
 
 void Reg_access::log(PipeRegister& pr)
 {   
-    spdlog::info("   MEMORY ACCESS STAGE         \n");
+    NANO_LOG(NOTICE,"      REGISTER ACCESS STAGE        \n");
+    //spdlog::info("   MEMORY ACCESS STAGE         \n");
     //  LOG(linfo) << "------------------------\n";
     //  LOG(linfo) << "  REGISTER ACCESS STAGE        \n";
     //  LOG(linfo) << "------------------------\n";
@@ -65,19 +66,27 @@ void Reg_access::log(PipeRegister& pr)
      {
         if(pr.a.sig.ALUSrc)
         {
-            spdlog::debug("ALU Operand1 : %x\n",pr.e.operand1);
-            spdlog::debug("ALU Operand2 : %x\n\n",pr.e.operand2);
+            NANO_LOG(DEBUG,"ALU Operand1 : %x\n",pr.e.operand1);
+            NANO_LOG(DEBUG,"ALU Operand2 : %x\n\n",pr.e.operand2);
+            //spdlog::debug("ALU Operand1 : %x\n",pr.e.operand1);
+            //spdlog::debug("ALU Operand2 : %x\n\n",pr.e.operand2);
             //LOG(ldebug) << "ALU Operand1 : " << std::hex << pr.e.operand1 << "\n";
             //LOG(ldebug) << "ALU Operand2 : " << std::hex << pr.e.operand2 << "\n\n";
         }
         
         else if(pr.a.sig.ALUop == 0x00000004)
         {   
-            spdlog::debug("ALU Operand : %x\n\n",pr.e.operand1);
+            NANO_LOG(DEBUG,"ALU Operand : %x\n",pr.e.operand1);
+            //spdlog::debug("ALU Operand : %x\n\n",pr.e.operand1);
             // LOG(ldebug) << "ALU Operand : " << std::hex << pr.e.operand1 << "\n\n";
         }
      }
 
      else
-        spdlog::debug(" NO JOB, IDLE\n\n");
+        NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+}
+
+void Reg_access::id(std::string s)
+{
+    this->id = s;
 }

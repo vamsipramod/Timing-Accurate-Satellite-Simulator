@@ -22,21 +22,24 @@ void Wrt_back::wrt_back(PipeRegister& pr, Registers& regs)
 
 void Wrt_back::log(PipeRegister& pr)
 {       
-        spdlog::info("   WRITE BACK STAGE         \n");
+       NANO_LOG(NOTICE,"      WRITE BACK STAGE       \n");
         // LOG(linfo) << "------------------------\n";
         // LOG(linfo) << "    WRITE BACK STAGE        \n";
         // LOG(linfo) << "------------------------\n";
 
         if(pr.w.valid)
         {
-            spdlog::debug("\nData written : %d [%x]\n",pr.w.data,pr.w.data);
-            spdlog::debug("Written to Register %d\n",pr.w.rd);
-            spdlog::debug("Total no.of cycles Taken for the instruction : %d\n\n",pr.w.instr.cycles);
+            NANO_LOG(DEBUG,"\nData written : %d [%x]\n",pr.w.data,pr.w.data);
+            NANO_LOG(DEBUG,"Written to Register %d\n",pr.w.rd);
+            NANO_LOG(DEBUG,"Total no.of cycles Taken for the instruction : %d\n\n",pr.w.instr.cycles);
+            //spdlog::debug("\nData written : %d [%x]\n",pr.w.data,pr.w.data);
+            //spdlog::debug("Written to Register %d\n",pr.w.rd);
+            //spdlog::debug("Total no.of cycles Taken for the instruction : %d\n\n",pr.w.instr.cycles);
             // LOG(ldebug) << "\nData written : " << pr.w.data << " ("<<std::hex<<pr.w.data<<")\n";
             // LOG(ldebug) << "Written to Register " << pr.w.rd << "\n\n";
             // LOG(ldebug) << "Total no.of cycles Taken for the instruction : " << pr.w.instr.cycles << "\n\n";
         }
 
         else
-           spdlog::debug(" \nNO JOB, IDLE\n\n");
+            NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
 }

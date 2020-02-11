@@ -9,8 +9,7 @@
 #include "mem_access.h"
 #include "exception.h"
 #include "write_back.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
+#include "NanoLogCpp17.h"
 
 class Core{
 
@@ -34,12 +33,14 @@ class Core{
     Mem_access m;
     Exception x;
     Wrt_back wb;
+    string id;
 
     public:
     Core();
     vector <uint32_t> icache;
     vector <uint32_t> dcache; 
     void pipeline();
+    void id(string id);
 
 };
 

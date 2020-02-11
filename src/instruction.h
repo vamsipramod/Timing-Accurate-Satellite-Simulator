@@ -3,8 +3,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
+#include "NanoLogCpp17.h"
 
 //INSTRUCTION
 typedef struct{

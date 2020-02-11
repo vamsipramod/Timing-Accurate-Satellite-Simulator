@@ -1,7 +1,7 @@
 #include "core.h"
 
 Core::Core()
-{
+{   
     regs.init_reg_file();
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x09200000);  //SETHI
@@ -20,6 +20,11 @@ Core::Core()
     regs.reg(5,50);
 }
 
+void Core::id(string i)
+{
+    this->id = "cpu" + i;
+}
+
 void Core:: pipeline()
 {
     bool run = true;
@@ -27,12 +32,14 @@ void Core:: pipeline()
     uint32_t cyc = 1;
     
     // LOG(ldebug) << "Pipeline Started\n";
-    spdlog::info("Pipeline Started\n");
+    // spdlog::info("Pipeline Started\n");
+    NANO_LOG(NOTICE,"Pipeline Started\n");
 
     while(run)
     { 
         // LOG(ldebug) << "=========================CYCLE"<<cyc++<<"============================\n";
-        spdlog::debug("=========================CYCLE %d ============================\n",cyc++);     
+        // spdlog::debug("=========================CYCLE %d ============================\n",cyc++); 
+        NANO_LOG(DEBUG,"=========================CYCLE %d ============================\n",cyc++);    
         
         //Write Back
         wb.wrt_back(pr,regs);

@@ -1,8 +1,9 @@
 #include "execute.h"
 
 void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
-{
-     spdlog::info("    EXECUTE STAGE        \n");
+{    
+     NANO_LOG(NOTICE,"    EXECUTE STAGE        \n");
+     // spdlog::info("    EXECUTE STAGE        \n");
 
      // LOG(linfo) << "------------------------\n";
      // LOG(linfo) << "    EXECUTE STAGE        \n";
@@ -58,22 +59,29 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
           switch (pr.e.sig.ALUop)
           {
                case 0x00000000:
-                    spdlog::debug("Executing  ADD Instruction\n");
-                    spdlog::debug("ALU Output : %d\n\n",pr.m.ares);
+                    NANO_LOG(DEBUG,"Executing  ADD Instruction\n");
+                    NANO_LOG(DEBUG,"ALU Output : %d\n\n",pr.m.ares);
+                    //spdlog::debug("Executing  ADD Instruction\n");
+                    //spdlog::debug("ALU Output : %d\n\n",pr.m.ares);
                     //LOG(ldebug) << "Executing  ADD Instruction\n";
                     //LOG(ldebug) << "ALU Output : " << pr.m.ares << "\n\n";
                     break;
                
                case 0x00000004:
-                    spdlog::debug("Executing  SETHI Instruction\n");
-                    spdlog::debug("ALU Output : %x\n\n",pr.m.ares);
+                   { NANO_LOG(DEBUG,"Executing  SETHI Instruction\n");
+                    NANO_LOG(DEBUG,"ALU Output : %d\n\n",pr.m.ares);
+                    //spdlog::debug("Executing  SETHI Instruction\n");
+                    //spdlog::debug("ALU Output : %x\n\n",pr.m.ares);
                     // LOG(ldebug) << "Executing  SETHI Instruction\n";
                     // LOG(ldebug) << "ALU Output : " << std::hex << pr.m.ares << "\n\n";
                     break;
+                   }
 
                case 0x00000002:
-                    spdlog::debug("Executing Branch Always Instruction\n");
-                    spdlog::debug("New PC : %x\n\n",pc);
+                    NANO_LOG(DEBUG,"Executing Branch Always Instruction\n");
+                    NANO_LOG(DEBUG,"New PC : %x\n\n",pc);
+                    //spdlog::debug("Executing Branch Always Instruction\n");
+                    //spdlog::debug("New PC : %x\n\n",pc);
                     // LOG(ldebug) << "Executing Branch Always Instruction\n";
                     // LOG(ldebug) << "New PC : " << std::hex << pc << "\n\n";   
 
@@ -82,11 +90,18 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
           }
 
           if(flush)
-          {    spdlog::debug("Branch Taken, PipeLine Flushed Out\n"); }
+          {    NANO_LOG(DEBUG,"Branch Taken, PipeLine Flushed Out\n"); }
+               //spdlog::debug("Branch Taken, PipeLine Flushed Out\n"); }
                // LOG(ldebug) << "Branch Taken, PipeLine Flushed Out\n";  
      }
 
      else
-          spdlog::debug(" NO JOB, IDLE\n\n");
+          NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+
+}
+
+void Execute::id(std::string s)
+{
+    this->id = s;
 }
 

@@ -1,4 +1,4 @@
-AM_CPPFLAGS = -Wall -Werror -O2
+AM_CPPFLAGS = -Wall -O2
 AM_LDFLAGS = -lelf
 
 bindir = ..

@@ -2,15 +2,17 @@
 #define EXECUTE
 
 #include "reg.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/sinks/basic_file_sink.h"
+#include "NanoLogCpp17.h"
 
 class Execute{
 
     private:
         void log(PipeRegister& pr,uint32_t pc,bool flush);
+    
     public:
         void execute(PipeRegister& pr,uint32_t& pc,bool& flush);
+        std::string id;
+        void id(std::string s);
 };
 
 #endif
