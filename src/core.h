@@ -33,7 +33,7 @@ class Core{
     Mem_access m;
     Exception x;
     Wrt_back wb;
-    string id;
+    string __id__;
 
     public:
     Core();

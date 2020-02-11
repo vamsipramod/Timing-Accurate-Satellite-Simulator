@@ -10,5 +10,7 @@ class Wrt_back
         void log(PipeRegister& pr);
     public:
         void wrt_back(PipeRegister& pr,Registers& regs);
+        std::string __id__;
+        void id(std::string s);
 };
 #endif

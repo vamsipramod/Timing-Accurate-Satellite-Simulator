@@ -2,6 +2,14 @@
 
 Core::Core()
 {   
+    f.id(this->__id__);
+    d.id(this->__id__);
+    ra.id(this->__id__);
+    e.id(this->__id__);
+    m.id(this->__id__);
+    x.id(this->__id__);
+    wb.id(this->__id__);
+
     regs.init_reg_file();
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x09200000);  //SETHI
@@ -22,7 +30,7 @@ Core::Core()
 
 void Core::id(string i)
 {
-    this->id = "cpu" + i;
+    this->__id__ = "cpu" + i;
 }
 
 void Core:: pipeline()
@@ -30,15 +38,11 @@ void Core:: pipeline()
     bool run = true;
     bool flush = false;
     uint32_t cyc = 1;
-    
-    // LOG(ldebug) << "Pipeline Started\n";
-    // spdlog::info("Pipeline Started\n");
+
     NANO_LOG(NOTICE,"Pipeline Started\n");
 
     while(run)
     { 
-        // LOG(ldebug) << "=========================CYCLE"<<cyc++<<"============================\n";
-        // spdlog::debug("=========================CYCLE %d ============================\n",cyc++); 
         NANO_LOG(DEBUG,"=========================CYCLE %d ============================\n",cyc++);    
         
         //Write Back

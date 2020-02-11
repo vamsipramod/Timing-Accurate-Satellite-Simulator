@@ -8,11 +8,11 @@ class Exception
 {   
     private:
     void log(PipeRegister& pr);
-    std::string id;
     
     public:
     void exception(PipeRegister& pr);
     void id(std::string id);
+    std::string __id__;
 };
 
 #endif

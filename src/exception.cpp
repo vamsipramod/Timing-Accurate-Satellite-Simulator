@@ -24,25 +24,17 @@ void Exception::exception(PipeRegister& pr)
 void Exception::log(PipeRegister& pr)
 {
     NANO_LOG(NOTICE,"    EXCEPTION STAGE       \n");
-    //spdlog::info("    EXCEPTION STAGE       \n");
-    // LOG(linfo) << "------------------------\n";
-    // LOG(linfo) << "    EXCEPTION STAGE        \n";
-    // LOG(linfo) << "------------------------\n";
     
     if(pr.x.valid)
     {
         NANO_LOG(DEBUG," NO EXCEPTIONS \n\n");
-        //spdlog::debug(" NO EXCEPTIONS \n\n");
-        // LOG(ldebug) << " NO EXCEPTIONS \n\n";
     }
 
     else
         NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
-        //spdlog::debug(" NO JOB, IDLE\n\n");
-        // LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }
 
 void Exception::id(std::string s)
 {
-    this->id = s;
+    this->__id__ = s+"X";
 }

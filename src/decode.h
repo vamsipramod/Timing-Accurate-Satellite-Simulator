@@ -18,11 +18,11 @@ class Decode {
         void set_control_regs(Instr instr,PipeRegister& r);
         int32_t simm13(int32_t n);
         void log(PipeRegister& pr);
-        std::string id;
         
     public :
         void decode(PipeRegister& pr);
         void id(std::string id);
+        std::string __id__;
         
 };
 

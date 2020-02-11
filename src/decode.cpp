@@ -209,25 +209,18 @@ void Decode::decode(PipeRegister& pr)
 void Decode::log(PipeRegister& pr)
 {   
     NANO_LOG(NOTICE,"    DECODE STAGE        \n");
-    //  LOG(linfo) << "------------------------\n";
-    //  LOG(linfo) << "    DECODE STAGE        \n";
-    //  LOG(linfo) << "------------------------\n";
 
      if(pr.d.valid)
      {       
         NANO_LOG(DEBUG,"INSTRUCTION DECODED \n");
         NANO_LOG(DEBUG,"CONTROL SIGNALS ARE SET \n\n");
-        // spdlog::debug("INSTRUCTION DECODED \n");
-        // spdlog::debug(" CONTROL SIGNALS ARE SET \n\n");
      }
 
      else
         NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
-        // spdlog::debug(" NO JOB, IDLE\n\n");
-        //  LOG(ldebug) << " \nNO JOB, IDLE\n\n";
 }
 
 void Decode::id(std::string s)
 {
-    this->id = s;
+    this->__id__ = s+"d";
 }

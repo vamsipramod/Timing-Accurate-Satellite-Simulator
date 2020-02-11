@@ -3,11 +3,7 @@
 void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
 {    
      NANO_LOG(NOTICE,"    EXECUTE STAGE        \n");
-     // spdlog::info("    EXECUTE STAGE        \n");
 
-     // LOG(linfo) << "------------------------\n";
-     // LOG(linfo) << "    EXECUTE STAGE        \n";
-     // LOG(linfo) << "------------------------\n";
      if(pr.e.valid)
      {
           pr.m.pc = pr.e.pc;
@@ -61,29 +57,18 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
                case 0x00000000:
                     NANO_LOG(DEBUG,"Executing  ADD Instruction\n");
                     NANO_LOG(DEBUG,"ALU Output : %d\n\n",pr.m.ares);
-                    //spdlog::debug("Executing  ADD Instruction\n");
-                    //spdlog::debug("ALU Output : %d\n\n",pr.m.ares);
-                    //LOG(ldebug) << "Executing  ADD Instruction\n";
-                    //LOG(ldebug) << "ALU Output : " << pr.m.ares << "\n\n";
                     break;
                
                case 0x00000004:
                    { NANO_LOG(DEBUG,"Executing  SETHI Instruction\n");
                     NANO_LOG(DEBUG,"ALU Output : %d\n\n",pr.m.ares);
-                    //spdlog::debug("Executing  SETHI Instruction\n");
-                    //spdlog::debug("ALU Output : %x\n\n",pr.m.ares);
-                    // LOG(ldebug) << "Executing  SETHI Instruction\n";
-                    // LOG(ldebug) << "ALU Output : " << std::hex << pr.m.ares << "\n\n";
                     break;
                    }
 
                case 0x00000002:
                     NANO_LOG(DEBUG,"Executing Branch Always Instruction\n");
                     NANO_LOG(DEBUG,"New PC : %x\n\n",pc);
-                    //spdlog::debug("Executing Branch Always Instruction\n");
-                    //spdlog::debug("New PC : %x\n\n",pc);
-                    // LOG(ldebug) << "Executing Branch Always Instruction\n";
-                    // LOG(ldebug) << "New PC : " << std::hex << pc << "\n\n";   
+                    break;
 
                default:
                     break;
@@ -91,8 +76,7 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
 
           if(flush)
           {    NANO_LOG(DEBUG,"Branch Taken, PipeLine Flushed Out\n"); }
-               //spdlog::debug("Branch Taken, PipeLine Flushed Out\n"); }
-               // LOG(ldebug) << "Branch Taken, PipeLine Flushed Out\n";  
+
      }
 
      else
@@ -102,6 +86,6 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
 
 void Execute::id(std::string s)
 {
-    this->id = s;
+    this->__id__ = s+"E";
 }
 
