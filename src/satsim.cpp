@@ -1,5 +1,6 @@
 #include "satsim.h"
 
+using namespace NanoLog::LogLevels;
 
 Simulator::Simulator()
 {
@@ -28,7 +29,8 @@ int main(int argc ,char ** argv)
         fprintf(stderr, "USAGE:  %s  </path/to/SPARCv8/executable>\n", argv[0]);
         exit(1);
     }
-
+    NanoLog::setLogLevel(DEBUG);
+    
     // TODO: Check for SPARCv8 executable
     //
 

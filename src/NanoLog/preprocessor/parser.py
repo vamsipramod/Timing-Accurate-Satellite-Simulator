@@ -552,8 +552,7 @@ def processFile(inputFile, mapOutputFilename):
 
           lastChar = c
     except ValueError as e:
-        print "\r\n%s:%d: Error - %s\r\n\r\n%s\r\n" % (
-            ppFileName, ppLineNum, e.args[0], "".join(e.args[1]))
+        print ("\r\n%s:%d: Error - %s\r\n\r\n%s\r\n") % (ppFileName, ppLineNum, e.args[0], "".join(e.args[1]))
         sys.exit(1)
 
     # Last step, retrieve the generated code and insert it at the end
