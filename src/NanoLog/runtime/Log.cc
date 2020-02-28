@@ -1351,12 +1351,18 @@ Log::Decoder::BufferFragment::decompressNextLogStatement(FILE *outputFd,
         // Output the context
         struct GeneratedFunctions::LogMetadata meta =
                                 GeneratedFunctions::logId2Metadata[nextLogId];
+        // if (outputFd) {
+        //     fprintf(outputFd,"%s.%09.0lf %s:%u %s[%u]: "
+        //             , timeString
+        //             , nanos
+        //             , meta.fileName
+        //             , meta.lineNumber
+        //             , logLevelNames[meta.logLevel]
+        //             , runtimeId);
+        // }
+
         if (outputFd) {
-            fprintf(outputFd,"%s.%09.0lf %s:%u %s[%u]: "
-                    , timeString
-                    , nanos
-                    , meta.fileName
-                    , meta.lineNumber
+            fprintf(outputFd,"%s[%u]: "
                     , logLevelNames[meta.logLevel]
                     , runtimeId);
         }
@@ -1390,16 +1396,21 @@ Log::Decoder::BufferFragment::decompressNextLogStatement(FILE *outputFd,
         logArgs.reset(metadata, nextLogId, nextLogTimestamp);
 
         // Output the context
+        // if (outputFd) {
+        //     fprintf(outputFd,"%s.%09.0lf %s:%u %s[%u]: "
+        //             , timeString
+        //             , nanos
+        //             , filename
+        //             , metadata->lineNumber
+        //             , logLevel
+        //             , runtimeId);
+        // }
+
         if (outputFd) {
-            fprintf(outputFd,"%s.%09.0lf %s:%u %s[%u]: "
-                    , timeString
-                    , nanos
-                    , filename
-                    , metadata->lineNumber
+            fprintf(outputFd,"%s[%u]: "
                     , logLevel
                     , runtimeId);
         }
-
         // Print out the actual log message, piece by piece
         PrintFragment *pf = reinterpret_cast<PrintFragment*>(
                 reinterpret_cast<char*>(metadata)
