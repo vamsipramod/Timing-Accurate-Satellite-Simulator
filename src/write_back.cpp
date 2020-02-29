@@ -37,5 +37,5 @@ void Wrt_back::log(PipeRegister& pr)
 
 void Wrt_back::id(std::string s)
 {
-    this->__id__ = s+"wb";
+    this->__id__ = s+"W";
 }

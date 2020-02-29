@@ -222,5 +222,5 @@ void Decode::log(PipeRegister& pr)
 
 void Decode::id(std::string s)
 {
-    this->__id__ = s+"d";
+    this->__id__ = s+"D";
 }
