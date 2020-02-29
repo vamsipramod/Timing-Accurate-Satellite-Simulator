@@ -23,15 +23,15 @@ void Exception::exception(PipeRegister& pr)
 
 void Exception::log(PipeRegister& pr)
 {
-    NANO_LOG(NOTICE,"    EXCEPTION STAGE       \n");
+    NANO_LOG(NOTICE,"%s :     EXCEPTION STAGE       \n",__id__.c_str());
     
     if(pr.x.valid)
     {
-        NANO_LOG(DEBUG," NO EXCEPTIONS \n\n");
+        NANO_LOG(DEBUG,"%s : NO EXCEPTIONS \n\n",__id__.c_str());
     }
 
     else
-        NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+        NANO_LOG(DEBUG,"%s :  NO JOB, IDLE\n\n",__id__.c_str());
 }
 
 void Exception::id(std::string s)

@@ -6,6 +6,7 @@ aclocal.m4
 configure
 autom4te.cache/**
 **/*.log
+compressedLog
 missing
 install-sh
 depcomp

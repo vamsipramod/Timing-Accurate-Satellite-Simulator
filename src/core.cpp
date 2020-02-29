@@ -2,14 +2,6 @@
 
 Core::Core()
 {   
-    f.id(this->__id__);
-    d.id(this->__id__);
-    ra.id(this->__id__);
-    e.id(this->__id__);
-    m.id(this->__id__);
-    x.id(this->__id__);
-    wb.id(this->__id__);
-
     regs.init_reg_file();
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x09200000);  //SETHI
@@ -31,6 +23,14 @@ Core::Core()
 void Core::id(string i)
 {
     this->__id__ = "cpu" + i;
+
+    f.id(this->__id__);
+    d.id(this->__id__);
+    ra.id(this->__id__);
+    e.id(this->__id__);
+    m.id(this->__id__);
+    x.id(this->__id__);
+    wb.id(this->__id__);
 }
 
 void Core:: pipeline()

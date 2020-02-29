@@ -56,24 +56,24 @@ void Reg_access::reg_access(PipeRegister& pr,Registers regs)
 
 void Reg_access::log(PipeRegister& pr)
 {   
-    NANO_LOG(NOTICE,"      REGISTER ACCESS STAGE        \n");
+    NANO_LOG(NOTICE,"%s :       REGISTER ACCESS STAGE        \n",__id__.c_str());
 
      if(pr.a.valid)
      {
         if(pr.a.sig.ALUSrc)
         {
-            NANO_LOG(DEBUG,"ALU Operand1 : %x\n",pr.e.operand1);
-            NANO_LOG(DEBUG,"ALU Operand2 : %x\n\n",pr.e.operand2);
+            NANO_LOG(DEBUG,"%s : ALU Operand1 : %x\n",__id__.c_str(),pr.e.operand1);
+            NANO_LOG(DEBUG,"%s : ALU Operand2 : %x\n\n",__id__.c_str(),pr.e.operand2);
         }
         
         else if(pr.a.sig.ALUop == 0x00000004)
         {   
-            NANO_LOG(DEBUG,"ALU Operand : %x\n",pr.e.operand1);
+            NANO_LOG(DEBUG,"%s : ALU Operand : %x\n",__id__.c_str(),pr.e.operand1);
         }
      }
 
      else
-        NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+        NANO_LOG(DEBUG,"%s :  NO JOB, IDLE\n\n",__id__.c_str());
 }
 
 void Reg_access::id(std::string s)

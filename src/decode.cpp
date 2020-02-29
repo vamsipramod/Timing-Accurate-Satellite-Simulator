@@ -208,16 +208,16 @@ void Decode::decode(PipeRegister& pr)
 
 void Decode::log(PipeRegister& pr)
 {   
-    NANO_LOG(NOTICE,"    DECODE STAGE        \n");
+    NANO_LOG(NOTICE,"%s :     DECODE STAGE        \n",__id__.c_str());
 
      if(pr.d.valid)
      {       
-        NANO_LOG(DEBUG,"INSTRUCTION DECODED \n");
-        NANO_LOG(DEBUG,"CONTROL SIGNALS ARE SET \n\n");
+        NANO_LOG(DEBUG,"%s : INSTRUCTION DECODED \n",__id__.c_str());
+        NANO_LOG(DEBUG,"%s : CONTROL SIGNALS ARE SET \n\n",__id__.c_str());
      }
 
      else
-        NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+        NANO_LOG(DEBUG,"%s :  NO JOB, IDLE\n\n",__id__.c_str());
 }
 
 void Decode::id(std::string s)

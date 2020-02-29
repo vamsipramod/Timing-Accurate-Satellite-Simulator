@@ -2,7 +2,7 @@
 
 void Execute::execute(PipeRegister& pr,uint32_t& pc, bool& flush)
 {    
-     NANO_LOG(NOTICE,"    EXECUTE STAGE        \n");
+     NANO_LOG(NOTICE,"%s :     EXECUTE STAGE        \n",__id__.c_str());
 
      if(pr.e.valid)
      {
@@ -55,19 +55,19 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
           switch (pr.e.sig.ALUop)
           {
                case 0x00000000:
-                    NANO_LOG(DEBUG,"Executing  ADD Instruction\n");
-                    NANO_LOG(DEBUG,"ALU Output : %d\n\n",pr.m.ares);
+                    NANO_LOG(DEBUG,"%s : Executing  ADD Instruction\n",__id__.c_str());
+                    NANO_LOG(DEBUG,"%s : ALU Output : %d\n\n",__id__.c_str(),pr.m.ares);
                     break;
                
                case 0x00000004:
-                   { NANO_LOG(DEBUG,"Executing  SETHI Instruction\n");
-                    NANO_LOG(DEBUG,"ALU Output : %d\n\n",pr.m.ares);
+                   { NANO_LOG(DEBUG,"%s : Executing  SETHI Instruction\n",__id__.c_str());
+                    NANO_LOG(DEBUG,"%s : ALU Output : %d\n\n",__id__.c_str(),pr.m.ares);
                     break;
                    }
 
                case 0x00000002:
-                    NANO_LOG(DEBUG,"Executing Branch Always Instruction\n");
-                    NANO_LOG(DEBUG,"New PC : %x\n\n",pc);
+                    NANO_LOG(DEBUG,"%s : Executing Branch Always Instruction\n",__id__.c_str());
+                    NANO_LOG(DEBUG,"%s : New PC : %x\n\n",__id__.c_str(),pc);
                     break;
 
                default:
@@ -75,12 +75,12 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
           }
 
           if(flush)
-          {    NANO_LOG(DEBUG,"Branch Taken, PipeLine Flushed Out\n"); }
+          {    NANO_LOG(DEBUG,"%s : Branch Taken, PipeLine Flushed Out\n",__id__.c_str()); }
 
      }
 
      else
-          NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+          NANO_LOG(DEBUG,"%s :  NO JOB, IDLE\n\n",__id__.c_str());
 
 }
 

@@ -20,16 +20,16 @@ void Fetch::fetch(PipeRegister& pr, std::vector <uint32_t> icache)
 
 void Fetch::log(PipeRegister& pr)
 {    
-    NANO_LOG(NOTICE,"    FETCH STAGE        \n");
+    NANO_LOG(NOTICE," %s :   FETCH STAGE        \n",__id__.c_str());
 
      if(pr.f.valid)
      {
-          NANO_LOG(DEBUG,"Fetching Instruction at address : %x\n",pr.f.pc);
-          NANO_LOG(DEBUG,"Instruction at %x  : %x \n\n",pr.f.pc,pr.d.instr);
+          NANO_LOG(DEBUG,"%s : Fetching Instruction at address : %x\n",__id__.c_str(),pr.f.pc);
+          NANO_LOG(DEBUG,"%s : Instruction at %x  : %x \n\n",__id__.c_str(),pr.f.pc,pr.d.instr);
      }
 
      else
-         NANO_LOG(DEBUG," NO JOB, IDLE\n\n");
+         NANO_LOG(DEBUG,"%s : NO JOB, IDLE\n\n",__id__.c_str());
      
 }
 
