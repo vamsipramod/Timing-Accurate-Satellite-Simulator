@@ -3,7 +3,8 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "NanoLogCpp17.h"
+// #include "NanoLogCpp17.h"
+#include <string>
 
 //INSTRUCTION
 typedef struct{
@@ -73,7 +74,14 @@ class Instr
     public:
         uint32_t cycles=0;
         inst instr;
-        void disassemble();
+        void disassembly();
 };
+
+void disassemble(inst x_inst);
+void Bicccond(inst x_inst);
+void FBfcccond(inst x_inst);
+void CBccccond(inst x_inst);
+void op3two(inst x_inst);
+void op3one(inst x_inst);
 
 #endif
