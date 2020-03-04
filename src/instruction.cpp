@@ -35,7 +35,7 @@ void Bicccond(inst x_inst){
 	
 
 	cond = x_inst.format.b.target.branch.cond;
-	temp  = x_inst.format.b.target.branch.a << 2;
+	// temp  = x_inst.format.b.target.branch.a << 2;
 	temp2 = x_inst.format.b.target.branch.disp22 << 2;
 	printf(" %s \"PC + %08jx\" \n",Bicc[cond].c_str(), (uintmax_t)temp2);
 	return;  
@@ -436,87 +436,87 @@ void disassemble(inst x_inst) {
 
 }
 
-void decode(uint32_t instr){
-	uint32_t instr_copy = instr;
+// void decode(uint32_t instr){
+// 	uint32_t instr_copy = instr;
 
-    inst d;
+//     inst d;
 
-    uint32_t op = instr_copy >> 30;
-    d.op = op;
+//     uint32_t op = instr_copy >> 30;
+//     d.op = op;
 
-    switch (op)
-    {
-        case 1:
-            d.format.a.disp30 = (((1 << 22) - 1) & (instr_copy >> (0)));
-            break;
+//     switch (op)
+//     {
+//         case 1:
+//             d.format.a.disp30 = (((1 << 22) - 1) & (instr_copy >> (0)));
+//             break;
 
-        case 0:
-            d.format.b.op2 = (((1 << 3) - 1) & (instr_copy >> (22)));
+//         case 0:
+//             d.format.b.op2 = (((1 << 3) - 1) & (instr_copy >> (22)));
 
-            if(d.format.b.op2 == 4)
-            {   
-                d.format.b.target.sethi.rd = (((1 << 5) - 1) & (instr_copy >> (25)));
-                d.format.b.target.sethi.imm22 = (((1 << 22) - 1) & (instr_copy >> (0)));
-            }
+//             if(d.format.b.op2 == 4)
+//             {   
+//                 d.format.b.target.sethi.rd = (((1 << 5) - 1) & (instr_copy >> (25)));
+//                 d.format.b.target.sethi.imm22 = (((1 << 22) - 1) & (instr_copy >> (0)));
+//             }
 
-            else
-            {   
-                d.format.b.target.branch.a = (((1) & (instr_copy >> (29))));
-                d.format.b.target.branch.cond = (((1 << 4) - 1) & (instr_copy >> (25)));;;
+//             else
+//             {   
+//                 d.format.b.target.branch.a = (((1) & (instr_copy >> (29))));
+//                 d.format.b.target.branch.cond = (((1 << 4) - 1) & (instr_copy >> (25)));;;
 
 
-                d.format.b.target.branch.disp22 = (((1 << 22) - 1) & (instr_copy >> (0)));
-            }
+//                 d.format.b.target.branch.disp22 = (((1 << 22) - 1) & (instr_copy >> (0)));
+//             }
 
-            break;
+//             break;
         
-        case 2:
-        case 3:
-            d.format.c.op3 = (((1 << 6) - 1) & (instr_copy >> (19)));
-            d.format.c.rd = (((1 << 5) - 1) & (instr_copy >> (25)));
-            d.format.c.rs1 = (((1 << 5) - 1) & (instr_copy >> (14)));
+//         case 2:
+//         case 3:
+//             d.format.c.op3 = (((1 << 6) - 1) & (instr_copy >> (19)));
+//             d.format.c.rd = (((1 << 5) - 1) & (instr_copy >> (25)));
+//             d.format.c.rs1 = (((1 << 5) - 1) & (instr_copy >> (14)));
 
-            if(d.format.c.op3 >= 0x00000034 && d.format.c.op3 <= 0x00000037)
-            {
-                d.format.c.operand2.fp.rs2 = (((1 << 5) - 1) & (instr_copy >> (0)));
-                d.format.c.operand2.fp.opf = (((1 << 9) - 1) & (instr_copy >> (5)));
-            }
+//             if(d.format.c.op3 >= 0x00000034 && d.format.c.op3 <= 0x00000037)
+//             {
+//                 d.format.c.operand2.fp.rs2 = (((1 << 5) - 1) & (instr_copy >> (0)));
+//                 d.format.c.operand2.fp.opf = (((1 << 9) - 1) & (instr_copy >> (5)));
+//             }
 
-            else
-            {
-                d.format.c.operand2.intg.i = ((1) & (instr_copy >> (13)));
-                if( d.format.c.operand2.intg.i)
-                {
-                    d.format.c.operand2.intg.rs2.simm13 = (((1 << 13) - 1) & (instr_copy >> (0)));
-                }
-                else
-                {
-                    d.format.c.operand2.intg.rs2.rs2 = (((1 << 5) - 1) & (instr_copy >> (0)));
-                }
-            }
-            break;
+//             else
+//             {
+//                 d.format.c.operand2.intg.i = ((1) & (instr_copy >> (13)));
+//                 if( d.format.c.operand2.intg.i)
+//                 {
+//                     d.format.c.operand2.intg.rs2.simm13 = (((1 << 13) - 1) & (instr_copy >> (0)));
+//                 }
+//                 else
+//                 {
+//                     d.format.c.operand2.intg.rs2.rs2 = (((1 << 5) - 1) & (instr_copy >> (0)));
+//                 }
+//             }
+//             break;
 
-        default:
-        	//cerr << "OPCODE length changed (not 2-bits anymore)?" << endl;
-            break;
-    }
-
-
-    disassemble(d);
-}
+//         default:
+//         	//cerr << "OPCODE length changed (not 2-bits anymore)?" << endl;
+//             break;
+//     }
 
 
-int main() {
+//     disassemble(d);
+// }
 
-    uint32_t instructions[] = {0x1a80000c,0xba274001, 0x92004009};
-    // ,0x03bffebf,0x40025642,0xee4e6002
-    //0xc208e001,0xa200e001,8216c002
-    //
 
-    for(int j = 0; j < 3; j++) {
-    	printf("%08jx ", (uintmax_t)instructions[j]);
-        decode(instructions[j]);
-    }
+// int main() {
 
-    return 0;
-}
+//     uint32_t instructions[] = {0x1a80000c,0xba274001, 0x92004009};
+//     // ,0x03bffebf,0x40025642,0xee4e6002
+//     //0xc208e001,0xa200e001,8216c002
+//     //
+
+//     for(int j = 0; j < 3; j++) {
+//     	printf("%08jx ", (uintmax_t)instructions[j]);
+//         decode(instructions[j]);
+//     }
+
+//     return 0;
+// }
