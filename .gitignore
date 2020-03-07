@@ -6,10 +6,12 @@ aclocal.m4
 configure
 autom4te.cache/**
 **/*.log
+/venv/*
 compressedLog
 missing
 install-sh
 depcomp
 config.status
-**/Makefile.in
+Makefile
+**/Makefile
 tags
