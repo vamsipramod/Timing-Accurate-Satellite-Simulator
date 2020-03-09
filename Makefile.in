@@ -1,5 +1,9 @@
 SUBDIRS = src
+LIB_DIR = ./lib
+BIN_DIR = ./bin
+SRC = ./src
 
+NANOLOG_LIB= ./src/NanoLog/runtime/libNanoLog.a
 .PHONY :$(SUBDIRS)
 
 $(SUBDIRS):
@@ -12,5 +16,13 @@ clean:
 clean-all:
 		$(MAKE) -C $(SUBDIRS) clean-all
 
+install:
+		mkdir -p $(LIB_DIR)
+		mkdir -p $(BIN_DIR)
+		ln -s -f $(NANOLOG_LIB) $(LIB_DIR)/libNanoLog.a
+		ln -s -f $(SRC)/decompress.sh $(BIN_DIR)/decompress.sh
+		ln -s -f $(SRC)/satsim $(BIN_DIR)/satsim
+
 distclean: clean-all
 		rm -f TAGS Makefile config.status config.log configure
+		rm -r -f $(LIB_DIR) $(BIN_DIR)
