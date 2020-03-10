@@ -12,7 +12,7 @@ class Reg_access
     public:
     void reg_access(PipeRegister& pr,Registers reg);
     std::string __id__;
-    void id(std::string s);
+    Reg_access(std::string s);
     
 };
 

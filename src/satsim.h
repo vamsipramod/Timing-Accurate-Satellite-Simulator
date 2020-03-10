@@ -2,7 +2,7 @@
 
 class Simulator{
     private:
-    Core core;
+    Core* core;
     vector <uint32_t> memory; 
 
     // TODO: 

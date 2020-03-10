@@ -7,12 +7,12 @@ Simulator::Simulator()
     // TODO: 
     // Memory ram;
     // Disk hdd;
-    core.id("0");
+    core = new Core("0");
 }
 
 void Simulator::run()
 {
-    core.pipeline();
+    core->pipeline();
 }
 
 void Simulator::load(char *input)

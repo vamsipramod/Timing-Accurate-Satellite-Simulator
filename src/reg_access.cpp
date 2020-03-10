@@ -76,7 +76,7 @@ void Reg_access::log(PipeRegister& pr)
         NANO_LOG(DEBUG,"%s :  NO JOB, IDLE\n\n",__id__.c_str());
 }
 
-void Reg_access::id(std::string s)
+Reg_access::Reg_access(std::string s)
 {
     this->__id__ = s+"RA";
 }

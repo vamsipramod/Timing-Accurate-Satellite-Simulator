@@ -12,7 +12,7 @@ class Execute{
     public:
         void execute(PipeRegister& pr,uint32_t& pc,bool& flush);
         std::string __id__;
-        void id(std::string s);
+        Execute(std::string s);
 };
 
 #endif

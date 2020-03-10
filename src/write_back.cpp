@@ -35,7 +35,7 @@ void Wrt_back::log(PipeRegister& pr)
             NANO_LOG(DEBUG,"%s :  NO JOB, IDLE\n\n",__id__.c_str());
 }
 
-void Wrt_back::id(std::string s)
+Wrt_back::Wrt_back(std::string s)
 {
     this->__id__ = s+"W";
 }

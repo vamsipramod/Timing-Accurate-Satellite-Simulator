@@ -11,7 +11,7 @@ class Exception
     
     public:
     void exception(PipeRegister& pr);
-    void id(std::string id);
+    Exception(std::string id);
     std::string __id__;
 };
 

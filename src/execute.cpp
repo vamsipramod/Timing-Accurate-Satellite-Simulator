@@ -84,7 +84,7 @@ void Execute::log(PipeRegister& pr,uint32_t pc,bool flush)
 
 }
 
-void Execute::id(std::string s)
+Execute::Execute(std::string s)
 {
     this->__id__ = s+"E";
 }

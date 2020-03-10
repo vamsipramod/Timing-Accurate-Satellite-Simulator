@@ -6,8 +6,6 @@ CXX_ARGS = -std=c++17 -DNDEBUG -O3 -g
 NANOLOG_RUNTIME_DIR= ./NanoLog/runtime
 NANOLOG_LIB= ./NanoLog/runtime/libNanoLog.a
 
-LIB_DIR = ./lib
-BIN_DIR = ./bin
 
 INCLUDES= -I$(NANOLOG_RUNTIME_DIR)
 LIBS = -lelf -L -lNanoLog -pthread -lrt

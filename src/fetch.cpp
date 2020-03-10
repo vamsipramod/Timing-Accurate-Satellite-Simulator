@@ -33,7 +33,7 @@ void Fetch::log(PipeRegister& pr)
      
 }
 
-void Fetch::id(std::string s)
+Fetch::Fetch(std::string s)
 {
     this->__id__ = s+"F";
 }

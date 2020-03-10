@@ -13,6 +13,6 @@ class Mem_access
     public:
     void mem_access(PipeRegister& pr, std::vector <uint32_t> dcache);
     std::string __id__;
-    void id(std::string s);
+    Mem_access(std::string s);
 };
 #endif

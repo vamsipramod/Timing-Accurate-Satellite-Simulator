@@ -26,24 +26,22 @@ class Core{
     private:
     PipeRegister pr;
     Registers regs;
-    Fetch f;
-    Decode d;
-    Reg_access ra;
-    Execute e;
-    Mem_access m;
-    Exception x;
-    Wrt_back wb;
+    Fetch* f;
+    Decode* d;
+    Reg_access* ra;
+    Execute* e;
+    Mem_access* m;
+    Exception* x;
+    Wrt_back* wb;
     string __id__;
 
     public:
-    Core();
+    Core(std::string i);
     uint32_t pc;
     
     vector <uint32_t> icache;
     vector <uint32_t> dcache; 
     void pipeline();
-    void id(string id);
-
 };
 
 void print_pregs(PipeRegister pr,char s);

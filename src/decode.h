@@ -21,7 +21,7 @@ class Decode {
         
     public :
         void decode(PipeRegister& pr);
-        void id(std::string id);
+        Decode(std::string id);
         std::string __id__;
         
 };

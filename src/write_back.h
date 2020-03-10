@@ -11,6 +11,6 @@ class Wrt_back
     public:
         void wrt_back(PipeRegister& pr,Registers& regs);
         std::string __id__;
-        void id(std::string s);
+        Wrt_back(std::string s);
 };
 #endif

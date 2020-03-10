@@ -51,7 +51,7 @@ void Mem_access::log(PipeRegister& pr)
         NANO_LOG(DEBUG,"%s :  NO JOB, IDLE\n\n",__id__.c_str());
 }
 
-void Mem_access::id(std::string s)
+Mem_access::Mem_access(std::string s)
 {
     this->__id__ = s+"M";
 }

@@ -12,9 +12,9 @@ class Fetch
     void log(PipeRegister& pr);
 
     public:
+    Fetch(std::string id);
     void fetch(PipeRegister& pr,std::vector <uint32_t> icache);
     std::string __id__;
-    void id(std::string id);
 
 };
 
