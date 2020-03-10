@@ -19,9 +19,9 @@ clean-all:
 install:
 		mkdir -p $(LIB_DIR)
 		mkdir -p $(BIN_DIR)
-		ln -s -f $(NANOLOG_LIB) $(LIB_DIR)/libNanoLog.a
-		ln -s -f $(SRC)/decompress.sh $(BIN_DIR)/decompress.sh
-		ln -s -f $(SRC)/satsim $(BIN_DIR)/satsim
+		ln -s -f -r $(NANOLOG_LIB) $(LIB_DIR)/libNanoLog.a
+		ln -s -f -r $(SRC)/decompress.sh $(BIN_DIR)/decompress.sh
+		ln -s -f -r $(SRC)/satsim $(BIN_DIR)/satsim
 
 distclean: clean-all
 		rm -f TAGS Makefile config.status config.log configure
