@@ -14,7 +14,6 @@ void Registers::state()
 
 void Registers::init_reg_file()
 {
-    Registers::pc = 0;
     for(int i=0;i<32;i++)
     {
         Registers::reg_file[i] = 0;

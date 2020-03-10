@@ -37,6 +37,8 @@ class Core{
 
     public:
     Core();
+    uint32_t pc;
+    
     vector <uint32_t> icache;
     vector <uint32_t> dcache; 
     void pipeline();

@@ -12,7 +12,7 @@ Core::Core()
     icache.push_back(0x82008003); //ADD
     icache.push_back(0x82008003); //ADD
     
-    regs.pc = 0;
+    pc = 0;
     regs.reg(1,10);
     regs.reg(2,20);
     regs.reg(3,30);
@@ -55,7 +55,7 @@ void Core:: pipeline()
         m.mem_access(pr,dcache);
 
         //Execute
-        e.execute(pr,regs.pc,flush);
+        e.execute(pr,pc,flush);
 
         if(flush)
             { flush = false; continue; }
@@ -67,16 +67,16 @@ void Core:: pipeline()
         d.decode(pr);
 
         
-        if(regs.pc >= icache.size())
+        if(pc >= icache.size())
             pr.f.valid = 0;
         else
             pr.f.valid = 1;
 
-        pr.f.pc = regs.pc;
+        pr.f.pc = pc;
         //Fetch
         f.fetch(pr, icache);
 
-        regs.pc++;
+        pc++;
         run = pr.f.valid | pr.d.valid | pr.a.valid | pr.e.valid | pr.m.valid | pr.x.valid | pr.w.valid;
     }
     

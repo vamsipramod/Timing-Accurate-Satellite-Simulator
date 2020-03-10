@@ -19,99 +19,84 @@ class CntrlSig
         bool Jump;
         uint32_t ALUop;
         bool valid;
-
-        void clear();
 };
 
-class PipeF
+class PipeBuffer{
+
+    public:
+    int32_t pc;
+    uint32_t valid;
+    Instr instr;
+    CntrlSig sig;
+    virtual void clear() = 0;
+
+};
+
+class PipeF : public PipeBuffer
 {
     public:
-        int32_t pc;
-        uint32_t valid;
-
         void clear();
 };
 
-class PipeD
+class PipeD : public PipeBuffer
 {   
     public:
         uint32_t instr;
-        uint32_t pc;
         uint32_t cycle;
-        uint32_t valid;
 
         void clear();
 
 };
 
-class PipeRA
+class PipeRA : public PipeBuffer
 {
     public:
         uint32_t rs1;
         uint32_t rs2;
         uint32_t rd;
-        uint32_t pc;
         int32_t simm13;
         uint32_t imm22;
         uint32_t disp22;
         uint32_t a;
         uint32_t cond;
-        Instr instr;
-        uint32_t valid;
-        CntrlSig sig;
 
         void clear();
 };  
 
-class PipeE
+class PipeE : public PipeBuffer
 {
     public:
         uint32_t operand1;
         uint32_t operand2;
         uint32_t rd;
         uint32_t disp22;
-        uint32_t pc;
-        Instr instr;
-        uint32_t valid;
-        CntrlSig sig;
 
         void clear();
 };
 
-class PipeMA
+class PipeMA : public PipeBuffer
 {
     public:
         uint32_t rd;
         uint32_t ares; //ALU result
-        uint32_t pc;
-        Instr instr;
-        uint32_t valid;
-        CntrlSig sig;
 
         void clear();
 };
 
-class PipeX
+class PipeX : public PipeBuffer
 {
     public:
         uint32_t rd;
-        uint32_t pc;
         int32_t data;
-        Instr instr;
-        uint32_t valid;
-        CntrlSig sig;
 
         void clear();
 };
 
-class PipeWB
+class PipeWB : public PipeBuffer
 {
     public:
         int32_t data;
         uint32_t rd;
-        Instr instr;
-        uint32_t valid;
-        CntrlSig sig;
 
         void clear();
 };
@@ -138,8 +123,7 @@ private:
     typedef int32_t reg_word;
     reg_word reg_file[32]; 
 
-public:
-    uint32_t pc; 
+public: 
     void state();
     void init_reg_file();
     void reg(uint32_t index, int32_t val); // TODO: register(uint32_t index,int32_t val)
