@@ -13,8 +13,8 @@ LIBELF_DIR= ./libelf
 INCLUDES= -I$(NANOLOG_RUNTIME_DIR) -I$(LIBELF_SRC_DIR)
 LIBS = -lelf -L -lNanoLog -pthread -lrt
 
-all:nano elf satsim
-
+all: libs satsim
+libs: nano elf
 nano:
 ifneq ("$(wildcard $(NANOLOG_LIB))","./NanoLog/runtime/libNanoLog.a")
 	$(wildcard $(NANOLOG_LIB))

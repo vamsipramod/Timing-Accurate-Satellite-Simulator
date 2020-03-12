@@ -9,11 +9,9 @@ autom4te.cache/**
 /venv/*
 /lib/*
 /bin/*
-compressedLog
+./compressedLog
 missing
 install-sh
 depcomp
 config.status
-Makefile
-**/Makefile
 tags
