@@ -10,8 +10,9 @@ LIBELF_SRC_DIR= ./libelf/lib
 LIBELF_LIB= ./libelf/lib/libelf.a
 LIBELF_DIR= ./libelf
 
+
 INCLUDES= -I$(NANOLOG_RUNTIME_DIR) -I$(LIBELF_SRC_DIR)
-LIBS = -lelf -L -lNanoLog -pthread -lrt
+LIBS = -L -lNanoLog -pthread -lrt
 
 all: libs satsim
 libs: nano elf
@@ -32,7 +33,7 @@ $(OBJS): %o : %cpp
 		$(CXX) $(INCLUDES) -c -o $@ $< $(LIBS)
 
 satsim : $(OBJS)
-		$(CXX) $(CXX_ARGS) $(INCLUDES) $(OBJS) $(NANOLOG_LIB) -o satsim $(LIBS)
+		$(CXX) $(CXX_ARGS) $(INCLUDES) $(OBJS) $(NANOLOG_LIB) $(LIBELF_LIB) -o satsim $(LIBS)
 
 clean :	
 		$(RM) *.o *.log satsim
