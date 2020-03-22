@@ -2,15 +2,13 @@
 
 //Instruction
 
-void Instr::disassembly()
+char* Instr::disassembly()
 {
-    // printf("Disassembly is Under Development!!!..............Coming Soon\n");
-    disassemble(this->instr);
-    
+    // sprintf(buffer,"Disassembly is Under Development!!!..............Coming Soon\n");
+    return disassemble(this->instr);
 }
 
-void Bicccond(inst x_inst){
-	//int cond;
+char* Bicccond(inst x_inst, char* buffer){
 	uint32_t cond;
 	uint32_t temp;
 	uint32_t temp2;
@@ -33,18 +31,16 @@ void Bicccond(inst x_inst){
         "BVC"
     };
 	
-
 	cond = x_inst.format.b.target.branch.cond;
-	// temp  = x_inst.format.b.target.branch.a << 2;
 	temp2 = x_inst.format.b.target.branch.disp22 << 2;
-	printf(" %s \"PC + %08jx\" \n",Bicc[cond].c_str(), (uintmax_t)temp2);
-	return;  
+	sprintf(buffer," %s \"PC + %08jx\" \n",Bicc[cond].c_str(), (uintmax_t)temp2);
+	return buffer;  
 }
 
-void FBfcccond(inst x_inst){
+char* FBfcccond(inst x_inst, char* buffer){
 	uint32_t cond;
-	uint32_t temp;
 	uint32_t temp2;
+
 	std::string FBfc[] = {
         "FBN", 
         "FBNE", 
@@ -64,22 +60,16 @@ void FBfcccond(inst x_inst){
         "FBO"
     };
 
-/*	//std::string 
-	cond = (arr[3] * 8) + (arr[4]*4) + (arr[5]*2) + (arr[6]);
-	cout << binToHex(arr,0,8) << " " << binToHex(arr,8,16) << " " << binToHex(arr,16,24) << " " << binToHex(arr,24,32) << "\t" ;
-	cout << FBfc[cond] << " " << "Address_to_jump " << "address+offset" << "\n";
-*/
   	cond = x_inst.format.b.target.branch.cond;
-	temp  = x_inst.format.b.target.branch.a << 2;
 	temp2 = x_inst.format.b.target.branch.disp22 << 2;
-	printf(" %s \"PC + %08jx\" \n",FBfc[cond].c_str(), (uintmax_t)temp2);  
-	return;
+	sprintf(buffer," %s \"PC + %08jx\" \n",FBfc[cond].c_str(), (uintmax_t)temp2);  
+	return buffer;
 }
 
-void CBccccond(inst x_inst){
+char* CBccccond(inst x_inst, char* buffer){
 	uint32_t cond;
-	uint32_t temp;
 	uint32_t temp2;
+
 	std::string cbc[] = {
         "CBN", 
         "CB123", 
@@ -99,24 +89,18 @@ void CBccccond(inst x_inst){
         "CB012"
     };
 
-/*	//std::string 
-	cond = (arr[3] * 8) + (arr[4]*4) + (arr[5]*2) + (arr[6]);
-	cout << binToHex(arr,0,8) << " " << binToHex(arr,8,16) << " " << binToHex(arr,16,24) << " " << binToHex(arr,24,32) << "\t" ;
-	cout << FBfc[cond] << " " << "Address_to_jump " << "address+offset" << "\n";
-*/
   	cond = x_inst.format.b.target.branch.cond;
-	temp  = x_inst.format.b.target.branch.a << 2;
 	temp2 = x_inst.format.b.target.branch.disp22 << 2;
-	printf(" %s \"PC + %08jx\" \n",cbc[cond].c_str(), (uintmax_t)temp2);  
-	return;
+	sprintf(buffer," %s \"PC + %08jx\" \n",cbc[cond].c_str(), (uintmax_t)temp2);  
+	return buffer;
 }
 
-void op3two(inst x_inst){
+char* op2(inst x_inst, char* buffer){
 	uint32_t op3; 
 	uint32_t rd;
 	uint32_t rs1;
 	uint32_t rs2;
-	uint32_t i;
+	uint32_t ii;
 	int k,l;
 	uint32_t opf;
 	uint32_t simm13;
@@ -146,7 +130,7 @@ void op3two(inst x_inst){
     rd = x_inst.format.c.rd;
     rs1= x_inst.format.c.rs1;
     op3= x_inst.format.c.op3;
-	i  = x_inst.format.c.operand2.intg.i; 
+	ii  = x_inst.format.c.operand2.intg.i; 
 	
 
 	std::string fpop2[]{
@@ -194,35 +178,24 @@ void op3two(inst x_inst){
 			"D3 FqTOi"
     	};
 
-    	if(rd < 8) RegRd = "%f";
-		else if(rd <16) RegRd= "%f";
-		else if(rd <24) RegRd= "%f";
-		else if(rd <32) RegRd= "%f";
+    	RegRd = "%f";
 
-		if(rs1 < 8) RegRs1 = "%f";
-		else if(rs1 <16) RegRs1= "%f";
-		else if(rs1 <24) RegRs1= "%f";
-		else if(rs1 <32) RegRs1= "%f";
-
-
-	  	if(rs2 < 8) RegRs2 = "%f";
-		else if(rs2 <16) RegRs2= "%f";
-		else if(rs2 <24) RegRs2= "%f";
-		else if(rs2 <32) RegRs2= "%f";
-
+		
 
     	k = x_inst.format.c.operand2.fp.opf;
     	// k == 09 is also with the below code
-    	if(k==01 || k==05  || k==41 || k==42 || k==43 || k==196 || k==198 || k==199 || k==200 || k==201 ||k==203 || k==204 || k==205 ||k==206 ||  k==209 || k==210 ||k==211){
-    		printf("%s %s%d %s%d \n",fpop2[k].c_str(),RegRs2.c_str(),(rs2),RegRd.c_str(),(rd));
-			return;
+    	if(k==01 || k==05  || k==41 || k==42 || k==43 || k==196 || k==198 || k==199 || k==200 || 
+    		k==201 ||k==203 || k==204 || k==205 ||k==206 ||  k==209 || k==210 ||k==211){
+    		
+    		sprintf(buffer,"%s %s%d %s%d \n",fpop2[k].c_str(),RegRd.c_str(),(rs2),RegRd.c_str(),(rd));
+			return buffer;
     	}
 
-			printf("%s %s%d %s%d %s%d \n",fpop[k].c_str(),RegRd.c_str(),(rd%8),RegRs2.c_str(),(rs2%8),RegRs1.c_str(),(rs1%8));
+			sprintf(buffer,"%s %s%d %s%d %s%d \n",fpop[k].c_str(),RegRd.c_str(),(rd%8),RegRd.c_str(),(rs2%8),RegRd.c_str(),(rs1%8));
 
 
 
-    	return;
+    	return buffer;
 
     }
     else if(op3==0x35){
@@ -242,9 +215,9 @@ void op3two(inst x_inst){
 		else if(rs2 <24) RegRs2= "%f";
 		else if(rs2 <32) RegRs2= "%f";
 
-		printf("%s %s%d %s%d %s%d \n",fpop2[k].c_str(),RegRd.c_str(),(rd%8),RegRs2.c_str(),(rs2%8),RegRs1.c_str(),(rs1%8));
+		sprintf(buffer,"%s %s%d %s%d %s%d \n",fpop2[k].c_str(),RegRd.c_str(),(rd%8),RegRs2.c_str(),(rs2%8),RegRs1.c_str(),(rs1%8));
 		
-    	return;
+    	return buffer;
 
     }
 
@@ -264,39 +237,235 @@ void op3two(inst x_inst){
 	else if(rs1 <24) RegRs1= "%l";
 	else if(rs1 <32) RegRs1= "%i";
 
-	/*
 	//excptions
+	ii = x_inst.format.c.operand2.intg.i; 
 	if(l==0 && k ==3){
-		if(i==0){printf("WRY %s%d %d %s%d \n",RegRd.c_str(),(rd%8), simm13 ,RegRs1.c_str(),(rs1%8));};
-		else if(i==1){printf("WRASR %s%d %d %s%d \n",RegRd.c_str(),(rd%8), simm13 ,RegRs1.c_str(),(rs1%8));};
+		if(rd==0){
+			if(ii==0){
+				rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+				if(rs2 < 8) RegRs2 = "%g";
+				else if(rs2 <16) RegRs2= "%o";
+				else if(rs2 <24) RegRs2= "%l";
+				else if(rs2 <32) RegRs2= "%i";
+
+				sprintf(buffer,"wr %s%d %s%d %s\n",RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),"%y");
+			}
+			else if(ii==1){
+				simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+				if((1) & (simm13 >> 12)){
+					simm13 = ((((1<<19)-1)<<12) | simm13);
+					sprintf(buffer,"wr %s%d , %x, %s\n",RegRs1.c_str(),(rs1%8), simm13,"%y");
+				}
+					
+				else
+					sprintf(buffer,"wr %s%d , %d, %s \n",RegRs1.c_str(),(rs1%8), simm13,"%y");		
+			}
+		}
+
+
+		else if(rd>0 && rd <16){
+			sprintf(buffer,"Reserved");
+		}
+
+		else if(rd>15 && rd <32){
+			if(ii==0){
+				rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+				if(rs2 < 8) RegRs2 = "%g";
+				else if(rs2 <16) RegRs2= "%o";
+				else if(rs2 <24) RegRs2= "%l";
+				else if(rs2 <32) RegRs2= "%i";
+
+				sprintf(buffer,"wr %s%d %s%d %s%d\n",RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),"%asr",(rd));
+			}
+			else if(ii==1){
+				simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+				if((1) & (simm13 >> 12)){
+					simm13 = ((((1<<19)-1)<<12) | simm13);
+					sprintf(buffer,"wr %s%d , %x, %s%d\n",RegRs1.c_str(),(rs1%8), simm13,"%asr",(rd));
+				}
+					
+				else
+					sprintf(buffer,"wr %s%d , %d, %s%d\n",RegRs1.c_str(),(rs1%8), simm13,"%asr",(rd));		
+			}
+		}
+		return buffer;		
 	}
-	else if (l == 1 && k ==3){
-		printf("WPRSR %s%d %d %s%d \n",RegRd.c_str(),(rd%8), simm13 ,RegRs1.c_str(),(rs1%8));	
+
+	if(l==1 && k==3){
+		if(ii==0){
+			rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+			if(rs2 < 8) RegRs2 = "%g";
+			else if(rs2 <16) RegRs2= "%o";
+			else if(rs2 <24) RegRs2= "%l";
+			else if(rs2 <32) RegRs2= "%i";
+
+			sprintf(buffer,"wr %s%d %s%d %s\n",RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),"%psr");
+		}
+		else if(ii==1){
+			simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+			if((1) & (simm13 >> 12)){
+				simm13 = ((((1<<19)-1)<<12) | simm13);
+				sprintf(buffer,"wr %s%d , %x, %s \n",RegRs1.c_str(),(rs1%8), simm13,"%psr");
+			}
+				
+			else
+				sprintf(buffer,"wr %s%d , %d, %s\n",RegRs1.c_str(),(rs1%8), simm13,"%psr");		
+		}
+		return buffer;
 	}
-	*/
-	i  = x_inst.format.c.operand2.intg.i; 
-	if(i=1){
+
+	if(l==2 && k==3){
+		if(ii==0){
+			rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+			if(rs2 < 8) RegRs2 = "%g";
+			else if(rs2 <16) RegRs2= "%o";
+			else if(rs2 <24) RegRs2= "%l";
+			else if(rs2 <32) RegRs2= "%i";
+
+			sprintf(buffer,"wr %s%d %s%d %s\n",RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),"%wim");
+		}
+		else if(ii==1){
+			simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+			if((1) & (simm13 >> 12)){
+				simm13 = ((((1<<19)-1)<<12) | simm13);
+				sprintf(buffer,"wr %s%d , %x, %s \n",RegRs1.c_str(),(rs1%8), simm13,"%wim");
+			}
+				
+			else
+				sprintf(buffer,"wr %s%d , %d, %s\n",RegRs1.c_str(),(rs1%8), simm13,"%wim");		
+		}
+		return buffer;
+	}
+
+	if(l==1 && k==3){
+		if(ii==0){
+			rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+			if(rs2 < 8) RegRs2 = "%g";
+			else if(rs2 <16) RegRs2= "%o";
+			else if(rs2 <24) RegRs2= "%l";
+			else if(rs2 <32) RegRs2= "%i";
+
+			sprintf(buffer,"wr %s%d %s%d %s\n",RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),"%tbr");
+		}
+		else if(ii==1){
+			simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+			if((1) & (simm13 >> 12)){
+				simm13 = ((((1<<19)-1)<<12) | simm13);
+				sprintf(buffer,"wr %s%d , %x, %s \n",RegRs1.c_str(),(rs1%8), simm13,"%tbr");
+			}
+				
+			else
+				sprintf(buffer,"wr %s%d , %d, %s\n",RegRs1.c_str(),(rs1%8), simm13,"%tbr");		
+		}
+		return buffer;
+	}
+	// RDY and RDASR
+	if(op3==0x28){
+		if(rs1==0){
+			if(ii==0){
+				rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+				if(rs2 < 8) RegRs2 = "%g";
+				else if(rs2 <16) RegRs2= "%o";
+				else if(rs2 <24) RegRs2= "%l";
+				else if(rs2 <32) RegRs2= "%i";
+
+				sprintf(buffer,"rd %s %s%d\n","%y",RegRd.c_str(),(rd%8));
+			}
+			else if(ii==1){
+				simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+				if((1) & (simm13 >> 12)){
+					simm13 = ((((1<<19)-1)<<12) | simm13);
+					sprintf(buffer,"rd %s , %s%d \n","%y",RegRd.c_str(),(rd%8));
+				}
+					
+				else
+					sprintf(buffer,"wr %s %s%d %x\n","%y",RegRd.c_str(),(rd%8), simm13);		
+			}
+		}
+
+
+		else if(rd>0 && rd <16){
+			if(ii==0){
+				rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+				if(rs2 < 8) RegRs2 = "%g";
+				else if(rs2 <16) RegRs2= "%o";
+				else if(rs2 <24) RegRs2= "%l";
+				else if(rs2 <32) RegRs2= "%i";
+
+				sprintf(buffer,"wr %s%d %s%d %s%d\n",RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),"%asr",(16+rd));
+			}
+			else if(ii==1){
+				simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+				if((1) & (simm13 >> 12)){
+					simm13 = ((((1<<19)-1)<<12) | simm13);
+					sprintf(buffer,"wr %s%d , %x, %s%d\n",RegRs1.c_str(),(rs1%8), simm13,"%asr",(16+rd));
+				}
+					
+				else
+					sprintf(buffer,"wr %s%d , %d, %s%d\n",RegRs1.c_str(),(rs1%8), simm13,"%asr",(16+rd));		
+			}
+		}
+
+		else if(rs1>15 && rs1 <32){
+			if(ii==0){
+				rs2= x_inst.format.c.operand2.intg.rs2.rs2;
+				if(rs2 < 8) RegRs2 = "%g";
+				else if(rs2 <16) RegRs2= "%o";
+				else if(rs2 <24) RegRs2= "%l";
+				else if(rs2 <32) RegRs2= "%i";
+
+				sprintf(buffer,"wr %s%d %s%d %s%d\n",RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),"%asr",(rd));
+			}
+			else if(ii==1){
+				simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+				if((1) & (simm13 >> 12)){
+					simm13 = ((((1<<19)-1)<<12) | simm13);
+					sprintf(buffer,"wr %s%d , %x, %s%d\n",RegRs1.c_str(),(rs1%8), simm13,"%asr",(rd));
+				}
+					
+				else
+					sprintf(buffer,"wr %s%d , %d, %s%d\n",RegRs1.c_str(),(rs1%8), simm13,"%asr",(rd));		
+			}
+		}
+	}
+
+	if(ii==0){
 		 rs2= x_inst.format.c.operand2.intg.rs2.rs2;
 	  	if(rs2 < 8) RegRs2 = "%g";
 		else if(rs2 <16) RegRs2= "%o";
 		else if(rs2 <24) RegRs2= "%l";
 		else if(rs2 <32) RegRs2= "%i";
 
-		printf("%s %s%d %s%d %s%d \n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),RegRd.c_str(),(rd%8));
+		sprintf(buffer,"%s %s%d %s%d %s%d i= %d\n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),RegRd.c_str(),(rd%8),ii);
 	}
-	else if(i=0){
-		simm13 = x_inst.format.c.operand2.intg.rs2.simm13 << 2;
-		printf("%s %s%d %d %s%d \n",cbc[l][k].c_str(),RegRd.c_str(),(rd%8), simm13 ,RegRs1.c_str(),(rs1%8));
+	else if(ii==1){
+		simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+		if((1) & (simm13 >> 12)){
+			simm13 = ((((1<<19)-1)<<12) | simm13);
+			sprintf(buffer,"%s %s%d , %x, %s%d \n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8), simm13,RegRd.c_str(),(rd%8));
+		}
+        	
+		else
+			sprintf(buffer,"%s %s%d , %d, %s%d \n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8), simm13,RegRd.c_str(),(rd%8));		
 	}
-    return;
+    return buffer;
 }
 
-void op3one(inst x_inst){
+char* op3one(inst x_inst, char* buffer){
 	uint32_t op3; 
 	uint32_t rd;
 	uint32_t rs1;
 	uint32_t rs2;
-	uint32_t i;
+	uint32_t ii;
 	int k,l;
 	uint32_t opf;
 	uint32_t simm13;
@@ -326,7 +495,7 @@ void op3one(inst x_inst){
     rd = x_inst.format.c.rd;
     rs1= x_inst.format.c.rs1;
     op3= x_inst.format.c.op3;
-	i  = x_inst.format.c.operand2.intg.i; 
+	ii  = x_inst.format.c.operand2.intg.i; 
 
     op354 = x_inst.format.c.op3 >> 4;
     op024 = (x_inst.format.c.op3 << 2)>>2;
@@ -344,53 +513,65 @@ void op3one(inst x_inst){
 	else if(rs1 <24) RegRs1= "%l";
 	else if(rs1 <32) RegRs1= "%i";
 
-	i  = x_inst.format.c.operand2.intg.i; 
-	if(i=0){
+	ii  = x_inst.format.c.operand2.intg.i; 
+	sprintf(buffer,"ii= %d\n", ii);
+	if(ii==0){
 		 rs2= x_inst.format.c.operand2.intg.rs2.rs2;
 	  	if(rs2 < 8) RegRs2 = "%g";
 		else if(rs2 <16) RegRs2= "%o";
 		else if(rs2 <24) RegRs2= "%l";
 		else if(rs2 <32) RegRs2= "%i";
 
-		printf("%s [%s%d + %s%d], %s%d \n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),RegRd.c_str(),(rd%8));
+		sprintf(buffer,"%s [%s%d + %s%d], %s%d \n i=%d",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),RegRd.c_str(),(rd%8),ii);
 	}
-	else if(i=1){
-		simm13 = x_inst.format.c.operand2.intg.rs2.simm13 << 2;
-		printf("%s [%s%d + %d], %s%d \n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8), simm13,RegRd.c_str(),(rd%8));
+	else if(ii==1){
+		simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
+
+		if((1) & (simm13 >> 12)){
+			simm13 = ((((1<<19)-1)<<12) | simm13);
+			sprintf(buffer,"%s [%s%d + %x], %s%d \n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8), simm13,RegRd.c_str(),(rd%8));
+		}
+        	
+		else
+			sprintf(buffer,"%s [%s%d + %d], %s%d \n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8), simm13,RegRd.c_str(),(rd%8));		
 	}
-    return;
+    return buffer;
 }
 
 
 
-void disassemble(inst x_inst) {
+char* disassemble(inst x_inst) {
 	uint32_t r;		// random which will be used to store some imp values
 	uint32_t eop;	//extra opcode like op2 and op3
 	uint32_t temp;
 	uint32_t temp2;
 	std::string reg;
+
+	std::string dissassmbly;
+	char* buffer = new char [100];
+
 	switch(x_inst.op){
 		case 1:
 			
-			//printf("we are in opcode1\n");
+			//sprintf(buffer,"we are in opcode1\n");
 			r = x_inst.format.a.disp30 << 2;
-			printf("call \"PC + %08jx\" \n", (uintmax_t)r);
+			sprintf(buffer,"call \"PC + %08jx\" \n", (uintmax_t)r);
 			break;
 
 
 		case 0:
-			//printf("we are in opcode0\n");
+			//sprintf(buffer,"we are in opcode0\n");
 			eop = x_inst.format.b.op2;
 			if (eop ==0 || eop == 1 || eop == 3 || eop == 5)
 			{
-				printf("ERROR!!! Unidentified Argument while reading OPCODE2");
+				sprintf(buffer,"ERROR!!! Unidentified Argument while reading OPCODE2");
 			}
 			else if(eop == 2){
-				//printf("We have to write for Bicc\n");
+				//sprintf(buffer,"We have to write for Bicc\n");
 				r = x_inst.format.b.target.branch.disp22 << 2;
 				temp2 = x_inst.format.b.target.branch.cond;
 				temp  = x_inst.format.b.target.branch.a << 2;
-				Bicccond(x_inst);
+				Bicccond(x_inst,buffer);
 			}
 
 			else if (eop == 4)
@@ -401,29 +582,29 @@ void disassemble(inst x_inst) {
 				else if(temp <16) reg= "%o";
 				else if(temp <24) reg= "%l";
 				else if(temp <32) reg= "%i";
-				printf("sethi %chi(%08jx), %s%d \n",'%',(uintmax_t)r,reg.c_str(),(temp%8));
+				sprintf(buffer,"sethi %chi(%08jx), %s%d \n",'%',(uintmax_t)r,reg.c_str(),(temp%8));
 			}
 
 			else if(eop == 6){
-				FBfcccond(x_inst);
+				FBfcccond(x_inst,buffer);
 			}
 
 			else if(eop == 7){
-				CBccccond(x_inst);
+				CBccccond(x_inst,buffer);
 			}
 
 			break;
 
 		case 2:
 			eop = x_inst.format.c.op3 >> 4; //getting op3[5:4]
-			op3two(x_inst);
+			op2(x_inst,buffer);
 			break;
 
 
 		case 3:
-			//printf("we are in opcode 2 or 3\n");
+			//sprintf(buffer,"we are in opcode 2 or 3\n");
 			eop = x_inst.format.c.op3 >> 4;
-			op3one(x_inst);
+			op3one(x_inst,buffer);
 			break;
 
 
@@ -432,91 +613,5 @@ void disassemble(inst x_inst) {
             exit(1);		
 
 	}
-    //std::string out;
-
+	return buffer;
 }
-
-// void decode(uint32_t instr){
-// 	uint32_t instr_copy = instr;
-
-//     inst d;
-
-//     uint32_t op = instr_copy >> 30;
-//     d.op = op;
-
-//     switch (op)
-//     {
-//         case 1:
-//             d.format.a.disp30 = (((1 << 22) - 1) & (instr_copy >> (0)));
-//             break;
-
-//         case 0:
-//             d.format.b.op2 = (((1 << 3) - 1) & (instr_copy >> (22)));
-
-//             if(d.format.b.op2 == 4)
-//             {   
-//                 d.format.b.target.sethi.rd = (((1 << 5) - 1) & (instr_copy >> (25)));
-//                 d.format.b.target.sethi.imm22 = (((1 << 22) - 1) & (instr_copy >> (0)));
-//             }
-
-//             else
-//             {   
-//                 d.format.b.target.branch.a = (((1) & (instr_copy >> (29))));
-//                 d.format.b.target.branch.cond = (((1 << 4) - 1) & (instr_copy >> (25)));;;
-
-
-//                 d.format.b.target.branch.disp22 = (((1 << 22) - 1) & (instr_copy >> (0)));
-//             }
-
-//             break;
-        
-//         case 2:
-//         case 3:
-//             d.format.c.op3 = (((1 << 6) - 1) & (instr_copy >> (19)));
-//             d.format.c.rd = (((1 << 5) - 1) & (instr_copy >> (25)));
-//             d.format.c.rs1 = (((1 << 5) - 1) & (instr_copy >> (14)));
-
-//             if(d.format.c.op3 >= 0x00000034 && d.format.c.op3 <= 0x00000037)
-//             {
-//                 d.format.c.operand2.fp.rs2 = (((1 << 5) - 1) & (instr_copy >> (0)));
-//                 d.format.c.operand2.fp.opf = (((1 << 9) - 1) & (instr_copy >> (5)));
-//             }
-
-//             else
-//             {
-//                 d.format.c.operand2.intg.i = ((1) & (instr_copy >> (13)));
-//                 if( d.format.c.operand2.intg.i)
-//                 {
-//                     d.format.c.operand2.intg.rs2.simm13 = (((1 << 13) - 1) & (instr_copy >> (0)));
-//                 }
-//                 else
-//                 {
-//                     d.format.c.operand2.intg.rs2.rs2 = (((1 << 5) - 1) & (instr_copy >> (0)));
-//                 }
-//             }
-//             break;
-
-//         default:
-//         	//cerr << "OPCODE length changed (not 2-bits anymore)?" << endl;
-//             break;
-//     }
-
-
-//     disassemble(d);
-// }
-
-
-// int main() {
-
-//     uint32_t instructions[] = {0x1a80000c,0xba274001, 0x92004009};
-//     // ,0x03bffebf,0x40025642,0xee4e6002
-//     //0xc208e001,0xa200e001,8216c002
-//     //
-
-//     for(int j = 0; j < 3; j++) {
-//     	printf("%08jx ", (uintmax_t)instructions[j]);
-//         decode(instructions[j]);
-//     }
-
-//     return 0;
-// }

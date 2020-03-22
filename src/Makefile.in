@@ -10,9 +10,12 @@ LIBELF_SRC_DIR= ./libelf/lib
 LIBELF_LIB= ./libelf/lib/libelf.a
 LIBELF_DIR= ./libelf
 
-
+SRCDIR := .
 INCLUDES= -I$(NANOLOG_RUNTIME_DIR) -I$(LIBELF_SRC_DIR)
 LIBS = -L -lNanoLog -pthread -lrt
+
+SRCS     := $(shell find $(SRCDIR) -maxdepth 1 -name "*.cpp")
+OBJS     := $(SRCS:$(SRCDIR)/%.cpp=$(SRCDIR)/%.o)
 
 all: libs satsim
 libs: nano elf
@@ -27,7 +30,7 @@ ifneq ("$(wildcard $(LIBELF_LIB))","./libelf/lib/libelf.a")
 	$(MAKE) -C $(LIBELF_DIR)
 endif
 
-OBJS = satsim.o core.o fetch.o decode.o execute.o reg_access.o mem_access.o exception.o write_back.o reg.o instruction.o elf_reader.o
+
 
 $(OBJS): %o : %cpp
 		$(CXX) $(INCLUDES) -c -o $@ $< $(LIBS)

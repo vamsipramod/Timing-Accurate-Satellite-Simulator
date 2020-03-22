@@ -24,8 +24,8 @@ void Fetch::log(PipeRegister& pr)
 
      if(pr.f.valid)
      {
-          NANO_LOG(DEBUG,"%s : Fetching Instruction at address : %x\n",__id__.c_str(),pr.f.pc);
-          NANO_LOG(DEBUG,"%s : Instruction at %x  : %x \n\n",__id__.c_str(),pr.f.pc,pr.d.instr);
+          NANO_LOG(DEBUG,"%s : Fetching Instruction at address : %x \n",__id__.c_str(),pr.f.pc);
+          NANO_LOG(DEBUG,"%s : Instruction at %x  : %x\n",__id__.c_str(),pr.f.pc,pr.d.instr);
      }
 
      else

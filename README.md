@@ -47,4 +47,6 @@ To Convert the `CompressedLog` to human readable format. Do:
 ./bin/decompress.sh 
 ```
 
+This creates a file named `mylogfile.log` in the current directory which contains Log messages in human readable format.
+
 `Note` : The Target Architecture of Simulator is SPARC V8 Architecture, So target ISA of executable that is passed to simulator must be SPARC V8

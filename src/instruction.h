@@ -74,14 +74,15 @@ class Instr
     public:
         uint32_t cycles=0;
         inst instr;
-        void disassembly();
+        char* disassembly();
 };
 
-void disassemble(inst x_inst);
-void Bicccond(inst x_inst);
-void FBfcccond(inst x_inst);
-void CBccccond(inst x_inst);
-void op3two(inst x_inst);
-void op3one(inst x_inst);
+char* disassemble(u_int32_t inst);
+char* disassemble(inst x_inst);
+char* Bicccond(inst x_inst, char* buffer);
+char* FBfcccond(inst x_inst, char* buffer);
+char* CBccccond(inst x_inst, char* buffer);
+char* op2(inst x_inst, char* buffer);
+char* op3one(inst x_inst, char* buffer);
 
 #endif

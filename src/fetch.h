@@ -5,7 +5,7 @@
 #include <vector>
 #include "reg.h"
 #include "NanoLogCpp17.h"
-
+#include "instruction.h"
 class Fetch
 {   
     private:

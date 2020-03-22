@@ -76,8 +76,6 @@ Instr Decode::decode_inst(uint32_t instr)
 
 void Decode::set_control_regs(Instr x,PipeRegister& pr)
 {
-    pr.a.instr = x;
-    pr.a.pc = pr.d.pc;
     CntrlSig sig;
     switch (x.instr.op)
     {
@@ -194,6 +192,8 @@ void Decode::decode(PipeRegister& pr)
     if(pr.d.valid)
     {
         Instr d = decode_inst(pr.d.instr);
+        pr.a.instr = d;
+        pr.a.pc = pr.d.pc;
         set_control_regs(d,pr);
         pr.a.instr.cycles = pr.d.cycle +1;
         pr.a.valid = 1;
@@ -212,7 +212,7 @@ void Decode::log(PipeRegister& pr)
 
      if(pr.d.valid)
      {       
-        NANO_LOG(DEBUG,"%s : INSTRUCTION DECODED \n",__id__.c_str());
+        NANO_LOG(DEBUG,"%s : INSTRUCTION DECODED    | %s\n",__id__.c_str(),pr.a.instr.disassembly());
         NANO_LOG(DEBUG,"%s : CONTROL SIGNALS ARE SET \n\n",__id__.c_str());
      }
 
