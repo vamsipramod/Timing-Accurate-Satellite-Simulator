@@ -24,5 +24,5 @@ install:
 		ln -s -f -r $(SRC)/satsim $(BIN_DIR)/satsim
 
 distclean: clean-all
-		rm -f TAGS Makefile config.status config.log configure compressedLog
+		rm -f TAGS Makefile config.status config.log configure compressedLog text_section.txt
 		rm -r -f $(LIB_DIR) $(BIN_DIR)

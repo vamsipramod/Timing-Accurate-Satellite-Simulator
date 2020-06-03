@@ -20,21 +20,23 @@ elf::elf(char *input_file)
 
 }
 
-void elf::read_elf_instruction()
+vector<uint32_t> elf::read_section(char* section)
 {
     Elf_Scn *scn = NULL;
-    GElf_Shdr shdr;
+    Elf32_Shdr *shdr;
+    vector <uint32_t> buffer;
+
     while ((scn = elf_nextscn(e,scn)) != NULL)
     { 
-        if (gelf_getshdr (scn ,&shdr) != &shdr)
-            errx(EXIT_FAILURE ," getshdr () failed : %s . ",elf_errmsg ( -1));
+        if ((shdr = elf32_getshdr(scn)) != shdr)
+            errx(EXIT_FAILURE, "getshdr() failed: %s.", elf_errmsg(-1));
 
         Elf_Data *data = NULL;
         size_t n = 0;
 		int shift =24;
 		uint32_t instr = 0;
 
-        while ( n < shdr.sh_size && ( data = elf_getdata(scn ,data)) != NULL )
+        while ( n < shdr->sh_size && ( data = elf_getdata(scn ,data)) != NULL )
         {
             uint32_t i=0,buff_size=0;
             unsigned char *p = (unsigned char *) data->d_buf;
@@ -60,13 +62,14 @@ void elf::read_elf_instruction()
                 if(shift < 0)
                 {
                     shift = 24;
-                    instructions.push_back(instr);
+                    buffer.push_back(instr);
                     instr = 0;
                 }
             }
         }
         break;
     }
+    return buffer;
 }
 
 void elf::print_section_header(Elf_Scn *scn)
@@ -95,34 +98,7 @@ void elf::print_section_header(Elf_Scn *scn)
     printf("====================\n");
 }
 
-uint32_t elf::get_instruciton()
-{
-    if(instructions.size() > 0 && current_instruction_index < instructions.size())
-    {
-        return instructions[current_instruction_index];
-    }
-
-    else if(instructions.size() == 0)
-    {
-        return 0;
-    }
-
-    else
-    {
-        return 0;
-    }
-    
-}
-
-void elf::print_instructions()
-{
-    for(auto i=instructions.begin();i!=instructions.end();i++)
-    {
-        printf("%8.8x\n",*i);
-    }
-}
-
-void elf::write_instructions(char output_file[])
+void elf::write_text_section(char output_file[])
 {
     FILE *fd;
     
@@ -131,9 +107,10 @@ void elf::write_instructions(char output_file[])
     if(fd == NULL)
         err(EXIT_FAILURE,"Failure in opening the file : %s",output_file);
     
+    vector<uint32_t> instructions = read_section((char *)".text");
     for(auto i=instructions.begin();i!=instructions.end();i++)
     {
         fprintf(fd,"%8.8x\n",*i);
     }
-    fclose(fd);
-}
+    fclose(fd); 
+}	

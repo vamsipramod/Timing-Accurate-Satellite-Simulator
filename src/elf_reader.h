@@ -7,6 +7,8 @@
 # include <stdint.h>
 # include <stdlib.h>
 # include <gelf.h>
+# include <string.h>
+
 #define __STDC_FORMAT_MACROS
 #include <vector>
 
@@ -28,22 +30,14 @@ class elf
     private:
     Elf *e;
     size_t shstrndx;
-    unsigned current_instruction_index=0;
     
 
     public:
-    vector <uint32_t> instructions;
+
     elf(char *input_file);
-
-    void read_elf_instruction();
-
-    uint32_t get_instruciton();
-
+    vector<uint32_t> read_section(char* section);
     void print_section_header(Elf_Scn *scn);
-    
-    void print_instructions();
-   
-    void write_instructions(char output_file[]);
+    void write_text_section(char output_file[]);
 
 };
 

@@ -1,9 +1,10 @@
 #include "core.h"
+#include "mem.h"
 
 class Simulator{
     private:
     Core* core;
-    vector <uint32_t> memory; 
+    Memory* mem;
 
     // TODO: 
     // Logging module

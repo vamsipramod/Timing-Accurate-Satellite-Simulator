@@ -77,7 +77,6 @@ class Instr
         char* disassembly();
 };
 
-char* disassemble(u_int32_t inst);
 char* disassemble(inst x_inst);
 char* Bicccond(inst x_inst, char* buffer);
 char* FBfcccond(inst x_inst, char* buffer);

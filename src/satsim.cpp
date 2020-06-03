@@ -18,8 +18,8 @@ void Simulator::run()
 void Simulator::load(char *input)
 {
     elf bin(input);
-    bin.read_elf_instruction();
-    memory = bin.instructions;
+    mem = new Memory(bin.read_section((char *)".text"),bin.read_section((char *)".data"));
+    bin.write_text_section((char *)"text_section.txt");
 }
 
 int main(int argc ,char ** argv)

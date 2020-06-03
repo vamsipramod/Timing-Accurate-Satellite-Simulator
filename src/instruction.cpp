@@ -4,7 +4,6 @@
 
 char* Instr::disassembly()
 {
-    // sprintf(buffer,"Disassembly is Under Development!!!..............Coming Soon\n");
     return disassemble(this->instr);
 }
 
@@ -179,9 +178,6 @@ char* op2(inst x_inst, char* buffer){
     	};
 
     	RegRd = "%f";
-
-		
-
     	k = x_inst.format.c.operand2.fp.opf;
     	// k == 09 is also with the below code
     	if(k==01 || k==05  || k==41 || k==42 || k==43 || k==196 || k==198 || k==199 || k==200 || 
@@ -190,10 +186,7 @@ char* op2(inst x_inst, char* buffer){
     		sprintf(buffer,"%s %s%d %s%d \n",fpop2[k].c_str(),RegRd.c_str(),(rs2),RegRd.c_str(),(rd));
 			return buffer;
     	}
-
-			sprintf(buffer,"%s %s%d %s%d %s%d \n",fpop[k].c_str(),RegRd.c_str(),(rd%8),RegRd.c_str(),(rs2%8),RegRd.c_str(),(rs1%8));
-
-
+		sprintf(buffer,"%s %s%d %s%d %s%d \n",fpop[k].c_str(),RegRd.c_str(),(rd%8),RegRd.c_str(),(rs2%8),RegRd.c_str(),(rs1%8));
 
     	return buffer;
 
@@ -237,7 +230,7 @@ char* op2(inst x_inst, char* buffer){
 	else if(rs1 <24) RegRs1= "%l";
 	else if(rs1 <32) RegRs1= "%i";
 
-	//excptions
+	//exceptions
 	ii = x_inst.format.c.operand2.intg.i; 
 	if(l==0 && k ==3){
 		if(rd==0){
@@ -262,7 +255,6 @@ char* op2(inst x_inst, char* buffer){
 					sprintf(buffer,"wr %s%d , %d, %s \n",RegRs1.c_str(),(rs1%8), simm13,"%y");		
 			}
 		}
-
 
 		else if(rd>0 && rd <16){
 			sprintf(buffer,"Reserved");
@@ -389,7 +381,6 @@ char* op2(inst x_inst, char* buffer){
 			}
 		}
 
-
 		else if(rd>0 && rd <16){
 			if(ii==0){
 				rs2= x_inst.format.c.operand2.intg.rs2.rs2;
@@ -446,6 +437,7 @@ char* op2(inst x_inst, char* buffer){
 
 		sprintf(buffer,"%s %s%d %s%d %s%d i= %d\n",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),RegRd.c_str(),(rd%8),ii);
 	}
+
 	else if(ii==1){
 		simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
 
@@ -524,6 +516,7 @@ char* op3one(inst x_inst, char* buffer){
 
 		sprintf(buffer,"%s [%s%d + %s%d], %s%d \n i=%d",cbc[l][k].c_str(),RegRs1.c_str(),(rs1%8),RegRs2.c_str(),(rs2%8),RegRd.c_str(),(rd%8),ii);
 	}
+	
 	else if(ii==1){
 		simm13 = x_inst.format.c.operand2.intg.rs2.simm13;
 
@@ -552,22 +545,17 @@ char* disassemble(inst x_inst) {
 
 	switch(x_inst.op){
 		case 1:
-			
-			//sprintf(buffer,"we are in opcode1\n");
 			r = x_inst.format.a.disp30 << 2;
 			sprintf(buffer,"call \"PC + %08jx\" \n", (uintmax_t)r);
 			break;
 
-
 		case 0:
-			//sprintf(buffer,"we are in opcode0\n");
 			eop = x_inst.format.b.op2;
 			if (eop ==0 || eop == 1 || eop == 3 || eop == 5)
 			{
 				sprintf(buffer,"ERROR!!! Unidentified Argument while reading OPCODE2");
 			}
 			else if(eop == 2){
-				//sprintf(buffer,"We have to write for Bicc\n");
 				r = x_inst.format.b.target.branch.disp22 << 2;
 				temp2 = x_inst.format.b.target.branch.cond;
 				temp  = x_inst.format.b.target.branch.a << 2;
@@ -600,16 +588,12 @@ char* disassemble(inst x_inst) {
 			op2(x_inst,buffer);
 			break;
 
-
 		case 3:
-			//sprintf(buffer,"we are in opcode 2 or 3\n");
 			eop = x_inst.format.c.op3 >> 4;
 			op3one(x_inst,buffer);
 			break;
 
-
         default:
-            //cerr << "OPCODE length changed (not 2-bits anymore)?" << endl;
             exit(1);		
 
 	}
